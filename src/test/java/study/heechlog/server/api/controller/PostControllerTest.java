@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -17,11 +18,29 @@ class PostControllerTest {
 
     @Test
     @DisplayName("/posts 요청시 Hello World를 출력")
-    void get() throws Exception {
+    void postTest() throws Exception {
         //expected
-        mockMvc.perform(MockMvcRequestBuilders.get("/posts"))
+        mockMvc.perform(MockMvcRequestBuilders.post("/posts")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"title\" : \"제목입니다.\", \"content\" : \"내용입니다.\"}")
+                )
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Hello World"))
+                .andExpect(MockMvcResultMatchers.content().string("{}"))
                 .andDo(MockMvcResultHandlers.print());
     }
+
+    @Test
+    @DisplayName("/posts 요청시 title 값은 필수다")
+    void postValidationTest() throws Exception {
+        //expected
+        mockMvc.perform(MockMvcRequestBuilders.post("/posts")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"title\" : \"\", \"content\" : \"내용입니다.\"}")
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("제목을 입력하세요."))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+
 }
