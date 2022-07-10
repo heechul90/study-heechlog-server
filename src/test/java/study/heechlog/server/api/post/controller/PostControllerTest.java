@@ -1,7 +1,6 @@
 package study.heechlog.server.api.post.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,11 +10,20 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.api.post.controller.request.CreatePostRequest;
+import study.heechlog.server.core.post.domain.Post;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class PostControllerTest {
+
+    @PersistenceContext
+    EntityManager em;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -24,7 +32,25 @@ class PostControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName(value = "post 저장 성공 테스트")
+    void findPost() throws Exception {
+        //given
+        Post post = Post.createPostBuilder()
+                .title("test_title")
+                .content("test_content")
+                .build();
+        em.persist(post);
+
+        //expected
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/{postId}", post.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(post.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value(post.getTitle()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(post.getContent()))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
     void savePostTest() throws Exception {
         //given
         CreatePostRequest request = CreatePostRequest.builder()
@@ -44,8 +70,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "post 저장 실패 테스트")
-    void savePostValidationTest() throws Exception {
+    void savePostTest_validation() throws Exception {
         //given
         CreatePostRequest request = CreatePostRequest.builder()
                 .title("")
