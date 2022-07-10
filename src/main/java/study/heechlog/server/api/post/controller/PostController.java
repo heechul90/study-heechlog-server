@@ -22,8 +22,8 @@ public class PostController {
     }
 
     @PostMapping
-    public Map<String, String> savePost(@RequestBody @Validated CreatePostRequest request) {
+    public Long savePost(@RequestBody @Validated CreatePostRequest request) {
         Long savedId = postService.savePost(request.toEntity());
-        return Map.of();
+        return savedId;
     }
 }
