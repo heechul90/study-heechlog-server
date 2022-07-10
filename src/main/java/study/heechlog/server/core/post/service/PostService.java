@@ -21,4 +21,11 @@ public class PostService {
     public Long savePost(Post post) {
         return postRepository.save(post).getId();
     }
+
+    /**
+     * post 단건 조회
+     */
+    public Post findPost(Long postId) {
+        return postRepository.findById(postId).orElse(null);
+    }
 }
