@@ -15,6 +15,26 @@ class PostServiceTest {
     @Autowired PostService postService;
 
     @Test
+    void findPostTest() {
+        //given
+        Post post = Post.createPostBuilder()
+                .title("test_title")
+                .content("test_content")
+                .build();
+        Long savedId = postService.savePost(post);
+
+        //when
+        Post findPost = postService.findPost(savedId);
+
+        //then
+        assertThat(findPost.getTitle()).isEqualTo("test_title");
+        assertThat(findPost.getContent()).isEqualTo("test_content");
+        assertThatThrownBy(() -> postService.findPost(9999999999999L))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("존재하지 않는 글입니다.");
+    }
+
+    @Test
     void savePostTest() {
         //given
         Post post = Post.createPostBuilder()

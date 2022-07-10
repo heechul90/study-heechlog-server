@@ -19,7 +19,8 @@ public class PostService {
      * post 단건 조회
      */
     public Post findPost(Long postId) {
-        return postRepository.findById(postId).orElse(null);
+        return postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글입니다."));
     }
 
     /**
