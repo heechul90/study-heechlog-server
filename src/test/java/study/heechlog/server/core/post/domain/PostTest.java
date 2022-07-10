@@ -17,7 +17,10 @@ class PostTest {
     @Test
     public void createEntityTest(){
         //given
-        Post post = new Post("test_title", "test_content");
+        Post post = Post.createPostBuilder()
+                .title("test_title")
+                .content("test_content")
+                .build();
 
         //when
         em.persist(post);

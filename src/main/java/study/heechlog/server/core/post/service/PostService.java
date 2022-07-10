@@ -16,16 +16,17 @@ public class PostService {
     private final PostRepository postRepository;
 
     /**
-     * post 저장
-     */
-    public Long savePost(Post post) {
-        return postRepository.save(post).getId();
-    }
-
-    /**
      * post 단건 조회
      */
     public Post findPost(Long postId) {
         return postRepository.findById(postId).orElse(null);
+    }
+
+    /**
+     * post 저장
+     */
+    @Transactional
+    public Long savePost(Post post) {
+        return postRepository.save(post).getId();
     }
 }

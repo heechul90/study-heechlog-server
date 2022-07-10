@@ -1,6 +1,7 @@
 package study.heechlog.server.core.post.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,6 +27,7 @@ public class Post {
     private String content;
 
     //===생성 메서드===//
+    @Builder(builderClassName = "createPostBuilder", builderMethodName = "createPostBuilder")
     public Post(String title, String content) {
         this.title = title;
         this.content = content;
