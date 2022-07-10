@@ -35,10 +35,11 @@ class PostControllerTest {
         //expected
         mockMvc.perform(MockMvcRequestBuilders.post("/posts")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"title\" : \"\", \"content\" : \"내용입니다.\"}")
+                        .content("{\"title\" : \"\", \"content\" : \"\"}")
                 )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("제목을 입력하세요."))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("잘못된 요청입니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
 
