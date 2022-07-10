@@ -1,4 +1,4 @@
-package study.heechlog.server.api.post.controller.response;
+package study.heechlog.server.core.common.json;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

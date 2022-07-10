@@ -17,6 +17,8 @@ import study.heechlog.server.core.post.domain.Post;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import static org.hamcrest.Matchers.hasSize;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
@@ -44,9 +46,10 @@ class PostControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/{postId}", post.getId())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(post.getId()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value(post.getTitle()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(post.getContent()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("OK"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.postId").value(post.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.postTitle").value(post.getTitle()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.postContent").value(post.getContent()))
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -87,6 +90,8 @@ class PostControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("잘못된 요청입니다."))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.errors").isArray())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.errors", hasSize(2)))
                 .andDo(MockMvcResultHandlers.print());
     }
 }
