@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.repository.PostRepository;
 
 @Slf4j
@@ -13,4 +14,11 @@ import study.heechlog.server.core.post.repository.PostRepository;
 public class PostService {
 
     private final PostRepository postRepository;
+
+    /**
+     * post 저장
+     */
+    public Long savePost(Post post) {
+        return postRepository.save(post).getId();
+    }
 }
