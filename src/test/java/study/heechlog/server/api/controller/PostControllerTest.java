@@ -17,10 +17,10 @@ class PostControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("/posts 요청시 Hello World를 출력")
-    void postTest() throws Exception {
+    @DisplayName(value = "post 저장 성공 테스트")
+    void savePostTest() throws Exception {
         //expected
-        mockMvc.perform(MockMvcRequestBuilders.post("/posts")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/posts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"title\" : \"제목입니다.\", \"content\" : \"내용입니다.\"}")
                 )
@@ -30,10 +30,10 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName("/posts 요청시 title 값은 필수다")
-    void postValidationTest() throws Exception {
+    @DisplayName(value = "post 저장 실패 테스트")
+    void savePostValidationTest() throws Exception {
         //expected
-        mockMvc.perform(MockMvcRequestBuilders.post("/posts")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/posts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"title\" : \"\", \"content\" : \"\"}")
                 )
@@ -42,6 +42,4 @@ class PostControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("잘못된 요청입니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
-
-
 }
