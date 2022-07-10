@@ -1,4 +1,4 @@
-package study.heechlog.server.api.controller;
+package study.heechlog.server.api.post.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

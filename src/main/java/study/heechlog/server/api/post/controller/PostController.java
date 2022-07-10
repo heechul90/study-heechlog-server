@@ -1,9 +1,9 @@
-package study.heechlog.server.api.controller;
+package study.heechlog.server.api.post.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import study.heechlog.server.api.request.PostCreateRequest;
+import study.heechlog.server.api.post.controller.request.PostCreateRequest;
 
 import java.util.Map;
 

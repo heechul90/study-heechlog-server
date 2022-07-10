@@ -1,4 +1,4 @@
-package study.heechlog.server.api.response;
+package study.heechlog.server.api.post.controller.response;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

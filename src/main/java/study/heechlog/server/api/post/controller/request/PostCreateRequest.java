@@ -1,4 +1,4 @@
-package study.heechlog.server.api.request;
+package study.heechlog.server.api.post.controller.request;
 
 import lombok.Getter;
 import lombok.Setter;
