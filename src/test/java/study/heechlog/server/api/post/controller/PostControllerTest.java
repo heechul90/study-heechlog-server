@@ -24,8 +24,7 @@ import static org.hamcrest.Matchers.hasSize;
 @Transactional
 class PostControllerTest {
 
-    @PersistenceContext
-    EntityManager em;
+    @PersistenceContext EntityManager em;
 
     @Autowired
     private ObjectMapper objectMapper;
