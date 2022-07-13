@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.repository.PostRepository;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -14,6 +16,13 @@ import study.heechlog.server.core.post.repository.PostRepository;
 public class PostService {
 
     private final PostRepository postRepository;
+
+    /**
+     * post 목록 조회
+     */
+    public List<Post> findPosts() {
+        return postRepository.findAll();
+    }
 
     /**
      * post 단건 조회

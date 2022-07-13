@@ -2,7 +2,6 @@ package study.heechlog.server.api.post.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.heechlog.server.api.post.controller.request.CreatePostRequest;
@@ -12,23 +11,23 @@ import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.dto.PostDto;
 import study.heechlog.server.core.post.service.PostService;
 
+import java.util.List;
+
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/api/posts")
 public class PostController {
 
     private final PostService postService;
 
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
-
     /**
      * post 목록 조회
      */
     @GetMapping
-    public void findPosts() {
-
+    public JsonResult findPosts() {
+        List<Post> posts = postService.findPosts();
+        return JsonResult.OK(posts);
     }
 
     /**

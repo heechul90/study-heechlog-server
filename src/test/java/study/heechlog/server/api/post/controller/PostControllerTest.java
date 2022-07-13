@@ -33,6 +33,13 @@ class PostControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    void findPosts() {
+        //given
+
+        //expected
+    }
+
+    @Test
     void findPost() throws Exception {
         //given
         Post post = Post.createPostBuilder()
