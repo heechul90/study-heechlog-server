@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -32,20 +33,38 @@ class PostControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private Post getPost(String title, String content) {
+        Post post = Post.createPostBuilder()
+                .title(title)
+                .content(content)
+                .build();
+        return post;
+    }
+
     @Test
-    void findPosts() {
+    void findPosts() throws Exception {
         //given
+        Post post1 = getPost("test_title1", "test_content1");
+        Post post2 = getPost("test_title2", "test_content2");
+        em.persist(post1);
+        em.persist(post2);
 
         //expected
+        mockMvc.perform((MockMvcRequestBuilders.get("/api/posts"))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("OK"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.length()", is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postId").value(post1.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postTitle").value(post1.getTitle()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postContent").value(post1.getContent()))
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
     void findPost() throws Exception {
         //given
-        Post post = Post.createPostBuilder()
-                .title("test_title")
-                .content("test_content")
-                .build();
+        Post post = getPost("test_title", "test_content");
         em.persist(post);
 
         //expected

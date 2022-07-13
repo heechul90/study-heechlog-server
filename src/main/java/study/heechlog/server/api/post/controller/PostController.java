@@ -12,6 +12,7 @@ import study.heechlog.server.core.post.dto.PostDto;
 import study.heechlog.server.core.post.service.PostService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -27,7 +28,15 @@ public class PostController {
     @GetMapping
     public JsonResult findPosts() {
         List<Post> posts = postService.findPosts();
-        return JsonResult.OK(posts);
+        List<PostDto> collect = posts.stream()
+                .map(post -> PostDto.builder()
+                        .postId(post.getId())
+                        .postTitle(post.getTitle())
+                        .postContent(post.getContent())
+                        .build()
+                )
+                .collect(Collectors.toList());
+        return JsonResult.OK(collect);
     }
 
     /**
