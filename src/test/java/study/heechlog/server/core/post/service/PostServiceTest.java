@@ -5,14 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.repository.PostRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
 class PostServiceTest {
+
+    @Autowired PostRepository postRepository;
 
     @Autowired PostService postService;
 
@@ -22,6 +28,23 @@ class PostServiceTest {
                 .content(content)
                 .build();
         return post;
+    }
+
+    @Test
+    void findPostWithPageTest() throws Exception{
+        //given
+        List<Post> requestPosts = IntStream.range(0, 30)
+                .mapToObj(i -> Post.createPostBuilder()
+                        .title("제목 - " + i)
+                        .content("내용 - " + i)
+                        .build()
+                )
+                .collect(Collectors.toList());
+        postRepository.saveAll(requestPosts);
+
+        //when
+
+        //then
     }
 
     @Test
