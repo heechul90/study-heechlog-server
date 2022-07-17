@@ -11,7 +11,7 @@ import java.util.List;
 public class JsonResult<T> {
 
     private HttpStatus status;
-    private String message = "";
+    private String message;
 
     private List<Error> errors;
     private T data;
