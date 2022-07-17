@@ -8,6 +8,7 @@ import java.util.List;
 
 @Getter
 @Builder
+@SuppressWarnings("unchecked")
 public class JsonResult<T> {
 
     private HttpStatus status;

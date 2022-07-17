@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.dto.PostSearchCondition;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -22,21 +23,37 @@ public class PostQueryRepository {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    public Page<Post> findPosts(Pageable pageable) {
+    /**
+     * post 목록 조회
+     */
+    public Page<Post> findPosts(PostSearchCondition condition, Pageable pageable) {
+        List<Post> content = getPostList(pageable);
+
+        JPAQuery<Long> count = getPostListCount();
+
+        return PageableExecutionUtils.getPage(content, pageable, count::fetchOne);
+    }
+
+    /**
+     * post 목록
+     */
+    private List<Post> getPostList(Pageable pageable) {
         List<Post> content = queryFactory
                 .select(post)
                 .from(post)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
+        return content;
+    }
 
+    /**
+     * post 목록 카운트
+     */
+    private JPAQuery<Long> getPostListCount() {
         JPAQuery<Long> count = queryFactory
                 .select(post.count())
                 .from(post);
-
-        return PageableExecutionUtils.getPage(content, pageable, count::fetchOne);
+        return count;
     }
-
-
-
 }
