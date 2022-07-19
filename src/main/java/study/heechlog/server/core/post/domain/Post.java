@@ -32,4 +32,10 @@ public class Post {
         this.title = title;
         this.content = content;
     }
+
+    @Builder(builderClassName = "updatePostBuiler", builderMethodName = "updatePostBuiler")
+    public void updatePost(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }

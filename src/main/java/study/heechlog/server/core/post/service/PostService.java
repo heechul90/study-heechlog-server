@@ -39,4 +39,14 @@ public class PostService {
     public Long savePost(Post post) {
         return postRepository.save(post).getId();
     }
+
+    @Transactional
+    public void updatePost(Long postId, Post post) {
+        Post findPost = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글입니다."));
+        findPost.updatePostBuiler()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .build();
+    }
 }
