@@ -2,12 +2,17 @@ package study.heechlog.server.api.post.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.heechlog.server.api.post.controller.request.CreatePostRequest;
+import study.heechlog.server.api.post.controller.request.UpdatePostRequest;
 import study.heechlog.server.api.post.controller.response.CreatePostResponse;
+import study.heechlog.server.api.post.controller.response.UpdatePostResponse;
+import study.heechlog.server.core.common.json.Error;
 import study.heechlog.server.core.common.json.JsonResult;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.domain.UpdatePostParam;
 import study.heechlog.server.core.post.dto.PostDto;
 import study.heechlog.server.core.post.service.PostService;
 
@@ -61,4 +66,34 @@ public class PostController {
         Long savedId = postService.savePost(request.toEntity());
         return JsonResult.OK(new CreatePostResponse(savedId));
     }
+
+    /**
+     * post 수정
+     */
+    @PutMapping(value = "/{postId}")
+    public JsonResult updatePost(@PathVariable("postId") Long postId,
+                                 @RequestBody @Validated UpdatePostRequest request, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            List<Error> errors = bindingResult.getAllErrors().stream()
+                    .map(error -> new Error(
+                            error.getObjectName(),
+                            error.getDefaultMessage()
+                    ))
+                    .collect(Collectors.toList());
+            return JsonResult.ERROR(errors);
+        }
+
+        UpdatePostParam param = UpdatePostParam.builder()
+                .title(request.getPostTitle())
+                .content(request.getPostContent())
+                .build();
+        postService.updatePost(postId, param);
+        Post post = postService.findPost(postId);
+        return JsonResult.OK(new UpdatePostResponse(post.getId()));
+    }
+
+    /**
+     * post 삭제
+     */
 }

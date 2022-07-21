@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static org.springframework.util.StringUtils.hasText;
+
 @Entity
 @SequenceGenerator(
         name = "post_seq_generator",
@@ -34,8 +36,8 @@ public class Post {
     }
 
     @Builder(builderClassName = "updatePostBuiler", builderMethodName = "updatePostBuiler")
-    public void updatePost(String title, String content) {
-        this.title = title;
-        this.content = content;
+    public void updatePost(UpdatePostParam param) {
+        if (hasText(param.getTitle())) this.title = title;
+        if (hasText(param.getContent())) this.content = content;
     }
 }

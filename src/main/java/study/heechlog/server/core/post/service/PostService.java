@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.domain.UpdatePostParam;
 import study.heechlog.server.core.post.repository.PostRepository;
 
 import java.util.List;
@@ -40,13 +41,15 @@ public class PostService {
         return postRepository.save(post).getId();
     }
 
+    /**
+     * post 수정
+     */
     @Transactional
-    public void updatePost(Long postId, Post post) {
+    public void updatePost(Long postId, UpdatePostParam param) {
         Post findPost = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글입니다."));
         findPost.updatePostBuiler()
-                .title(post.getTitle())
-                .content(post.getContent())
+                .param(param)
                 .build();
     }
 }
