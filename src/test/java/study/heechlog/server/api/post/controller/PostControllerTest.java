@@ -81,10 +81,9 @@ class PostControllerTest {
     @Test
     void savePostTest() throws Exception {
         //given
-        CreatePostRequest request = CreatePostRequest.builder()
-                .title("제목입니다.")
-                .content("내용입니다.")
-                .build();
+        CreatePostRequest request = new CreatePostRequest();
+        request.setTitle("제목입니다.");
+        request.setContent("내용입니다.");
 
         String json = objectMapper.writeValueAsString(request);
 
@@ -100,10 +99,9 @@ class PostControllerTest {
     @Test
     void savePostTest_validation() throws Exception {
         //given
-        CreatePostRequest request = CreatePostRequest.builder()
-                .title("")
-                .content("")
-                .build();
+        CreatePostRequest request = new CreatePostRequest();
+        request.setTitle("");
+        request.setContent("");
 
         String json = objectMapper.writeValueAsString(request);
 
@@ -118,5 +116,11 @@ class PostControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.errors").isArray())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.errors", hasSize(2)))
                 .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    void updatePostTest() throws Exception {
+
+
     }
 }

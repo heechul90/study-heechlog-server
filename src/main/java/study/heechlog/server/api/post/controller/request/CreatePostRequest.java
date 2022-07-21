@@ -16,12 +16,6 @@ public class CreatePostRequest {
     @NotBlank(message = "내용을 입력하세요.")
     private String content;
 
-    @Builder
-    public CreatePostRequest(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
-
     public Post toEntity() {
         return Post.createPostBuilder()
                 .title(this.getTitle())
