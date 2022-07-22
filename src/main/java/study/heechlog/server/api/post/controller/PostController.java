@@ -62,7 +62,18 @@ public class PostController {
      * post 저장
      */
     @PostMapping
-    public JsonResult savePost(@RequestBody @Validated CreatePostRequest request) {
+    public JsonResult savePost(@RequestBody @Validated CreatePostRequest request, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            List<Error> errors = bindingResult.getAllErrors().stream()
+                    .map(error -> new Error(
+                            error.getObjectName(),
+                            error.getDefaultMessage()
+                    ))
+                    .collect(Collectors.toList());
+            return JsonResult.ERROR(errors);
+        }
+
         Long savedId = postService.savePost(request.toEntity());
         return JsonResult.OK(new CreatePostResponse(savedId));
     }
