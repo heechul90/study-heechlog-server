@@ -2,13 +2,15 @@ package study.heechlog.server.core.post.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.transaction.annotation.Transactional;
+import study.heechlog.server.core.post.PostTestConfig;
 import study.heechlog.server.core.post.domain.Post;
-import study.heechlog.server.core.post.dto.UpdatePostParam;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
+import study.heechlog.server.core.post.dto.UpdatePostParam;
 import study.heechlog.server.core.post.repository.PostRepository;
 
 import javax.persistence.EntityManager;
@@ -20,8 +22,9 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SpringBootTest
-@Transactional
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(PostTestConfig.class)
 class PostServiceTest {
 
     @PersistenceContext EntityManager em;
