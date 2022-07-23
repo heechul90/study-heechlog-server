@@ -7,9 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.domain.UpdatePostParam;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
 import study.heechlog.server.core.post.repository.PostRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -20,6 +23,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest
 @Transactional
 class PostServiceTest {
+
+    @PersistenceContext EntityManager em;
 
     @Autowired PostRepository postRepository;
 
@@ -85,5 +90,25 @@ class PostServiceTest {
         Post findPost = postService.findPost(savedPost);
         assertThat(findPost.getTitle()).isEqualTo("test_title");
         assertThat(findPost.getContent()).isEqualTo("test_content");
+    }
+
+    @Test
+    void updatePostTest() {
+        //given
+        Post post = getPost("test_title", "test_content");
+        em.persist(post);
+
+        UpdatePostParam param = UpdatePostParam.builder()
+                .title("update_title")
+                .content("update_content")
+                .build();
+
+        //when
+        postService.updatePost(post.getId(), param);
+
+        //then
+        Post findPost = em.find(Post.class, post.getId());
+        assertThat(findPost.getTitle()).isEqualTo("update_title");
+        assertThat(findPost.getContent()).isEqualTo("update_content");
     }
 }

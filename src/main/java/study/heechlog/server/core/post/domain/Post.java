@@ -37,7 +37,7 @@ public class Post {
 
     @Builder(builderClassName = "updatePostBuiler", builderMethodName = "updatePostBuiler")
     public void updatePost(UpdatePostParam param) {
-        if (hasText(param.getTitle())) this.title = title;
-        if (hasText(param.getContent())) this.content = content;
+        if (hasText(param.getTitle())) this.title = param.getTitle();
+        if (hasText(param.getContent())) this.content = param.getContent();
     }
 }
