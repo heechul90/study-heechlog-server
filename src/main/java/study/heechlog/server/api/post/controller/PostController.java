@@ -2,6 +2,8 @@ package study.heechlog.server.api.post.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +14,8 @@ import study.heechlog.server.api.post.controller.response.UpdatePostResponse;
 import study.heechlog.server.core.common.json.Error;
 import study.heechlog.server.core.common.json.JsonResult;
 import study.heechlog.server.core.post.domain.Post;
-import study.heechlog.server.core.post.domain.UpdatePostParam;
 import study.heechlog.server.core.post.dto.PostDto;
+import study.heechlog.server.core.post.dto.PostSearchCondition;
 import study.heechlog.server.core.post.service.PostService;
 
 import java.util.List;
@@ -31,9 +33,9 @@ public class PostController {
      * post 목록 조회
      */
     @GetMapping
-    public JsonResult findPosts() {
-        List<Post> posts = postService.findPosts();
-        List<PostDto> collect = posts.stream()
+    public JsonResult findPosts(PostSearchCondition condition, Pageable pageable) {
+        Page<Post> contents = postService.findPosts(condition, pageable);
+        List<PostDto> collect = contents.getContent().stream()
                 .map(post -> PostDto.builder()
                         .postId(post.getId())
                         .postTitle(post.getTitle())
@@ -65,9 +67,9 @@ public class PostController {
     public JsonResult savePost(@RequestBody @Validated CreatePostRequest request, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            List<Error> errors = bindingResult.getAllErrors().stream()
+            List<Error> errors = bindingResult.getFieldErrors().stream()
                     .map(error -> new Error(
-                            error.getObjectName(),
+                            error.getField(),
                             error.getDefaultMessage()
                     ))
                     .collect(Collectors.toList());
@@ -86,20 +88,16 @@ public class PostController {
                                  @RequestBody @Validated UpdatePostRequest request, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            List<Error> errors = bindingResult.getAllErrors().stream()
+            List<Error> errors = bindingResult.getFieldErrors().stream()
                     .map(error -> new Error(
-                            error.getObjectName(),
+                            error.getField(),
                             error.getDefaultMessage()
                     ))
                     .collect(Collectors.toList());
             return JsonResult.ERROR(errors);
         }
 
-        UpdatePostParam param = UpdatePostParam.builder()
-                .title(request.getPostTitle())
-                .content(request.getPostContent())
-                .build();
-        postService.updatePost(postId, param);
+        postService.updatePost(postId, request.toParam());
         Post post = postService.findPost(postId);
         return JsonResult.OK(new UpdatePostResponse(post.getId()));
     }

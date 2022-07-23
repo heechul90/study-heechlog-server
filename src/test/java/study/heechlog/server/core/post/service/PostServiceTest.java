@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.core.post.domain.Post;
-import study.heechlog.server.core.post.domain.UpdatePostParam;
+import study.heechlog.server.core.post.dto.UpdatePostParam;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
 import study.heechlog.server.core.post.repository.PostRepository;
 

@@ -1,4 +1,4 @@
-package study.heechlog.server.core.post.domain;
+package study.heechlog.server.core.post.dto;
 
 import lombok.Builder;
 import lombok.Getter;

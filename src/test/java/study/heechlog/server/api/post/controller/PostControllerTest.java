@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.api.post.controller.request.CreatePostRequest;
+import study.heechlog.server.api.post.controller.request.UpdatePostRequest;
 import study.heechlog.server.core.post.domain.Post;
 
 import javax.persistence.EntityManager;
@@ -42,7 +43,7 @@ class PostControllerTest {
     }
 
     @Test
-    void findPosts() throws Exception {
+    void findPostsTest() throws Exception {
         //given
         Post post1 = getPost("test_title1", "test_content1");
         Post post2 = getPost("test_title2", "test_content2");
@@ -62,7 +63,7 @@ class PostControllerTest {
     }
 
     @Test
-    void findPost() throws Exception {
+    void findPostTest() throws Exception {
         //given
         Post post = getPost("test_title", "test_content");
         em.persist(post);
@@ -110,7 +111,7 @@ class PostControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
                 )
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("BAD_REQUEST"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("잘못된 요청입니다."))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.errors").isArray())
@@ -120,7 +121,24 @@ class PostControllerTest {
 
     @Test
     void updatePostTest() throws Exception {
+        //given
+        Post post = getPost("title", "content");
+        em.persist(post);
 
+        UpdatePostRequest request = new UpdatePostRequest();
+        request.setPostTitle("update_title");
+        request.setPostContent("update_content");
 
+        String json = objectMapper.writeValueAsString(request);
+
+        //expected
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/posts/{postId}", post.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("OK"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.updatedPostId").value(post.getId()))
+                .andDo(MockMvcResultHandlers.print());
     }
 }
