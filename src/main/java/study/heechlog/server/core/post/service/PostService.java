@@ -2,13 +2,15 @@ package study.heechlog.server.core.post.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.domain.UpdatePostParam;
+import study.heechlog.server.core.post.dto.PostSearchCondition;
+import study.heechlog.server.core.post.repository.PostQueryRepository;
 import study.heechlog.server.core.post.repository.PostRepository;
-
-import java.util.List;
 
 @Slf4j
 @Service
@@ -17,12 +19,13 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final PostQueryRepository postQueryRepository;
 
     /**
      * post 목록 조회
      */
-    public List<Post> findPosts() {
-        return postRepository.findAll();
+    public Page<Post> findPosts(PostSearchCondition condition, Pageable pageable) {
+        return postQueryRepository.findPosts(condition, pageable);
     }
 
     /**
