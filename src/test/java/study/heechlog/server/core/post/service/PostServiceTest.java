@@ -3,8 +3,11 @@ package study.heechlog.server.core.post.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.dto.PostSearchCondition;
 import study.heechlog.server.core.post.repository.PostRepository;
 
 import java.util.List;
@@ -31,7 +34,7 @@ class PostServiceTest {
     }
 
     @Test
-    void findPostWithPageTest() throws Exception{
+    void findPostsTest() {
         //given
         List<Post> requestPosts = IntStream.range(0, 30)
                 .mapToObj(i -> Post.createPostBuilder()
@@ -42,26 +45,15 @@ class PostServiceTest {
                 .collect(Collectors.toList());
         postRepository.saveAll(requestPosts);
 
-        //when
-
-        //then
-    }
-
-    @Test
-    public void findPostsTest() throws Exception{
-        //given
-        Post post1 = getPost("test_title1", "test_content1");
-        Post post2 = getPost("test_title2", "test_content2");
-        postService.savePost(post1);
-        postService.savePost(post2);
+        PostSearchCondition condition = new PostSearchCondition();
+        PageRequest pageRequest = PageRequest.of(0, 10);
 
         //when
-        List<Post> posts = postService.findPosts();
+        Page<Post> contents = postService.findPosts(condition, pageRequest);
 
         //then
-        assertThat(posts.size()).isEqualTo(2);
-        assertThat(posts).extracting("title").containsExactly("test_title1", "test_title2");
-        assertThat(posts).extracting("content").containsExactly("test_content1", "test_content2");
+        assertThat(contents.getTotalElements()).isEqualTo(30);
+        assertThat(contents.getContent().size()).isEqualTo(10);
     }
 
     @Test
