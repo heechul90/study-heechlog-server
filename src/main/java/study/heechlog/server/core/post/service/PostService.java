@@ -55,4 +55,14 @@ public class PostService {
                 .param(param)
                 .build();
     }
+
+    /**
+     * post 삭제
+     */
+    @Transactional
+    public void deletePost(Long postId) {
+        Post findPost = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 글입니다."));
+        postRepository.delete(findPost);
+    }
 }

@@ -1,5 +1,6 @@
 package study.heechlog.server.core.post.service;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -42,6 +43,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName(value = "포스트 목록 조회")
     void findPostsTest() {
         //given
         List<Post> requestPosts = IntStream.range(0, 30)
@@ -65,6 +67,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName(value = "포스트 단건 조회")
     void findPostTest() {
         //given
         Post post = getPost("test_title", "test_content");
@@ -82,6 +85,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName(value = "포스트 저장")
     void savePostTest() {
         //given
         Post post = getPost("test_title", "test_content");
@@ -96,6 +100,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName(value = "포스트 수정")
     void updatePostTest() {
         //given
         Post post = getPost("test_title", "test_content");
@@ -113,5 +118,22 @@ class PostServiceTest {
         Post findPost = em.find(Post.class, post.getId());
         assertThat(findPost.getTitle()).isEqualTo("update_title");
         assertThat(findPost.getContent()).isEqualTo("update_content");
+    }
+
+    @Test
+    @DisplayName(value = "포스트 삭제")
+    void deletePostTest() {
+        //given
+        Post post = getPost("test_title", "test_content");
+        em.persist(post);
+
+        //when
+        postService.deletePost(post.getId());
+
+        //then
+        assertThatThrownBy(() -> postService.findPost(post.getId()))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("존재하지")
+                .hasMessageEndingWith("입니다.");
     }
 }
