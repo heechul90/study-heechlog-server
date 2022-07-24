@@ -105,4 +105,9 @@ public class PostController {
     /**
      * post 삭제
      */
+    @DeleteMapping(value = "/{postId}")
+    public JsonResult deletePost(@PathVariable("postId") Long postId) {
+        postService.deletePost(postId);
+        return JsonResult.OK();
+    }
 }

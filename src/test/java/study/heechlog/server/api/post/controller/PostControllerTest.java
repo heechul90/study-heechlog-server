@@ -141,4 +141,19 @@ class PostControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.updatedPostId").value(post.getId()))
                 .andDo(MockMvcResultHandlers.print());
     }
+
+    @Test
+    void deletePostTest() throws Exception {
+        //given
+        Post post = getPost("title", "content");
+        em.persist(post);
+
+        //expected
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/posts/{postId}", post.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("OK"))
+                .andDo(MockMvcResultHandlers.print());
+    }
 }
