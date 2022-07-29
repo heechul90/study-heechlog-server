@@ -26,6 +26,8 @@ import static org.hamcrest.Matchers.is;
 @Transactional
 class PostControllerTest {
 
+    public static final String TITLE = "test_title1";
+    public static final String CONTENT = "test_content1";
     @PersistenceContext EntityManager em;
 
     @Autowired
@@ -45,7 +47,7 @@ class PostControllerTest {
     @Test
     void findPostsTest() throws Exception {
         //given
-        Post post1 = getPost("test_title1", "test_content1");
+        Post post1 = getPost(TITLE, CONTENT);
         Post post2 = getPost("test_title2", "test_content2");
         em.persist(post1);
         em.persist(post2);
