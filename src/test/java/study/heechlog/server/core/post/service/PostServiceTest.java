@@ -5,14 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import study.heechlog.server.core.common.exception.EntityNotFound;
 import study.heechlog.server.core.post.PostTestConfig;
 import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
 import study.heechlog.server.core.post.dto.UpdatePostParam;
+import study.heechlog.server.core.post.exception.PostNotFound;
 import study.heechlog.server.core.post.repository.PostRepository;
 
 import javax.persistence.EntityManager;
@@ -34,6 +35,8 @@ class PostServiceTest {
     @Autowired PostRepository postRepository;
 
     @Autowired PostService postService;
+
+    @Autowired MessageSource messageSource;
 
     private Post getPost(String title, String content) {
         Post post = Post.createPostBuilder()
@@ -77,12 +80,14 @@ class PostServiceTest {
         //when
         Post findPost = postService.findPost(savedId);
 
+
         //then
         assertThat(findPost.getTitle()).isEqualTo("test_title");
         assertThat(findPost.getContent()).isEqualTo("test_content");
         assertThatThrownBy(() -> postService.findPost(post.getId() + 1L))
-                .isInstanceOf(EntityNotFound.class)
-                .hasMessageContaining("존재하지 않는 엔티티입니다.");
+                .isInstanceOf(PostNotFound.class)
+                .hasMessageStartingWith("존재하지 않는")
+                .hasMessageEndingWith("게시물입니다.");
     }
 
     @Test
@@ -133,8 +138,8 @@ class PostServiceTest {
 
         //then
         assertThatThrownBy(() -> postService.findPost(post.getId()))
-                .isInstanceOf(EntityNotFound.class)
-                .hasMessageStartingWith("존재하지")
-                .hasMessageEndingWith("엔티티입니다.");
+                .isInstanceOf(PostNotFound.class)
+                .hasMessageStartingWith("존재하지 않는")
+                .hasMessageEndingWith("게시물입니다.");
     }
 }

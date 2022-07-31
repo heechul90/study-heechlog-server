@@ -6,10 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import study.heechlog.server.core.common.exception.EntityNotFound;
 import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.dto.UpdatePostParam;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
+import study.heechlog.server.core.post.exception.PostNotFound;
 import study.heechlog.server.core.post.repository.PostQueryRepository;
 import study.heechlog.server.core.post.repository.PostRepository;
 
@@ -34,7 +34,7 @@ public class PostService {
      */
     public Post findPost(Long postId) {
         return postRepository.findById(postId)
-                .orElseThrow(() -> new EntityNotFound());
+                .orElseThrow(PostNotFound::new);
     }
 
     /**
@@ -51,7 +51,7 @@ public class PostService {
     @Transactional
     public void updatePost(Long postId, UpdatePostParam param) {
         Post findPost = postRepository.findById(postId)
-                .orElseThrow(() -> new EntityNotFound());
+                .orElseThrow(PostNotFound::new);
         findPost.updatePostBuiler()
                 .param(param)
                 .build();
@@ -63,7 +63,7 @@ public class PostService {
     @Transactional
     public void deletePost(Long postId) {
         Post findPost = postRepository.findById(postId)
-                .orElseThrow(() -> new EntityNotFound());
+                .orElseThrow(PostNotFound::new);
         postRepository.delete(findPost);
     }
 }
