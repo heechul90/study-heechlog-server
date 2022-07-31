@@ -16,6 +16,10 @@ spring:
         format_sql: true
         defaul_batch_fetch_size: 1000
 
+  messages:
+    basename: messages,errors
+    encoding: UTF-8
+
   data:
     web:
       pageable:
