@@ -31,10 +31,11 @@ public class JsonResult<T> {
                 .build();
     }
 
-    public static <T> JsonResult<T> ERROR(List<Error> errors) {
+    @Builder(builderClassName = "errorBuiler", builderMethodName = "errorBuiler")
+    public static <T> JsonResult<T> ERROR(HttpStatus httpStatus, String message, List<Error> errors) {
         return (JsonResult<T>) JsonResult.builder()
-                .status(HttpStatus.BAD_REQUEST)
-                .message("잘못된 요청입니다.")
+                .status(httpStatus)
+                .message(message)
                 .errors(errors)
                 .build();
     }

@@ -1,6 +1,16 @@
 package study.heechlog.server.core.common.exception;
 
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
+import study.heechlog.server.core.common.json.Error;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
 public abstract class CommonException extends RuntimeException {
+
+    List<Error> errors = new ArrayList<>();
 
     public CommonException(String message) {
         super(message);
@@ -8,5 +18,11 @@ public abstract class CommonException extends RuntimeException {
 
     public CommonException(String message, Throwable cause) {
         super(message, cause);
+    }
+
+    public abstract HttpStatus status();
+
+    public void addValidation(String fieldName, String errorMessage) {
+        errors.add(new Error(fieldName, errorMessage));
     }
 }
