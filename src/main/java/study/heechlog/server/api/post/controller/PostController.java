@@ -4,14 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.heechlog.server.api.post.controller.request.CreatePostRequest;
 import study.heechlog.server.api.post.controller.request.UpdatePostRequest;
 import study.heechlog.server.api.post.controller.response.CreatePostResponse;
 import study.heechlog.server.api.post.controller.response.UpdatePostResponse;
-import study.heechlog.server.core.common.json.Error;
 import study.heechlog.server.core.common.json.JsonResult;
 import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.dto.PostDto;
@@ -64,18 +62,7 @@ public class PostController {
      * post 저장
      */
     @PostMapping
-    public JsonResult savePost(@RequestBody @Validated CreatePostRequest request, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            List<Error> errors = bindingResult.getFieldErrors().stream()
-                    .map(error -> new Error(
-                            error.getField(),
-                            error.getDefaultMessage()
-                    ))
-                    .collect(Collectors.toList());
-            return JsonResult.ERROR(errors);
-        }
-
+    public JsonResult savePost(@RequestBody @Validated CreatePostRequest request) {
         Long savedId = postService.savePost(request.toEntity());
         return JsonResult.OK(new CreatePostResponse(savedId));
     }
@@ -85,17 +72,7 @@ public class PostController {
      */
     @PutMapping(value = "/{postId}")
     public JsonResult updatePost(@PathVariable("postId") Long postId,
-                                 @RequestBody @Validated UpdatePostRequest request, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            List<Error> errors = bindingResult.getFieldErrors().stream()
-                    .map(error -> new Error(
-                            error.getField(),
-                            error.getDefaultMessage()
-                    ))
-                    .collect(Collectors.toList());
-            return JsonResult.ERROR(errors);
-        }
+                                 @RequestBody @Validated UpdatePostRequest request) {
 
         postService.updatePost(postId, request.toParam());
         Post post = postService.findPost(postId);

@@ -6,11 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import study.heechlog.server.core.post.dto.UpdatePostParam;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class UpdatePostRequest {
 
+    @NotBlank(message = "제목을 입력하세요.")
     private String postTitle;
     private String postContent;
 
