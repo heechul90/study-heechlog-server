@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/posts")
-public class PostController {
+public class PostController  {
 
     private final PostService postService;
 
@@ -63,6 +63,10 @@ public class PostController {
      */
     @PostMapping
     public JsonResult savePost(@RequestBody @Validated CreatePostRequest request) {
+
+        //validate
+        request.validate();
+
         Long savedId = postService.savePost(request.toEntity());
         return JsonResult.OK(new CreatePostResponse(savedId));
     }
