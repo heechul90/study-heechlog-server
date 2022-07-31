@@ -47,7 +47,7 @@ class PostServiceTest {
     }
 
     @Test
-    @DisplayName(value = "포스트 목록 조회")
+    @DisplayName("게시글 목록 조회")
     void findPostsTest() {
         //given
         List<Post> requestPosts = IntStream.range(0, 30)
@@ -71,7 +71,7 @@ class PostServiceTest {
     }
 
     @Test
-    @DisplayName(value = "포스트 단건 조회")
+    @DisplayName("게시글 단건 조회")
     void findPostTest() {
         //given
         Post post = getPost("test_title", "test_content");
@@ -87,11 +87,11 @@ class PostServiceTest {
         assertThatThrownBy(() -> postService.findPost(post.getId() + 1L))
                 .isInstanceOf(PostNotFound.class)
                 .hasMessageStartingWith("존재하지 않는")
-                .hasMessageEndingWith("게시물입니다.");
+                .hasMessageEndingWith("게시글입니다.");
     }
 
     @Test
-    @DisplayName(value = "포스트 저장")
+    @DisplayName("게시글 저장")
     void savePostTest() {
         //given
         Post post = getPost("test_title", "test_content");
@@ -106,7 +106,7 @@ class PostServiceTest {
     }
 
     @Test
-    @DisplayName(value = "포스트 수정")
+    @DisplayName("게시글 수정")
     void updatePostTest() {
         //given
         Post post = getPost("test_title", "test_content");
@@ -124,10 +124,14 @@ class PostServiceTest {
         Post findPost = em.find(Post.class, post.getId());
         assertThat(findPost.getTitle()).isEqualTo("update_title");
         assertThat(findPost.getContent()).isEqualTo("update_content");
+        assertThatThrownBy(() -> postService.updatePost(post.getId() + 1L, param))
+                .isInstanceOf(PostNotFound.class)
+                .hasMessageStartingWith("존재하지 않는")
+                .hasMessageEndingWith("게시글입니다.");
     }
 
     @Test
-    @DisplayName(value = "포스트 삭제")
+    @DisplayName("게시글 삭제")
     void deletePostTest() {
         //given
         Post post = getPost("test_title", "test_content");
@@ -140,6 +144,6 @@ class PostServiceTest {
         assertThatThrownBy(() -> postService.findPost(post.getId()))
                 .isInstanceOf(PostNotFound.class)
                 .hasMessageStartingWith("존재하지 않는")
-                .hasMessageEndingWith("게시물입니다.");
+                .hasMessageEndingWith("게시글입니다.");
     }
 }

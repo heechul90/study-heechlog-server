@@ -1,5 +1,6 @@
 package study.heechlog.server.core.post.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -15,6 +16,7 @@ class PostTest {
     EntityManager em;
 
     @Test
+    @DisplayName("게시글 엔티티 생성 확인")
     public void createEntityTest(){
         //given
         Post post = Post.createPostBuilder()

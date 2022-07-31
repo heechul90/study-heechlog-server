@@ -47,7 +47,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "게시글 목록 조회")
+    @DisplayName("게시글 목록 조회")
     void findPostsTest() throws Exception {
         //given
         Post post1 = getPost(TITLE, CONTENT);
@@ -68,7 +68,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "게시글 단건 조회")
+    @DisplayName("게시글 단건 조회")
     void findPostTest() throws Exception {
         //given
         Post post = getPost("test_title", "test_content");
@@ -86,7 +86,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "게시글 단건 조회_예외 발생")
+    @DisplayName("게시글 단건 조회_예외 발생")
     void findPostTest_validation() throws Exception {
         //given
         Post post = getPost("test_title", "test_content");
@@ -102,7 +102,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "게시글 저장")
+    @DisplayName("게시글 저장")
     void savePostTest() throws Exception {
         //given
         CreatePostRequest request = new CreatePostRequest();
@@ -121,7 +121,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "게시글 저장_예외 발생_필드")
+    @DisplayName("게시글 저장_예외 발생_필드")
     void savePostTest_validation_field() throws Exception {
         //given
         CreatePostRequest request = new CreatePostRequest();
@@ -144,7 +144,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "게시글 저장_예외 발생_제목")
+    @DisplayName("게시글 저장_예외 발생_제목")
     void savePostTest_validation_object_title() throws Exception {
         //given
         CreatePostRequest request = new CreatePostRequest();
@@ -166,7 +166,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "게시글 저장_예외 발생_내용")
+    @DisplayName("게시글 저장_예외 발생_내용")
     void savePostTest_validation_object_content() throws Exception {
         //given
         CreatePostRequest request = new CreatePostRequest();
@@ -188,7 +188,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "게시글 수정")
+    @DisplayName("게시글 수정")
     void updatePostTest() throws Exception {
         //given
         Post post = getPost("title", "content");
@@ -211,7 +211,7 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName(value = "게시글 수정_예외 발생")
+    @DisplayName("게시글 수정_예외 발생")
     void updatePostTest_validation() throws Exception {
         //given
         Post post = getPost("title", "content");
@@ -265,6 +265,4 @@ class PostControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("존재하지 않는 게시글입니다."))
                 .andDo(MockMvcResultHandlers.print());
     }
-
-
 }

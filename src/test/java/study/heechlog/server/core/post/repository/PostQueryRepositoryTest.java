@@ -1,5 +1,6 @@
 package study.heechlog.server.core.post.repository;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -26,6 +27,7 @@ class PostQueryRepositoryTest {
     @Autowired PostQueryRepository postQueryRepository;
 
     @Test
+    @DisplayName("게시글 목록 조회")
     void findPostsTest() {
         //given
         for (int i = 0; i < 50; i++) {
