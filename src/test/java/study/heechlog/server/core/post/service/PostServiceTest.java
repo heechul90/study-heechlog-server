@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import study.heechlog.server.core.common.exception.EntityNotFound;
 import study.heechlog.server.core.post.PostTestConfig;
 import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
@@ -79,9 +80,9 @@ class PostServiceTest {
         //then
         assertThat(findPost.getTitle()).isEqualTo("test_title");
         assertThat(findPost.getContent()).isEqualTo("test_content");
-        assertThatThrownBy(() -> postService.findPost(9999999999999L))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("존재하지 않는 글입니다.");
+        assertThatThrownBy(() -> postService.findPost(post.getId() + 1L))
+                .isInstanceOf(EntityNotFound.class)
+                .hasMessageContaining("존재하지 않는 엔티티입니다.");
     }
 
     @Test
@@ -132,8 +133,8 @@ class PostServiceTest {
 
         //then
         assertThatThrownBy(() -> postService.findPost(post.getId()))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(EntityNotFound.class)
                 .hasMessageStartingWith("존재하지")
-                .hasMessageEndingWith("입니다.");
+                .hasMessageEndingWith("엔티티입니다.");
     }
 }

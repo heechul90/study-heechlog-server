@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @Builder
 @SuppressWarnings("unchecked")
+//@JsonInclude(value = JsonInclude.Include.NON_EMPTY)
 public class JsonResult<T> {
 
     private HttpStatus status;
