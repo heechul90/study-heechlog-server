@@ -91,8 +91,6 @@ class PostControllerTest {
         Post post = getPost("test_title", "test_content");
         em.persist(post);
 
-        System.out.println("post1111 = " + post);
-
         //expected
         mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/{postId}", post.getId() + 1L)
                         .contentType(MediaType.APPLICATION_JSON))
