@@ -33,11 +33,9 @@ class PostControllerTest {
 
     @PersistenceContext EntityManager em;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    @Autowired private ObjectMapper objectMapper;
 
-    @Autowired
-    private MockMvc mockMvc;
+    @Autowired private MockMvc mockMvc;
 
     private Post getPost(String title, String content) {
         Post post = Post.createPostBuilder()
