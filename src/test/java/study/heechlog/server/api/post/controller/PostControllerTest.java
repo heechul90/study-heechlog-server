@@ -30,6 +30,7 @@ class PostControllerTest {
 
     public static final String TITLE = "test_title1";
     public static final String CONTENT = "test_content1";
+
     @PersistenceContext EntityManager em;
 
     @Autowired
