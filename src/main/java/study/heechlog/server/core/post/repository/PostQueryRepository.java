@@ -41,6 +41,7 @@ public class PostQueryRepository {
         List<Post> content = queryFactory
                 .select(post)
                 .from(post)
+                .orderBy(post.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
