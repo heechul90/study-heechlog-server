@@ -6,22 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import study.heechlog.server.api.post.controller.request.CreatePostRequest;
-import study.heechlog.server.api.post.controller.request.UpdatePostRequest;
 import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.service.PostService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @WebMvcTest(PostController.class)
 class PostControllerTest {
@@ -33,6 +30,7 @@ class PostControllerTest {
     //POST UPDATE DATA
     public static final String UPDATE_TITLE = "update_title";
     public static final String UPDATE_CONTENT = "update_content";
+    public static final String API_FIND_POST = "/api/posts/{postId}";
 
     @Autowired private MockMvc mockMvc;
 
@@ -53,33 +51,31 @@ class PostControllerTest {
     @DisplayName("게시글 목록 조회")
     void findPostsTest() throws Exception {
         //given
-        Post post1 = getPost(TITLE, CONTENT);
-        Post post2 = getPost("test_title2", "test_content2");
-        em.persist(post1);
-        em.persist(post2);
 
-        //expected
-        mockMvc.perform((MockMvcRequestBuilders.get("/api/posts"))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("OK"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.length()", is(2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postId").value(post1.getId()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postTitle").value(post1.getTitle()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postContent").value(post1.getContent()))
-                .andDo(MockMvcResultHandlers.print());
+
     }
 
     @Test
     @DisplayName("게시글 단건 조회")
     void findPostTest() throws Exception {
         //given
+        Post post = getPost(TITLE, CONTENT);
+        given(postService.findPost(any())).willReturn(post);
 
         //when
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get(API_FIND_POST, any(Long.class))
+                .contentType(MediaType.APPLICATION_JSON)
+        );
 
         //then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.postTitle").value(TITLE))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.postContent").value(CONTENT))
+                .andDo(MockMvcResultHandlers.print());
 
         //verify
+        verify(postService, times(1)).findPost(any());
     }
 
     @Test
