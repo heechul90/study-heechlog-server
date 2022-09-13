@@ -83,6 +83,12 @@ class PostControllerTest {
     void findPostTest_validation() throws Exception {
         //given
 
+        //when
+
+        //then
+
+        //verify
+
     }
 
     @Test
