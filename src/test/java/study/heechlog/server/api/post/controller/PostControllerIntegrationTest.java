@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @Transactional
 class PostControllerIntegrationTest {
 
@@ -60,9 +62,9 @@ class PostControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("OK"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.length()", is(2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postId").value(post1.getId()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postTitle").value(post1.getTitle()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postContent").value(post1.getContent()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postId").value(post2.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postTitle").value(post2.getTitle()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data[0].postContent").value(post2.getContent()))
                 .andDo(MockMvcResultHandlers.print());
     }
 
