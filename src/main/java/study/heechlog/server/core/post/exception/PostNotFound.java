@@ -1,7 +1,7 @@
 package study.heechlog.server.core.post.exception;
 
 import org.springframework.http.HttpStatus;
-import study.heechlog.server.core.common.exception.CommonException;
+import study.heechlog.server.common.exception.CommonException;
 
 public class PostNotFound extends CommonException {
 
