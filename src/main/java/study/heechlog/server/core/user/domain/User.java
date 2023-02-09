@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 @SequenceGenerator(
         name = "user_seq_generator",
         sequenceName = "user_seq",
