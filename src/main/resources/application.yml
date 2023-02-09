@@ -31,3 +31,6 @@ server:
 logging:
   level:
     org.hibernate.SQL: debug
+
+heechman:
+  hello: world
