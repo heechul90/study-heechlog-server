@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.snippet.Attributes;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -31,20 +33,18 @@ import static org.springframework.restdocs.request.RequestDocumentation.pathPara
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @AutoConfigureRestDocs(uriScheme = "https", uriHost = "api.heechlog.com", uriPort = 443)
 @Transactional
+@WithMockUser
 public class PostControllerDocTest {
 
     @PersistenceContext EntityManager em;
-
     @Autowired private ObjectMapper objectMapper;
-
     @Autowired private MockMvc mockMvc;
 
     private Post getPost(String title, String content) {
-        Post post = Post.createPostBuilder()
+        return Post.createPostBuilder()
                 .title(title)
                 .content(content)
                 .build();
-        return post;
     }
 
     @Test
