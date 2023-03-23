@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class LoginRequest {
+public class SigninRequest {
 
     @NotBlank(message = "이메일을 입력해주세요.")
     private String email;
@@ -16,7 +16,7 @@ public class LoginRequest {
     private String password;
 
     @Builder
-    public LoginRequest(String email, String password) {
+    public SigninRequest(String email, String password) {
         this.email = email;
         this.password = password;
     }

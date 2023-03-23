@@ -1,6 +1,7 @@
-package study.heechlog.server.common.exception;
+package study.heechlog.server.core.user.exception;
 
 import org.springframework.http.HttpStatus;
+import study.heechlog.server.common.exception.CommonException;
 
 public class AlreadyExistsEmailException extends CommonException {
 
