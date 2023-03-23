@@ -1,13 +1,12 @@
 package study.heechlog.server.core.user.controller.request;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SigninRequest {
 
     @NotBlank(message = "이메일을 입력해주세요.")
