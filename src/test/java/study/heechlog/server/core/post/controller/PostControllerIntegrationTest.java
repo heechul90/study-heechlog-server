@@ -33,10 +33,8 @@ class PostControllerIntegrationTest {
     public static final String TITLE = "test_title1";
     public static final String CONTENT = "test_content1";
 
-    @PersistenceContext EntityManager em;
-
+    @PersistenceContext private EntityManager em;
     @Autowired private ObjectMapper objectMapper;
-
     @Autowired private MockMvc mockMvc;
 
     private Post getPost(String title, String content) {
