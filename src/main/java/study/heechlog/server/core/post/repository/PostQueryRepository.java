@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.util.List;
 
 import static study.heechlog.server.core.post.domain.QPost.post;

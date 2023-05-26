@@ -4,7 +4,7 @@ import lombok.*;
 import study.heechlog.server.common.exception.InvalidRequest;
 import study.heechlog.server.core.post.domain.Post;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 @Getter
 @Setter

@@ -1,6 +1,8 @@
 package study.heechlog.server.core.post.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.core.post.controller.request.CreatePostRequest;
 import study.heechlog.server.core.post.controller.request.UpdatePostRequest;
 import study.heechlog.server.core.post.domain.Post;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;

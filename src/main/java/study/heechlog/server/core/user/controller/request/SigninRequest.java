@@ -2,7 +2,7 @@ package study.heechlog.server.core.user.controller.request;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 @Getter
 @Setter

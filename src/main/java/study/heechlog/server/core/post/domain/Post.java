@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import study.heechlog.server.core.post.dto.UpdatePostParam;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import static org.springframework.util.StringUtils.hasText;
 

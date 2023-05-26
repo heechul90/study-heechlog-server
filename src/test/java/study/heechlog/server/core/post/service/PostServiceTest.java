@@ -1,5 +1,7 @@
 package study.heechlog.server.core.post.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,6 @@ import study.heechlog.server.core.post.dto.UpdatePostParam;
 import study.heechlog.server.core.post.exception.PostNotFound;
 import study.heechlog.server.core.post.repository.PostRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Import(PostTestConfig.class)
 class PostServiceTest {
 
-    @PersistenceContext EntityManager em;
+    @PersistenceContext private EntityManager em;
 
     @Autowired PostRepository postRepository;
 

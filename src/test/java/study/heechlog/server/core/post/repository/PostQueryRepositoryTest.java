@@ -1,5 +1,7 @@
 package study.heechlog.server.core.post.repository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import study.heechlog.server.core.post.PostTestConfig;
 import study.heechlog.server.core.post.domain.Post;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

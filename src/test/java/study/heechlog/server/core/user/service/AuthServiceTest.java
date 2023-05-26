@@ -1,5 +1,7 @@
 package study.heechlog.server.core.user.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,6 @@ import study.heechlog.server.core.user.exception.AlreadyExistsEmailException;
 import study.heechlog.server.core.user.controller.request.SignupRequest;
 import study.heechlog.server.core.user.domain.User;
 import study.heechlog.server.core.user.exception.InvalidSigninInformation;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
