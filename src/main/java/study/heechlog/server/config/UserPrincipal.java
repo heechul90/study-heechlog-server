@@ -10,7 +10,14 @@ public class UserPrincipal extends User {
     private final Long userId;
 
     public UserPrincipal(study.heechlog.server.core.user.domain.User user) {
-        super(user.getEmail(), user.getPassword(), List.of(new SimpleGrantedAuthority("ADMIN")));
+        super(
+                user.getEmail(),
+                user.getPassword(),
+                List.of(
+                        new SimpleGrantedAuthority("ROLE_ADMIN"),
+                        new SimpleGrantedAuthority("WRITE")
+                )
+        );
         this.userId = user.getId();
     }
 

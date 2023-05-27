@@ -1,5 +1,4 @@
 ### 회원가입
-
 POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
@@ -11,7 +10,6 @@ Content-Type: application/json
 
 
 ### 로그인
-
 POST http://localhost:9000/auth/login
 Content-Type: application/x-www-form-urlencoded
 
@@ -19,5 +17,12 @@ username=heechul@gmail.com&password=1234&remember=1
 
 
 ### 메인 페이지
-
 GET http://localhost:9000
+
+
+### 사용자 페이지
+GET http://localhost:9000/user
+
+
+### 관리자 페이지
+GET http://localhost:9000/admin
