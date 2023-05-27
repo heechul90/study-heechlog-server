@@ -1,9 +1,21 @@
+### 회원가입
+
+POST http://localhost:9000/auth/signup
+Content-Type: application/json
+
+{
+  "name": "이희철",
+  "email": "heechul@gmail.com",
+  "password": "1234"
+}
+
+
 ### 로그인
 
 POST http://localhost:9000/auth/login
 Content-Type: application/x-www-form-urlencoded
 
-username=heechul&password=1234&remember=1
+username=heechul@gmail.com&password=1234&remember=1
 
 
 ### 메인 페이지
