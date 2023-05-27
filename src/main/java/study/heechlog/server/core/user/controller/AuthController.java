@@ -4,10 +4,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import study.heechlog.server.config.AppConfig;
 import study.heechlog.server.core.user.controller.reponse.SessionResponse;
 import study.heechlog.server.core.user.controller.request.SigninRequest;
@@ -38,6 +35,11 @@ public class AuthController {
                 .compact();
 
         return new SessionResponse(jwt);
+    }
+
+    @GetMapping("/auth/login")
+    public String login() {
+        return "로그인 페이지입니다.";
     }
 
     @PostMapping("/auth/signup")
