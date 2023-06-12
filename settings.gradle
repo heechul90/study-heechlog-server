@@ -1,1 +1,5 @@
 rootProject.name = 'settlement-service'
+include 'batch'
+include 'domain'
+include 'api'
+
