@@ -1,19 +1,44 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
-
-group 'org.woorinpang'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+bootJar.enabled = false
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+
+    // 관리하는 모듈의 공통 dependencies
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
 }
 
-test {
-    useJUnitPlatform()
+project(':settlement-batch') {
+    dependencies {
+        compileOnly project(':settlement-domain')
+    }
+}
+
+project(':settlement-service') {
+    dependencies {
+        compileOnly project(':settlement-domain')
+    }
+}
+
+project(':settlement-domain') {
+    bootJar { enabled = false }
+    jar { enabled = true}
 }
