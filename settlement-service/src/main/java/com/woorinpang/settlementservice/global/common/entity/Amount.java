@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.payment.record.domain;
+package com.woorinpang.settlementservice.global.common.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;

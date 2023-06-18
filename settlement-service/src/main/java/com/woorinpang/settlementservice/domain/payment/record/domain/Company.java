@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Company {
-    @Column
+    @Column(columnDefinition = "bigint not null comment '고객사 고유번호'")
     private Long companyId;
 
-    @Column
+    @Column(columnDefinition = "varchar(120) not null comment '고객사명'")
     private String companyName;
 }

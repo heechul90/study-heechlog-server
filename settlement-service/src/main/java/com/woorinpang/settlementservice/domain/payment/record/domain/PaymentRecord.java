@@ -1,9 +1,11 @@
 package com.woorinpang.settlementservice.domain.payment.record.domain;
 
+import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
 
 import java.time.LocalDateTime;
 
@@ -11,11 +13,12 @@ import java.time.LocalDateTime;
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PaymentRecord {
+public class PaymentRecord extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_record_id")
+    @Column(name = "payment_record_id") @Comment("결재 기록 고유번호")
     private Long id;
 
+    @Column(columnDefinition = "varchar(36) not null comment '거래 고유 아이디'")
     private String transactionId;
 
     @Embedded
@@ -30,6 +33,11 @@ public class PaymentRecord {
     @Embedded
     private PaymentAmount paymentAmount;
 
-    private LocalDateTime paymentDate;
-    private String paymentDateYmd;
+    @Embedded
+    private Payment payment;
+
+    @Embedded
+    private PaymentCancellation paymentCancellation;
+
+    private Integer status;
 }
