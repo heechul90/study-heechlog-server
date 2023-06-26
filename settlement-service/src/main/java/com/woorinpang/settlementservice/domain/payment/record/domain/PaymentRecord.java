@@ -3,6 +3,7 @@ package com.woorinpang.settlementservice.domain.payment.record.domain;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
@@ -40,4 +41,16 @@ public class PaymentRecord extends BaseEntity {
     private PaymentCancellation paymentCancellation;
 
     private Integer status;
+
+    @Builder(builderMethodName = "createPaymentRecord")
+    public PaymentRecord(String transactionId, User user, Company company, Store store, PaymentAmount paymentAmount, Payment payment, PaymentCancellation paymentCancellation, Integer status) {
+        this.transactionId = transactionId;
+        this.user = user;
+        this.company = company;
+        this.store = store;
+        this.paymentAmount = paymentAmount;
+        this.payment = payment;
+        this.paymentCancellation = paymentCancellation;
+        this.status = status;
+    }
 }
