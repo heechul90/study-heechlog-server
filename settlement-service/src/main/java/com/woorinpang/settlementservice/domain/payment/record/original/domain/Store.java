@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.payment.record.domain;
+package com.woorinpang.settlementservice.domain.payment.record.original.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

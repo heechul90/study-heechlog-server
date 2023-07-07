@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.payment.record.domain;
+package com.woorinpang.settlementservice.domain.payment.record.common.domain;
 
 import com.woorinpang.settlementservice.global.common.entity.Amount;
 import jakarta.persistence.*;
@@ -27,14 +27,14 @@ public class PaymentAmount {
     private Amount mealAmount;
 
     @Embedded
+    @AttributeOverrides(@AttributeOverride(name = "value",column = @Column(name = "couponPayAmount", columnDefinition = "bigint default 0 comment '쿠폰 결재금액'")))
+    private Amount couponAmount;
+
+    @Embedded
     @AttributeOverrides(@AttributeOverride(name = "value",column = @Column(name = "companySettlementAmount", columnDefinition = "bigint default 0 comment '고객사 정산금액'")))
     private Amount companySettlementAmount;
 
     @Embedded
     @AttributeOverrides(@AttributeOverride(name = "value",column = @Column(name = "storeSettlementAmount", columnDefinition = "bigint default 0 comment '제휴사 정산금액'")))
     private Amount storeSettlementAmount;
-
-    @Embedded
-    @AttributeOverrides(@AttributeOverride(name = "value",column = @Column(name = "couponPayAmount", columnDefinition = "bigint default 0 comment '쿠폰 결재금액'")))
-    private Amount couponAmount;
 }

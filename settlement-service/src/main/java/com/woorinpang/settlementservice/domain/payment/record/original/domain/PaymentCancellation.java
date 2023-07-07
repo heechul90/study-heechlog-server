@@ -1,7 +1,7 @@
-package com.woorinpang.settlementservice.domain.payment.record.domain;
+package com.woorinpang.settlementservice.domain.payment.record.original.domain;
 
-import com.woorinpang.settlementservice.domain.payment.settlement.domain.YearMonthDay;
-import com.woorinpang.settlementservice.domain.payment.settlement.domain.YearMonthDayConverter;
+import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
+import com.woorinpang.settlementservice.global.common.entity.YearMonthDayConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;

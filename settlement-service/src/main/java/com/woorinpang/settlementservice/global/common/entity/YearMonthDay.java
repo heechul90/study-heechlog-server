@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.payment.settlement.domain;
+package com.woorinpang.settlementservice.global.common.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
