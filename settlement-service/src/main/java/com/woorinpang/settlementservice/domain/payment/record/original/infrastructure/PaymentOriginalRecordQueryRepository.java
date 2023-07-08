@@ -1,9 +1,11 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.infrastructure;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.PaymentOriginalRecord;
+import com.woorinpang.settlementservice.domain.payment.record.original.infrastructure.dto.find.FindPagePaymentOriginalRecordResponse;
 import com.woorinpang.settlementservice.domain.payment.record.original.infrastructure.dto.search.PaymentOriginalRecordSearchCondition;
 import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
@@ -26,7 +28,7 @@ public class PaymentOriginalRecordQueryRepository {
     /**
      * 결제 원본 기록 목록조회
      */
-    public Page<PaymentOriginalRecord> findPagePaymentOriginalRecord(PaymentOriginalRecordSearchCondition condition, Pageable pageable) {
+    public Page<FindPagePaymentOriginalRecordResponse> findPagePaymentOriginalRecord(PaymentOriginalRecordSearchCondition condition, Pageable pageable) {
         return PageableExecutionUtils.getPage(
                 getPaymentOriginalRecordList(condition, pageable),
                 pageable,
@@ -37,9 +39,17 @@ public class PaymentOriginalRecordQueryRepository {
     /**
      * 결제 원본 기록 목록
      */
-    private List<PaymentOriginalRecord> getPaymentOriginalRecordList(PaymentOriginalRecordSearchCondition condition, Pageable pageable) {
+    private List<FindPagePaymentOriginalRecordResponse> getPaymentOriginalRecordList(PaymentOriginalRecordSearchCondition condition, Pageable pageable) {
         return queryFactory
-                .select(paymentOriginalRecord)
+                .select(
+                        Projections.constructor(FindPagePaymentOriginalRecordResponse.class,
+                                paymentOriginalRecord.id,
+                                paymentOriginalRecord.transactionId,
+                                paymentOriginalRecord.company,
+                                paymentOriginalRecord.store,
+                                paymentOriginalRecord.user
+                        )
+                )
                 .from(paymentOriginalRecord)
                 .where(
                         searchCompanyIdEq(condition.getSearchCompanyId()),
