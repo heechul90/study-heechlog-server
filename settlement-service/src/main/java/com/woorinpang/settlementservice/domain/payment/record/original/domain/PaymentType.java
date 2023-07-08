@@ -1,5 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.domain;
 
+import com.woorinpang.settlementservice.domain.payment.record.original.application.exception.PaymentTypeMismatchException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -19,6 +20,6 @@ public enum PaymentType {
         return Arrays.stream(PaymentType.values())
                 .filter(type -> type.getCode().equals(code))
                 .findAny()
-                .orElse(null);
+                .orElseThrow(() -> new PaymentTypeMismatchException(code));
     }
 }
