@@ -11,7 +11,15 @@ import lombok.NoArgsConstructor;
 public class Amount {
     private long value;
 
-    public Amount(Long value) {
-        this.value = value != null ? value : 0L;
+    private Amount(long value) {
+        this.value = value;
+    }
+
+    public static Amount create(Long value) {
+        return new Amount(value != null ? value : 0L);
+    }
+
+    public static Amount cancel(Long value) {
+        return new Amount(value != null ? value * -1 : 0L);
     }
 }
