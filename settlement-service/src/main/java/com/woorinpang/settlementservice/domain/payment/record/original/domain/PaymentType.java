@@ -11,6 +11,7 @@ import java.util.Arrays;
 public enum PaymentType {
     GENERAL("GENERAL", "일반 결제"),
     CANCEL("CANCEL", "취소 결제"),
+    ADMIN("ADMIN", "관리자 등록"),
     ;
 
     private final String code;

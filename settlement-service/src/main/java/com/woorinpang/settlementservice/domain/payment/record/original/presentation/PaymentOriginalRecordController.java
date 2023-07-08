@@ -3,6 +3,7 @@ package com.woorinpang.settlementservice.domain.payment.record.original.presenta
 import com.woorinpang.settlementservice.domain.payment.record.original.application.SavePaymentOriginalRecordService;
 import com.woorinpang.settlementservice.domain.payment.record.original.presentation.dto.request.AddPaymentOriginalRecordRequest;
 import com.woorinpang.settlementservice.domain.payment.record.original.presentation.dto.response.AddPaymentOriginalRecordResponse;
+import com.woorinpang.settlementservice.domain.payment.record.original.presentation.dto.response.CancelPaymentOriginalRecordResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,8 +22,9 @@ public class PaymentOriginalRecordController {
      * 결제 원본 기록 등록
      */
     @PostMapping("/{transactionId}")
-    public ResponseEntity addPaymentOriginalRecord(@PathVariable("transactionId") String transactionId,
-                                                   @RequestBody @Valid AddPaymentOriginalRecordRequest request) {
+    public ResponseEntity<AddPaymentOriginalRecordResponse> addPaymentOriginalRecord(
+            @PathVariable("transactionId") String transactionId,
+            @RequestBody @Valid AddPaymentOriginalRecordRequest request) {
 
         //validate
         request.validate();
@@ -33,8 +35,4 @@ public class PaymentOriginalRecordController {
                 .status(HttpStatus.CREATED)
                 .body(new AddPaymentOriginalRecordResponse(savedId));
     }
-
-    /**
-     * 결제 원본 기록 취소
-     */
 }
