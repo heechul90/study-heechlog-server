@@ -2,7 +2,9 @@ package com.woorinpang.settlementservice.domain.payment.record.original.applicat
 
 import com.woorinpang.settlementservice.domain.payment.record.common.domain.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.*;
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Builder
 public record SavePaymentOriginalRecordCommand(
