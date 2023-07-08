@@ -53,10 +53,10 @@ public class AddPaymentOriginalRecordRequest {
     private PaymentAmount getPaymentAmount() {
         return PaymentAmount.builder()
                 .userPayAmount(new Amount(this.userPayAmount))
-                .mypointPayAmount(new Amount(this.mypointPayAmount == null ? 0L : this.mypointPayAmount))
-                .instantPayAmount(new Amount(this.instantPayAmount == null ? 0L : this.instantPayAmount))
-                .mealAmount(new Amount(this.mealAmount == null ? 0L : this.mealAmount))
-                .couponAmount(new Amount(this.couponAmount == null ? 0L : this.couponAmount))
+                .mypointPayAmount(new Amount(this.mypointPayAmount))
+                .instantPayAmount(new Amount(this.instantPayAmount))
+                .mealAmount(new Amount(this.mealAmount))
+                .couponAmount(new Amount(this.couponAmount))
                 .companySettlementAmount(new Amount(this.companySettlementAmount))
                 .storeSettlementAmount(new Amount(this.storeSettlementAmount))
                 .build();

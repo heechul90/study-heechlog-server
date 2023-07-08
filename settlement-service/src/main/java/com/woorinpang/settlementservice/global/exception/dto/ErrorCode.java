@@ -10,6 +10,7 @@ public enum ErrorCode {
     INVALID_INPUT_VALUE(400, "E001", "error.invalid.input.value"), //Bad Request
     INVALID_TYPE_VALUE(400, "E002", "error.invalid.type.value"), //Bad Request
     ENTITY_NOT_FOUND(404, "E003", "error.entity.not.found"), //Not Found
+    ENTITY_ALREADY_EXISTS(404, "E003", "error.entity.already.exists"), //Already Exists
     UNAUTHORIZED(401, "E003", "error.unauthorized"), //The request requires an user authentication
     JWT_EXPIRED(401, "E003", "error.unauthorized"), //The request requires an user authentication
     ACCESS_DENIED(403,"E006","error.access.denied"), //Forbidden, Access is Denied
