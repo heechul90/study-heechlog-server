@@ -16,10 +16,6 @@ public class YearMonthDayConverter implements AttributeConverter<YearMonthDay, S
     @Override
     public YearMonthDay convertToEntityAttribute(String dbData) {
         if(!hasText(dbData)) return null;
-        return YearMonthDay.builder()
-                .year(dbData.substring(0, 4))
-                .month(dbData.substring(4, 6))
-                .day(dbData.substring(6, 8))
-                .build();
+        return YearMonthDay.of(dbData);
     }
 }

@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.global.common.config.jpa;
+package com.woorinpang.settlementservice.global.config.jpa;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;

@@ -39,13 +39,12 @@ public class PaymentOriginalRecord extends BaseEntity {
     @Embedded
     private PaymentCancellation paymentCancellation;
 
-    private Integer status;
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
 
     @Builder(builderMethodName = "createPaymentOriginalRecord")
-    public PaymentOriginalRecord(Long id, String transactionId, Company company, Store store, User user,
-                                 PaymentAmount paymentAmount, Payment payment, PaymentCancellation paymentCancellation,
-                                 Integer status) {
-        this.id = id;
+    public PaymentOriginalRecord(String transactionId, Company company, Store store, User user, PaymentAmount paymentAmount,
+                                 Payment payment, PaymentCancellation paymentCancellation, PaymentType paymentType) {
         this.transactionId = transactionId;
         this.company = company;
         this.store = store;
@@ -53,6 +52,6 @@ public class PaymentOriginalRecord extends BaseEntity {
         this.paymentAmount = paymentAmount;
         this.payment = payment;
         this.paymentCancellation = paymentCancellation;
-        this.status = status;
+        this.paymentType = paymentType;
     }
 }
