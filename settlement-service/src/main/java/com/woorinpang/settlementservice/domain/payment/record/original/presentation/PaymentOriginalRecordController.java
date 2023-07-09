@@ -29,10 +29,8 @@ public class PaymentOriginalRecordController {
         //validate
         request.validate();
 
-        Long savedId = savePaymentOriginalRecordService.create(request.toCommand(transactionId));
-
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new AddPaymentOriginalRecordResponse(savedId));
+                .body(new AddPaymentOriginalRecordResponse(savePaymentOriginalRecordService.create(request.toCommand(transactionId))));
     }
 }
