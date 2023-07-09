@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.global.common.config.api;
+package com.woorinpang.settlementservice.global.config.api;
 
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;

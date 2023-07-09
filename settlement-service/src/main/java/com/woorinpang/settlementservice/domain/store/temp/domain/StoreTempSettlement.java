@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.company.settlement.temp.domain;
+package com.woorinpang.settlementservice.domain.store.temp.domain;
 
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -7,14 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
-import java.util.Date;
-
 @Entity
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CompanyTempSettlement extends BaseEntity {
+public class StoreTempSettlement extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "company_temp_settlement_id") @Comment("회사 임시 정산 고유번호")
+    @Column(name = "store_temp_settlement_id") @Comment("제휴사 임시 정산 고유번호")
     private Long id;
 }

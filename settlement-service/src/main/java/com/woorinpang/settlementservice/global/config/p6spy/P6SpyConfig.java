@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.global.common.config.p6spy;
+package com.woorinpang.settlementservice.global.config.p6spy;
 
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.P6SpyOptions;

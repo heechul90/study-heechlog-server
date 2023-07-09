@@ -5,9 +5,7 @@ import com.woorinpang.settlementservice.global.common.entity.YearMonthDayConvert
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -24,4 +22,11 @@ public class PaymentCancellation {
 
     @Column(columnDefinition = "varchar(255) null comment '결제 취소사유'")
     private String paymentCancellationReason;
+
+    @Builder
+    public PaymentCancellation(LocalDateTime paymentCancellationDate, YearMonthDay paymentCancellationYmd, String paymentCancellationReason) {
+        this.paymentCancellationDate = paymentCancellationDate;
+        this.paymentCancellationYmd = paymentCancellationYmd;
+        this.paymentCancellationReason = paymentCancellationReason;
+    }
 }

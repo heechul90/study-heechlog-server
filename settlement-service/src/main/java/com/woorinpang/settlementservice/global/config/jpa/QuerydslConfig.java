@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.global.common.config.jpa;
+package com.woorinpang.settlementservice.global.config.jpa;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
