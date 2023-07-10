@@ -4,8 +4,11 @@ import com.woorinpang.settlementservice.domain.payment.record.common.domain.Paym
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Company;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.*;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
+import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
+import com.woorinpang.settlementservice.global.common.entity.YearMonthDayConverter;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
@@ -27,4 +30,16 @@ public class PaymentDailyRecord extends BaseEntity {
 
     @Embedded
     private PaymentAmount paymentAmount;
+
+    @Column(columnDefinition = "char(8) not null comment '결제일자 년월일'")
+    @Convert(converter = YearMonthDayConverter.class)
+    private YearMonthDay paymentDateYmd;
+
+    @Builder(builderMethodName = "createPaymentDailyRecord")
+    public PaymentDailyRecord(Long companyId, Long storeId, PaymentAmount paymentAmount, YearMonthDay paymentDateYmd) {
+        this.companyId = companyId;
+        this.storeId = storeId;
+        this.paymentAmount = paymentAmount;
+        this.paymentDateYmd = paymentDateYmd;
+    }
 }

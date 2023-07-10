@@ -21,6 +21,8 @@ public class CreatePaymentDailyRecordService {
 
     public Long create(CreatePaymentDailyRecordCommand command) {
         List<PaymentOriginalRecord> paymentOriginalRecords = paymentOriginalRecordRepository.findAllByPaymentDateYmd(command.paymentDateYmd());
+        command.toPaymentDailyRecord();
+
 
         return null;
     }

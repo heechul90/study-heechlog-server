@@ -1,5 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.daily.application.dto.command;
 
+import com.woorinpang.settlementservice.domain.payment.record.daily.domain.PaymentDailyRecord;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
 import lombok.Builder;
 
@@ -7,4 +8,9 @@ import lombok.Builder;
 public record CreatePaymentDailyRecordCommand(
     YearMonthDay paymentDateYmd
 ) {
+    public PaymentDailyRecord toPaymentDailyRecord() {
+        return PaymentDailyRecord.createPaymentDailyRecord()
+                .paymentDateYmd(this.paymentDateYmd)
+                .build();
+    }
 }
