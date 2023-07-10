@@ -1,7 +1,7 @@
 package com.woorinpang.settlementservice.domain.payment.record.daily.presentation;
 
 import com.woorinpang.settlementservice.domain.payment.record.daily.application.CreatePaymentDailyRecordService;
-import com.woorinpang.settlementservice.domain.payment.record.daily.presentation.dto.request.createPaymentDailyRecordRequest;
+import com.woorinpang.settlementservice.domain.payment.record.daily.presentation.dto.request.CreatePaymentDailyRecordRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,8 @@ public class PaymentDailyRecordController {
      * 결제일일기록 생성
      */
     @PostMapping
-    public ResponseEntity createPaymentDailyRecord(createPaymentDailyRecordRequest request) {
+    public ResponseEntity createPaymentDailyRecord(CreatePaymentDailyRecordRequest request) {
+        createPaymentDailyRecordService.create(request.toCommend());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body("");
