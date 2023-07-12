@@ -25,4 +25,8 @@ public class YearMonthDay {
     public static YearMonthDay of(String yearMonthDay) {
         return new YearMonthDay(yearMonthDay.substring(0, 4), yearMonthDay.substring(4, 6), yearMonthDay.substring(6, 8));
     }
+
+    public String getYearMonthDay() {
+        return this.year + this.month + this.day;
+    }
 }
