@@ -6,10 +6,14 @@ import lombok.Builder;
 
 @Builder
 public record CreatePaymentDailyRecordCommand(
+    Long companyId,
+    Long storeId,
     YearMonthDay paymentDateYmd
 ) {
     public PaymentDailyRecord toPaymentDailyRecord() {
         return PaymentDailyRecord.createPaymentDailyRecord()
+                .companyId(this.companyId)
+                .storeId(this.storeId)
                 .paymentDateYmd(this.paymentDateYmd)
                 .build();
     }

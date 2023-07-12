@@ -8,5 +8,7 @@ import java.util.List;
 public interface PaymentOriginalRecordRepository extends JpaRepository<PaymentOriginalRecord, Long> {
     boolean existsByTransactionId(String transactionId);
 
+    boolean existsByCompanyIdAndStoreIdAndPaymentDateYmd(Long companyId, Long storeId, YearMonthDay paymentDateYmd);
+
     List<PaymentOriginalRecord> findAllByPaymentDateYmd(YearMonthDay paymentDateYmd);
 }

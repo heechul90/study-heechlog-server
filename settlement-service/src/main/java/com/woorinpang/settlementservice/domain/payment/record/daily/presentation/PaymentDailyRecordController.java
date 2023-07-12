@@ -18,11 +18,11 @@ public class PaymentDailyRecordController {
     private final CreatePaymentDailyRecordService createPaymentDailyRecordService;
 
     /**
-     * 결제일일기록 생성
+     * 특정 회사 제휴사 결제일일기록 재생성
      */
     @PostMapping
-    public ResponseEntity createPaymentDailyRecord(CreatePaymentDailyRecordRequest request) {
-        createPaymentDailyRecordService.create(request.toCommend());
+    public ResponseEntity reCreateCompanyStorePaymentDailyRecord(CreatePaymentDailyRecordRequest request) {
+        createPaymentDailyRecordService.reCreate(request.toCommend());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body("");
