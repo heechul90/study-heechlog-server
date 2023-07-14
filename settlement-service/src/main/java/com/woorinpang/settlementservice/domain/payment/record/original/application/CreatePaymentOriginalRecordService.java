@@ -1,7 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.application;
 
-import com.woorinpang.settlementservice.domain.payment.record.original.application.dto.command.SavePaymentOriginalRecordCommand;
-import com.woorinpang.settlementservice.domain.payment.record.original.application.exception.TransactionIdAlreadyExistsException;
+import com.woorinpang.settlementservice.domain.payment.record.original.application.dto.command.CreatePaymentOriginalRecordCommand;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.PaymentOriginalRecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,13 +14,13 @@ import static com.woorinpang.settlementservice.domain.payment.record.original.ap
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class SavePaymentOriginalRecordService {
+public class CreatePaymentOriginalRecordService {
     private final PaymentOriginalRecordRepository paymentOriginalRecordRepository;
 
     /**
      * 결제 원본 기록 생성
      */
-    public Long create(SavePaymentOriginalRecordCommand command) {
+    public Long create(CreatePaymentOriginalRecordCommand command) {
         existsPaymentOriginalRecordByTransactionId(paymentOriginalRecordRepository, command.transactionId());
         return savePaymentOriginalRecord(paymentOriginalRecordRepository, command.toPaymentOriginalRecord())
                 .getId();

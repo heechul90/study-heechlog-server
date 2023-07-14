@@ -32,7 +32,6 @@ public class CreatePaymentDailyRecordService {
         List<PaymentOriginalRecord> paymentOriginalRecords = paymentOriginalRecordRepository.findAllByPaymentDateYmd(command.paymentDateYmd());
         command.toPaymentDailyRecord();
 
-
         return null;
     }
 }
