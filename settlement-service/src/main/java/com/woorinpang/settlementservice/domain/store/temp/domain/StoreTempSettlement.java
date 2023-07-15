@@ -1,5 +1,7 @@
 package com.woorinpang.settlementservice.domain.store.temp.domain;
 
+import com.woorinpang.settlementservice.domain.payment.record.daily.domain.PaymentDailyRecord;
+import com.woorinpang.settlementservice.domain.store.common.domain.StoreSettlementDateYmd;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -15,4 +17,13 @@ public class StoreTempSettlement extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_temp_settlement_id") @Comment("제휴사 임시 정산 고유번호")
     private Long id;
+
+    private Long storeId;
+
+    @Embedded
+    private StoreSettlementDateYmd storeSettlementDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_daily_record_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private PaymentDailyRecord paymentDailyRecord;
 }

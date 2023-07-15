@@ -29,11 +29,11 @@ public class AddPaymentOriginalRecordRequest {
     private Long userId;
     @NotBlank(message = "사용자명은 필수입니다.")
     private String userName;
-    private Long userPayAmount;
-    private Long mypointPayAmount;
-    private Long instantPayAmount;
+    //private Long userPayAmount;
+    //private Long mypointPayAmount;
+    //private Long instantPayAmount;
     private Long mealAmount;
-    private Long couponAmount;
+    //private Long couponAmount;
     private Long companySettlementAmount;
     private Long storeSettlementAmount;
     private LocalDateTime paymentDate;
@@ -60,11 +60,7 @@ public class AddPaymentOriginalRecordRequest {
 
     private PaymentAmount getPaymentAmount() {
         return PaymentAmount.of(
-                Amount.create(this.userPayAmount),
-                Amount.create(this.mypointPayAmount),
-                Amount.create(this.instantPayAmount),
                 Amount.create(this.mealAmount),
-                Amount.create(this.couponAmount),
                 Amount.create(this.companySettlementAmount),
                 Amount.create(this.storeSettlementAmount)
         );
