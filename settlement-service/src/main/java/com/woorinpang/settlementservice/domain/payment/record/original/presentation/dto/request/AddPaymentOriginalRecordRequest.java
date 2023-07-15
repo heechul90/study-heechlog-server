@@ -51,23 +51,23 @@ public class AddPaymentOriginalRecordRequest {
                 .company(new Company(this.companyId, this.companyName))
                 .store(new Store(this.storeId, this.storeName))
                 .user(new User(this.userId, this.userName))
-                .paymentAmount(getPaymentAmount())
-                .payment(getPayment())
-                .paymentCancellation(getPaymentCancellation())
+                .paymentAmount(this.getPaymentAmount())
+                .payment(this.getPayment())
+                .paymentCancellation(this.getPaymentCancellation())
                 .paymentType(PaymentType.findByCode(this.paymentType))
                 .build();
     }
 
     private PaymentAmount getPaymentAmount() {
-        return PaymentAmount.builder()
-                .userPayAmount(Amount.create(this.userPayAmount))
-                .mypointPayAmount(Amount.create(this.mypointPayAmount))
-                .instantPayAmount(Amount.create(this.instantPayAmount))
-                .mealAmount(Amount.create(this.mealAmount))
-                .couponAmount(Amount.create(this.couponAmount))
-                .companySettlementAmount(Amount.create(this.companySettlementAmount))
-                .storeSettlementAmount(Amount.create(this.storeSettlementAmount))
-                .build();
+        return PaymentAmount.of(
+                Amount.create(this.userPayAmount),
+                Amount.create(this.mypointPayAmount),
+                Amount.create(this.instantPayAmount),
+                Amount.create(this.mealAmount),
+                Amount.create(this.couponAmount),
+                Amount.create(this.companySettlementAmount),
+                Amount.create(this.storeSettlementAmount)
+        );
     }
 
     private Payment getPayment() {

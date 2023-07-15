@@ -1,11 +1,14 @@
 package com.woorinpang.settlementservice.domain.payment.record.common.domain;
 
+import com.woorinpang.settlementservice.domain.payment.record.original.domain.PaymentOriginalRecord;
 import com.woorinpang.settlementservice.global.common.entity.Amount;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Embeddable
 @Getter
@@ -47,7 +50,7 @@ public class PaymentAmount {
     private Amount storeSettlementAmount;
 
     @Builder
-    public PaymentAmount(Amount userPayAmount, Amount mypointPayAmount, Amount instantPayAmount, Amount mealAmount,
+    private PaymentAmount(Amount userPayAmount, Amount mypointPayAmount, Amount instantPayAmount, Amount mealAmount,
                          Amount couponAmount, Amount companySettlementAmount, Amount storeSettlementAmount) {
         this.userPayAmount = userPayAmount;
         this.mypointPayAmount = mypointPayAmount;
@@ -56,5 +59,44 @@ public class PaymentAmount {
         this.couponAmount = couponAmount;
         this.companySettlementAmount = companySettlementAmount;
         this.storeSettlementAmount = storeSettlementAmount;
+    }
+
+    public static PaymentAmount of(Amount userPayAmount, Amount mypointPayAmount, Amount instantPayAmount, Amount mealAmount,
+                                   Amount couponAmount, Amount companySettlementAmount, Amount storeSettlementAmount) {
+        return PaymentAmount.builder()
+                .userPayAmount(userPayAmount)
+                .mypointPayAmount(mypointPayAmount)
+                .instantPayAmount(instantPayAmount)
+                .mealAmount(mealAmount)
+                .couponAmount(couponAmount)
+                .companySettlementAmount(companySettlementAmount)
+                .storeSettlementAmount(storeSettlementAmount)
+                .build();
+    }
+
+    public static PaymentAmount of(List<PaymentOriginalRecord> paymentOriginalRecords) {
+        return PaymentAmount.builder()
+                .userPayAmount(Amount.create(paymentOriginalRecords.stream()
+                        .mapToLong(paymentOriginalRecord -> paymentOriginalRecord.getPaymentAmount().getUserPayAmount().getValue())
+                        .sum()))
+                .mypointPayAmount(Amount.create(paymentOriginalRecords.stream()
+                        .mapToLong(paymentOriginalRecord -> paymentOriginalRecord.getPaymentAmount().getMypointPayAmount().getValue())
+                        .sum()))
+                .instantPayAmount(Amount.create(paymentOriginalRecords.stream()
+                        .mapToLong(paymentOriginalRecord -> paymentOriginalRecord.getPaymentAmount().getInstantPayAmount().getValue())
+                        .sum()))
+                .mealAmount(Amount.create(paymentOriginalRecords.stream()
+                        .mapToLong(paymentOriginalRecord -> paymentOriginalRecord.getPaymentAmount().getMealAmount().getValue())
+                        .sum()))
+                .couponAmount(Amount.create(paymentOriginalRecords.stream()
+                        .mapToLong(paymentOriginalRecord -> paymentOriginalRecord.getPaymentAmount().getCouponAmount().getValue())
+                        .sum()))
+                .companySettlementAmount(Amount.create(paymentOriginalRecords.stream()
+                        .mapToLong(paymentOriginalRecord -> paymentOriginalRecord.getPaymentAmount().getCompanySettlementAmount().getValue())
+                        .sum()))
+                .storeSettlementAmount(Amount.create(paymentOriginalRecords.stream()
+                        .mapToLong(paymentOriginalRecord -> paymentOriginalRecord.getPaymentAmount().getStoreSettlementAmount().getValue())
+                        .sum()))
+                .build();
     }
 }

@@ -1,5 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.infrastructure;
 
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -7,6 +8,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.PaymentOriginalRecord;
 import com.woorinpang.settlementservice.domain.payment.record.original.infrastructure.dto.find.FindPagePaymentOriginalRecordResponse;
 import com.woorinpang.settlementservice.domain.payment.record.original.infrastructure.dto.search.PaymentOriginalRecordSearchCondition;
+import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
 import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +39,21 @@ public class PaymentOriginalRecordQueryRepository {
     }
 
     /**
+     * 결제 원본 기록 목록조회 by companyId and storeId and paymentDateYmd
+     */
+    public List<PaymentOriginalRecord> findAllByCompanyAndStore(Long companyId, Long storeId, YearMonthDay paymentDateYmd) {
+        return queryFactory
+                .select(paymentOriginalRecord)
+                .from(paymentOriginalRecord)
+                .where(
+                        searchCompanyIdEq(companyId),
+                        searchStoreIdEq(storeId),
+                        searchPaymentDateYmdEq(paymentDateYmd)
+                )
+                .fetch();
+    }
+
+    /**
      * 결제 원본 기록 목록
      */
     private List<FindPagePaymentOriginalRecordResponse> getPaymentOriginalRecordList(PaymentOriginalRecordSearchCondition condition, Pageable pageable) {
@@ -53,7 +70,7 @@ public class PaymentOriginalRecordQueryRepository {
                 .from(paymentOriginalRecord)
                 .where(
                         searchCompanyIdEq(condition.getSearchCompanyId()),
-                        searchStoreEq(condition.getSearchStoreId()),
+                        searchStoreIdEq(condition.getSearchStoreId()),
                         searchUserEq(condition.getSearchUserId())
                 )
                 .offset(pageable.getOffset())
@@ -70,7 +87,7 @@ public class PaymentOriginalRecordQueryRepository {
                 .from(paymentOriginalRecord)
                 .where(
                         searchCompanyIdEq(condition.getSearchCompanyId()),
-                        searchStoreEq(condition.getSearchStoreId()),
+                        searchStoreIdEq(condition.getSearchStoreId()),
                         searchUserEq(condition.getSearchUserId())
                 );
     }
@@ -85,7 +102,7 @@ public class PaymentOriginalRecordQueryRepository {
     /**
      * where storeId = storeId
      */
-    private BooleanExpression searchStoreEq(Long storeId) {
+    private BooleanExpression searchStoreIdEq(Long storeId) {
         return storeId != null ? paymentOriginalRecord.store.storeId.eq(storeId) : null;
     }
 
@@ -94,5 +111,12 @@ public class PaymentOriginalRecordQueryRepository {
      */
     private BooleanExpression searchUserEq(Long userId) {
         return userId != null ? paymentOriginalRecord.user.userId.eq(userId) : null;
+    }
+
+    /**
+     * where paymentDateYmd = paymentDateYmd
+     */
+    private BooleanExpression searchPaymentDateYmdEq(YearMonthDay paymentDateYmd) {
+        return paymentDateYmd != null ? paymentOriginalRecord.payment.paymentDateYmd.eq(paymentDateYmd) : null;
     }
 }

@@ -1,14 +1,7 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.domain;
 
-import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface PaymentOriginalRecordRepository extends JpaRepository<PaymentOriginalRecord, Long> {
     boolean existsByTransactionId(String transactionId);
-
-    boolean existsByCompanyIdAndStoreIdAndPaymentDateYmd(Long companyId, Long storeId, YearMonthDay paymentDateYmd);
-
-    List<PaymentOriginalRecord> findAllByPaymentDateYmd(YearMonthDay paymentDateYmd);
 }
