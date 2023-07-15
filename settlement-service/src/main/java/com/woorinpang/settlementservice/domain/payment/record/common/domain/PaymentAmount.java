@@ -47,7 +47,8 @@ public class PaymentAmount {
     private Amount storeSettlementAmount;
 
     @Builder
-    public PaymentAmount(Amount userPayAmount, Amount mypointPayAmount, Amount instantPayAmount, Amount mealAmount, Amount couponAmount, Amount companySettlementAmount, Amount storeSettlementAmount) {
+    public PaymentAmount(Amount userPayAmount, Amount mypointPayAmount, Amount instantPayAmount, Amount mealAmount,
+                         Amount couponAmount, Amount companySettlementAmount, Amount storeSettlementAmount) {
         this.userPayAmount = userPayAmount;
         this.mypointPayAmount = mypointPayAmount;
         this.instantPayAmount = instantPayAmount;
