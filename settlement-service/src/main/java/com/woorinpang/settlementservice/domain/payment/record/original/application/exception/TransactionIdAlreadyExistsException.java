@@ -1,8 +1,8 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.application.exception;
 
-import com.woorinpang.settlementservice.global.exception.AlreadyExistsException;
+import com.woorinpang.settlementservice.global.exception.EntityAlreadyExistsException;
 
-public class TransactionIdAlreadyExistsException extends AlreadyExistsException {
+public class TransactionIdAlreadyExistsException extends EntityAlreadyExistsException {
     private static final String MESSAGE = "transactionId=%s은 이미 존재합니다.";
 
     public TransactionIdAlreadyExistsException(String transactionId) {
