@@ -1,7 +1,7 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.presentation.dto.request;
 
 import com.woorinpang.settlementservice.domain.payment.record.common.domain.PaymentAmount;
-import com.woorinpang.settlementservice.domain.payment.record.original.application.dto.command.SavePaymentOriginalRecordCommand;
+import com.woorinpang.settlementservice.domain.payment.record.original.application.dto.command.CreatePaymentOriginalRecordCommand;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.*;
 import com.woorinpang.settlementservice.global.common.entity.Amount;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
@@ -45,8 +45,8 @@ public class AddPaymentOriginalRecordRequest {
 
     }
 
-    public SavePaymentOriginalRecordCommand toCommand(String transactionId) {
-        return SavePaymentOriginalRecordCommand.builder()
+    public CreatePaymentOriginalRecordCommand toCommand(String transactionId) {
+        return CreatePaymentOriginalRecordCommand.builder()
                 .transactionId(transactionId)
                 .company(new Company(this.companyId, this.companyName))
                 .store(new Store(this.storeId, this.storeName))
