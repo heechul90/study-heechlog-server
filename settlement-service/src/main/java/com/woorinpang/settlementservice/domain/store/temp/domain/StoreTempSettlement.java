@@ -1,6 +1,7 @@
 package com.woorinpang.settlementservice.domain.store.temp.domain;
 
 import com.woorinpang.settlementservice.domain.payment.record.daily.domain.PaymentDailyRecord;
+import com.woorinpang.settlementservice.domain.store.common.domain.StorePaymentAmount;
 import com.woorinpang.settlementservice.domain.store.common.domain.StoreSettlementDateYmd;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -22,6 +23,9 @@ public class StoreTempSettlement extends BaseEntity {
 
     @Embedded
     private StoreSettlementDateYmd storeSettlementDate;
+
+    @Embedded
+    private StorePaymentAmount storePaymentAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_daily_record_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
