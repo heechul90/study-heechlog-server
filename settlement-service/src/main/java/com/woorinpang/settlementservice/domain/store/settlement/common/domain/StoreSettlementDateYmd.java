@@ -5,7 +5,6 @@ import com.woorinpang.settlementservice.global.common.entity.YearMonthDayConvert
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Embedded;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,9 +20,6 @@ public class StoreSettlementDateYmd {
     @Column(columnDefinition = "char(8) not null comment '제휴사 정산종료일자 년월일'")
     @Convert(converter = YearMonthDayConverter.class)
     private YearMonthDay storeSettlementEndDateYmd;
-
-    @Embedded
-    private StorePaymentAmount storePaymentAmount;
 
     public String getStoreSettlementDateYmd() {
         return this.storeSettlementStartDateYmd.getYearMonthDay() + "~" + this.storeSettlementEndDateYmd.getYearMonthDay();
