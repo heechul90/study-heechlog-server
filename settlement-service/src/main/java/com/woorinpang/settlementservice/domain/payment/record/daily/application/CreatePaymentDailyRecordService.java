@@ -32,6 +32,7 @@ public class CreatePaymentDailyRecordService {
     public Long reCreate(CreatePaymentDailyRecordCommand command) {
         List<PaymentOriginalRecord> paymentOriginalRecords = paymentOriginalRecordQueryRepository
                 .findAllByCompanyAndStore(command.companyId(), command.storeId(), command.paymentDateYmd());
-        return savePaymentDailyRecord(paymentDailyRecordRepository, command.toPaymentDailyRecord(PaymentAmount.of(paymentOriginalRecords))).getId();
+        return savePaymentDailyRecord(paymentDailyRecordRepository, command.toPaymentDailyRecord(PaymentAmount.of(paymentOriginalRecords)))
+                .getId();
     }
 }

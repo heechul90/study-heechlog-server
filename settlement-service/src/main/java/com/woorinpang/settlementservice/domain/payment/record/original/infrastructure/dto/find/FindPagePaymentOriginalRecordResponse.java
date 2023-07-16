@@ -1,9 +1,13 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.infrastructure.dto.find;
 
 import com.querydsl.core.annotations.QueryProjection;
+import com.woorinpang.settlementservice.domain.payment.record.common.domain.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Company;
+import com.woorinpang.settlementservice.domain.payment.record.original.domain.Payment;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Store;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.User;
+
+import java.time.LocalDateTime;
 
 public class FindPagePaymentOriginalRecordResponse {
     private Long paymentOriginalRecordId;
@@ -14,10 +18,14 @@ public class FindPagePaymentOriginalRecordResponse {
     private String storeName;
     private Long userId;
     private String userName;
+    private Long mealAmount;
+    private Long companySettlementAmount;
+    private Long storeSettlementAmount;
+    private LocalDateTime paymentDate;
 
     @QueryProjection
     public FindPagePaymentOriginalRecordResponse(Long paymentOriginalRecordId, String transactionId, Company company,
-                                                 Store store, User user) {
+                                                 Store store, User user, PaymentAmount paymentAmount, Payment payment) {
         this.paymentOriginalRecordId = paymentOriginalRecordId;
         this.transactionId = transactionId;
         this.companyId = company.getCompanyId();
@@ -26,5 +34,9 @@ public class FindPagePaymentOriginalRecordResponse {
         this.storeName = store.getStoreName();
         this.userId = user.getUserId();
         this.userName = user.getUserName();
+        this.mealAmount = paymentAmount.getMealAmount().getValue();
+        this.companySettlementAmount = paymentAmount.getCompanySettlementAmount().getValue();
+        this.storeSettlementAmount = paymentAmount.getStoreSettlementAmount().getValue();
+        this.paymentDate = payment.getPaymentDate();
     }
 }
