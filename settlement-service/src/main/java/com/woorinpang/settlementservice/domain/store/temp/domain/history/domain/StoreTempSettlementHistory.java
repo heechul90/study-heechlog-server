@@ -1,10 +1,12 @@
-package com.woorinpang.settlementservice.domain.store.temp.domain;
+package com.woorinpang.settlementservice.domain.store.temp.domain.history.domain;
 
 import com.woorinpang.settlementservice.domain.store.common.domain.StorePaymentAmount;
 import com.woorinpang.settlementservice.domain.store.common.domain.StoreSettlementDateYmd;
+import com.woorinpang.settlementservice.domain.store.temp.domain.StoreTempSettlement;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
@@ -29,4 +31,12 @@ public class StoreTempSettlementHistory extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_temp_settlement_id")
     private StoreTempSettlement storeTempSettlement;
+
+    @Builder(builderMethodName = "createStoreTempSettlementHistory")
+    public StoreTempSettlementHistory(Long storeId, StoreSettlementDateYmd storeSettlementDateYmd, StorePaymentAmount storePaymentAmount, StoreTempSettlement storeTempSettlement) {
+        this.storeId = storeId;
+        this.storeSettlementDateYmd = storeSettlementDateYmd;
+        this.storePaymentAmount = storePaymentAmount;
+        this.storeTempSettlement = storeTempSettlement;
+    }
 }

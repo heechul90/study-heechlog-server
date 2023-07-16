@@ -1,6 +1,7 @@
-package com.woorinpang.settlementservice.domain.store.temp.domain;
+package com.woorinpang.settlementservice.domain.store.temp.domain.detail.domain;
 
 import com.woorinpang.settlementservice.domain.store.common.domain.StorePaymentAmount;
+import com.woorinpang.settlementservice.domain.store.temp.domain.StoreTempSettlement;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
