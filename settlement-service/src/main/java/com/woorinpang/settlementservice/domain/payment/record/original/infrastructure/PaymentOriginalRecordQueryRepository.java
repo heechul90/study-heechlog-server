@@ -64,7 +64,9 @@ public class PaymentOriginalRecordQueryRepository {
                                 paymentOriginalRecord.transactionId,
                                 paymentOriginalRecord.company,
                                 paymentOriginalRecord.store,
-                                paymentOriginalRecord.user
+                                paymentOriginalRecord.user,
+                                paymentOriginalRecord.paymentAmount,
+                                paymentOriginalRecord.payment
                         )
                 )
                 .from(paymentOriginalRecord)
