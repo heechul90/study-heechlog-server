@@ -30,8 +30,7 @@ public class StorePaymentAmount {
 
     @Embedded
     @AttributeOverrides(@AttributeOverride(name = "value", column = @Column(
-            name = "mealAmount",
-            columnDefinition = "bigint default 0 comment '식대 결제금액'")))
+            name = "mealAmount", columnDefinition = "bigint default 0 comment '식대 결제금액'")))
     private Amount mealAmount;
 
     /*@Embedded
@@ -42,7 +41,6 @@ public class StorePaymentAmount {
 
     @Embedded
     @AttributeOverrides(@AttributeOverride(name = "value",column = @Column(
-            name = "storeSettlementAmount",
-            columnDefinition = "bigint default 0 comment '제휴사 정산금액'")))
+            name = "storeSettlementAmount", columnDefinition = "bigint default 0 comment '제휴사 정산금액'")))
     private Amount storeSettlementAmount;
 }
