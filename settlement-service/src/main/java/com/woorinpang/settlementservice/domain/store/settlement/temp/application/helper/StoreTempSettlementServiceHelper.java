@@ -27,7 +27,7 @@ public final class StoreTempSettlementServiceHelper {
         StoreTempSettlement savedStoreTempSettlement = storeTempSettlementRepository.save(storeTempSettlement);
 
         //save history
-        saveStoreTempSettlementHistory(storeTempSettlementHistoryRepository, getStoreTempSettlementHistory(savedStoreTempSettlement));
+        saveStoreTempSettlementHistory(storeTempSettlementHistoryRepository, savedStoreTempSettlement);
         return savedStoreTempSettlement;
     }
 
@@ -37,14 +37,5 @@ public final class StoreTempSettlementServiceHelper {
     public static void deleteStoreTempSettlement(StoreTempSettlementRepository storeTempSettlementRepository,
                                                  StoreTempSettlement storeTempSettlement) {
         storeTempSettlementRepository.delete(storeTempSettlement);
-    }
-
-    private static StoreTempSettlementHistory getStoreTempSettlementHistory(StoreTempSettlement savedStoreTempSettlement) {
-        return StoreTempSettlementHistory.createStoreTempSettlementHistory()
-                .storeId(savedStoreTempSettlement.getStoreId())
-                .storeSettlementDateYmd(savedStoreTempSettlement.getStoreSettlementDateYmd())
-                .storePaymentAmount(savedStoreTempSettlement.getStorePaymentAmount())
-                .storeTempSettlement(savedStoreTempSettlement)
-                .build();
     }
 }

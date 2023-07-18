@@ -29,7 +29,7 @@ public class StoreTempSettlementHistory extends BaseEntity {
     private StorePaymentAmount storePaymentAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_temp_settlement_id")
+    @JoinColumn(name = "store_temp_settlement_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private StoreTempSettlement storeTempSettlement;
 
     @Builder(builderMethodName = "createStoreTempSettlementHistory")

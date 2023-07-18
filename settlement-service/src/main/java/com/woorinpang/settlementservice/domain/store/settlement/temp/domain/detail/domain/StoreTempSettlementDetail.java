@@ -25,6 +25,6 @@ public class StoreTempSettlementDetail extends BaseEntity {
     private StorePaymentAmount storePaymentAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_temp_settlement_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "store_temp_settlement_id")
     private StoreTempSettlement storeTempSettlement;
 }
