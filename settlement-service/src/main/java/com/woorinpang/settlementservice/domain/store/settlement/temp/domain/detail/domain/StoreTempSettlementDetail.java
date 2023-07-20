@@ -1,6 +1,8 @@
 package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.detail.domain;
 
-import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StorePaymentAmount;
+import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
+import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyId;
+import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreSettlementAmount;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreTempSettlement;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -19,10 +21,14 @@ public class StoreTempSettlementDetail extends BaseEntity {
     @Comment("제휴사 임시 정산 상세 고유번호")
     private Long id;
 
-    private Long companyId;
+    @EmbeddedId
+    private StoreId storeId;
+
+    @EmbeddedId
+    private CompanyId companyId;
 
     @Embedded
-    private StorePaymentAmount storePaymentAmount;
+    private StoreSettlementAmount storePaymentAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_temp_settlement_id")
