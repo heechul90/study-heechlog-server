@@ -27,4 +27,7 @@ public class CompanyTempSettlement extends BaseEntity {
 
     @Embedded
     private CompanyPaymentAmount companyPaymentAmount;
+
+    @Embedded
+    private CompanyTempSettlementApply companyTempSettlementApply;
 }
