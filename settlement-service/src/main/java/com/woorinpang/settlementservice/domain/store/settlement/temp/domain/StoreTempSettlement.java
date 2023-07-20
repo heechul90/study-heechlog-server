@@ -1,5 +1,6 @@
 package com.woorinpang.settlementservice.domain.store.settlement.temp.domain;
 
+import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StorePaymentAmount;
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreSettlementDateYmd;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
@@ -18,7 +19,8 @@ public class StoreTempSettlement extends BaseEntity {
     @Column(name = "store_temp_settlement_id") @Comment("제휴사 임시 정산 고유번호")
     private Long id;
 
-    private Long storeId;
+    @Embedded
+    private StoreId storeId;
 
     @Embedded
     private StoreSettlementDateYmd storeSettlementDateYmd;

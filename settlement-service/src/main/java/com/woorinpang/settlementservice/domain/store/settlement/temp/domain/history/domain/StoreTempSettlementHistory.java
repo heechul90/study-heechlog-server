@@ -1,5 +1,6 @@
 package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history.domain;
 
+import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StorePaymentAmount;
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreSettlementDateYmd;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreTempSettlement;
@@ -17,10 +18,11 @@ import org.hibernate.annotations.Comment;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StoreTempSettlementHistory extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_temp_settlement_history_id") @Comment("제휴사 임시 정산 기록 고유번호")
+    @Column(name = "store_temp_settlement_history_id") @Comment("제휴사 임시정산 기록 고유번호")
     private Long id;
 
-    private Long storeId;
+    @Embedded
+    private StoreId storeId;
 
     @Embedded
     private StoreSettlementDateYmd storeSettlementDateYmd;
@@ -33,7 +35,8 @@ public class StoreTempSettlementHistory extends BaseEntity {
     private StoreTempSettlement storeTempSettlement;
 
     @Builder(builderMethodName = "createStoreTempSettlementHistory")
-    public StoreTempSettlementHistory(Long storeId, StoreSettlementDateYmd storeSettlementDateYmd, StorePaymentAmount storePaymentAmount, StoreTempSettlement storeTempSettlement) {
+    public StoreTempSettlementHistory(StoreId storeId, StoreSettlementDateYmd storeSettlementDateYmd,
+                                      StorePaymentAmount storePaymentAmount, StoreTempSettlement storeTempSettlement) {
         this.storeId = storeId;
         this.storeSettlementDateYmd = storeSettlementDateYmd;
         this.storePaymentAmount = storePaymentAmount;
