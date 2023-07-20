@@ -1,5 +1,6 @@
 package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history.application.helper;
 
+import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreTempSettlement;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history.application.exception.StoreTempSettlementHistoryNotFoundException;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history.domain.StoreTempSettlementHistory;
@@ -23,12 +24,12 @@ public final class StoreTempSettlementHistoryServiceHelper {
         return storeTempSettlementHistoryRepository.save(getStoreTempSettlementHistory(storeTempSettlement));
     }
 
-    private static StoreTempSettlementHistory getStoreTempSettlementHistory(StoreTempSettlement savedStoreTempSettlement) {
+    private static StoreTempSettlementHistory getStoreTempSettlementHistory(StoreTempSettlement storeTempSettlement) {
         return StoreTempSettlementHistory.createStoreTempSettlementHistory()
-                .storeId(savedStoreTempSettlement.getStoreId())
-                .storeSettlementDateYmd(savedStoreTempSettlement.getStoreSettlementDateYmd())
-                .storePaymentAmount(savedStoreTempSettlement.getStorePaymentAmount())
-                .storeTempSettlement(savedStoreTempSettlement)
+                .storeId(storeTempSettlement.getStoreId())
+                .storeSettlementDateYmd(storeTempSettlement.getStoreSettlementDateYmd())
+                .storePaymentAmount(storeTempSettlement.getStorePaymentAmount())
+                .storeTempSettlement(storeTempSettlement)
                 .build();
     }
 }
