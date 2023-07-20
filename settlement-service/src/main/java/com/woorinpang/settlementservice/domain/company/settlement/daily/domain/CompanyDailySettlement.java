@@ -1,7 +1,6 @@
 package com.woorinpang.settlementservice.domain.company.settlement.daily.domain;
 
-import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementAmount;
-import com.woorinpang.settlementservice.domain.payment.record.common.domain.PaymentAmount;
+import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyPaymentAmount;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDayConverter;
@@ -23,7 +22,7 @@ public class CompanyDailySettlement extends BaseEntity {
     private Long companyId;
 
     @Embedded
-    private CompanySettlementAmount companySettlementAmount;
+    private CompanyPaymentAmount companySettlementAmount;
 
     @Column(columnDefinition = "char(8) null comment '정산일자 년월일'")
     @Convert(converter = YearMonthDayConverter.class)

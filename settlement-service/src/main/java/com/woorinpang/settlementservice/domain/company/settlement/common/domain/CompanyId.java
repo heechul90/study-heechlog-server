@@ -13,9 +13,9 @@ import java.io.Serializable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CompanyId implements Serializable {
     @Column(columnDefinition = "bigint not null comment '회사 고유번호'")
-    private Long storeId;
+    private Long companyId;
 
-    public CompanyId(Long storeId) {
-        this.storeId = storeId;
+    public CompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 }

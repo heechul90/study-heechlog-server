@@ -1,7 +1,7 @@
 package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history.domain;
 
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
-import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreSettlementAmount;
+import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StorePaymentAmount;
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreSettlementDateYmd;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreTempSettlement;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
@@ -21,14 +21,14 @@ public class StoreTempSettlementHistory extends BaseEntity {
     @Column(name = "store_temp_settlement_history_id") @Comment("제휴사 임시정산 기록 고유번호")
     private Long id;
 
-    @EmbeddedId
+    @Embedded
     private StoreId storeId;
 
     @Embedded
     private StoreSettlementDateYmd storeSettlementDateYmd;
 
     @Embedded
-    private StoreSettlementAmount storeSettlementAmount;
+    private StorePaymentAmount storePaymentAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_temp_settlement_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
@@ -36,10 +36,10 @@ public class StoreTempSettlementHistory extends BaseEntity {
 
     @Builder(builderMethodName = "createStoreTempSettlementHistory")
     public StoreTempSettlementHistory(StoreId storeId, StoreSettlementDateYmd storeSettlementDateYmd,
-                                      StoreSettlementAmount storeSettlementAmount, StoreTempSettlement storeTempSettlement) {
+                                      StorePaymentAmount storePaymentAmount, StoreTempSettlement storeTempSettlement) {
         this.storeId = storeId;
         this.storeSettlementDateYmd = storeSettlementDateYmd;
-        this.storeSettlementAmount = storeSettlementAmount;
+        this.storePaymentAmount = storePaymentAmount;
         this.storeTempSettlement = storeTempSettlement;
     }
 }

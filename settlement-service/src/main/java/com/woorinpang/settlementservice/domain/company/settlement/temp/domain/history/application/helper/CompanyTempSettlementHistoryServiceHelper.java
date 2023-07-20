@@ -27,7 +27,7 @@ public final class CompanyTempSettlementHistoryServiceHelper {
         return CompanyTempSettlementHistory.createCompanyTempSettlementHistory()
                 .companyId(companyTempSettlement.getCompanyId())
                 .companySettlementDateYmd(companyTempSettlement.getCompanySettlementDateYmd())
-                .companySettlementAmount(companyTempSettlement.getCompanySettlementAmount())
+                .companyPaymentAmount(companyTempSettlement.getCompanyPaymentAmount())
                 .companyTempSettlement(companyTempSettlement)
                 .build();
     }

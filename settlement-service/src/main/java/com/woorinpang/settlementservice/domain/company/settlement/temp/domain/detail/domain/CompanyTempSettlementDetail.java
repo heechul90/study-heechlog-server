@@ -1,11 +1,9 @@
 package com.woorinpang.settlementservice.domain.company.settlement.temp.domain.detail.domain;
 
 import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyId;
-import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementAmount;
+import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyPaymentAmount;
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.CompanyTempSettlement;
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
-import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreSettlementAmount;
-import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreTempSettlement;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -20,17 +18,17 @@ import org.hibernate.annotations.Comment;
 public class CompanyTempSettlementDetail extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "company_temp_settlement_detail_id")
-    @Comment("회사 임시정산 상세 고유번호")
+    @Comment("회사 임시정산상세 고유번호")
     private Long id;
 
-    @EmbeddedId
+    @Embedded
     private CompanyId companyId;
 
-    @EmbeddedId
+    @Embedded
     private StoreId storeId;
 
     @Embedded
-    private CompanySettlementAmount companySettlementAmount;
+    private CompanyPaymentAmount companyPaymentAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_temp_settlement_id")

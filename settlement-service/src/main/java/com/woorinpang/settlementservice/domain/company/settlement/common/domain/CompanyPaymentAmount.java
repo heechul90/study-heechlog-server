@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CompanySettlementAmount {
+public class CompanyPaymentAmount {
     @Embedded
     @AttributeOverrides(@AttributeOverride(name = "value", column = @Column(name = "mealAmount", columnDefinition = "bigint default 0 comment '식대 결제금액'")))
     private Amount mealAmount;

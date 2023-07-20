@@ -1,7 +1,7 @@
 package com.woorinpang.settlementservice.domain.company.settlement.temp.domain.history.domain;
 
 import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyId;
-import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementAmount;
+import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyPaymentAmount;
 import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementDateYmd;
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.CompanyTempSettlement;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
@@ -21,14 +21,14 @@ public class CompanyTempSettlementHistory extends BaseEntity {
     @Column(name = "company_temp_settlement_history_id") @Comment("회사 임시정산 기록 고유번호")
     private Long id;
 
-    @EmbeddedId
+    @Embedded
     private CompanyId companyId;
 
     @Embedded
     private CompanySettlementDateYmd companySettlementDateYmd;
 
     @Embedded
-    private CompanySettlementAmount companySettlementAmount;
+    private CompanyPaymentAmount companyPaymentAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_temp_settlement_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
@@ -36,10 +36,10 @@ public class CompanyTempSettlementHistory extends BaseEntity {
 
     @Builder(builderMethodName = "createCompanyTempSettlementHistory")
     public CompanyTempSettlementHistory(CompanyId companyId, CompanySettlementDateYmd companySettlementDateYmd,
-                                        CompanySettlementAmount companySettlementAmount, CompanyTempSettlement companyTempSettlement) {
+                                        CompanyPaymentAmount companyPaymentAmount, CompanyTempSettlement companyTempSettlement) {
         this.companyId = companyId;
         this.companySettlementDateYmd = companySettlementDateYmd;
-        this.companySettlementAmount = companySettlementAmount;
+        this.companyPaymentAmount = companyPaymentAmount;
         this.companyTempSettlement = companyTempSettlement;
     }
 }
