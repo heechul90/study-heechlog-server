@@ -18,7 +18,13 @@ public class CompanySettlementAmount {
 
     @Embedded
     @AttributeOverrides(
-            @AttributeOverride(name = "amount",column = @Column(name = "serviceAmount", columnDefinition = "decimal(38,2) default 0 comment '서비스이용 금액'"))
+            @AttributeOverride(name = "amount",column = @Column(name = "serviceAmount", columnDefinition = "decimal(38,2) default 0 comment '서비스 이용금액'"))
     )
     private Amount serviceAmount;
+
+    @Embedded
+    @AttributeOverrides(
+            @AttributeOverride(name = "amount",column = @Column(name = "companySettlementAmount", columnDefinition = "decimal(38,2) default 0 comment '회사 정산금액'"))
+    )
+    private Amount companySettlementAmount;
 }
