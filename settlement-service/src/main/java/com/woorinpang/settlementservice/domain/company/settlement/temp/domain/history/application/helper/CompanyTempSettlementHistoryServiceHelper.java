@@ -25,10 +25,11 @@ public final class CompanyTempSettlementHistoryServiceHelper {
 
     private static CompanyTempSettlementHistory getCompanyTempSettlementHistory(CompanyTempSettlement companyTempSettlement) {
         return CompanyTempSettlementHistory.createCompanyTempSettlementHistory()
+                .companyTempSettlement(companyTempSettlement)
                 .companyId(companyTempSettlement.getCompanyId())
                 .companySettlementDateYmd(companyTempSettlement.getCompanySettlementDateYmd())
                 .companyPaymentAmount(companyTempSettlement.getCompanyPaymentAmount())
-                .companyTempSettlement(companyTempSettlement)
+                .companyTempSettlementApply(companyTempSettlement.getCompanyTempSettlementApply())
                 .build();
     }
 }

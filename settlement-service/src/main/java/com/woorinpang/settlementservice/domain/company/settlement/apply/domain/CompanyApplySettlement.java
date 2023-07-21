@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CompanyApplySettlement {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "company_apply_settlement_id") @Comment("회사 반영 정산 고유번호")
+    @Column(name = "company_apply_settlement_id") @Comment("회사 적용정산 고유번호")
     private Long id;
 
     @Embedded
