@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 public class StorePaymentAmount {
     @Embedded
     @AttributeOverrides(@AttributeOverride(name = "amount", column = @Column(
-            name = "mealAmount", columnDefinition = "bigint default 0 comment '식대 결제금액'")))
+            name = "mealAmount", columnDefinition = "decimal(38,2) default 0 comment '식대 결제금액'")))
     private Amount mealAmount;
 
     @Embedded
     @AttributeOverrides(@AttributeOverride(name = "amount",column = @Column(
-            name = "storeSettlementAmount", columnDefinition = "bigint default 0 comment '제휴사 정산금액'")))
+            name = "storeSettlementAmount", columnDefinition = "decimal(38,2) default 0 comment '제휴사 정산금액'")))
     private Amount storeSettlementAmount;
 }

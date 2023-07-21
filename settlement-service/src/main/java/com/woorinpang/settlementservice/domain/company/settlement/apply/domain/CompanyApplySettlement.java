@@ -27,7 +27,7 @@ public class CompanyApplySettlement {
     private CompanySettlementType companySettlementType;
 
     @Embedded
-    private CompanyPaymentAmount companySettlementAmount;
+    private CompanySettlementAmount companySettlementAmount;
 
     @Enumerated(EnumType.STRING)
     private CompanyApprovalType companyApprovalType;
