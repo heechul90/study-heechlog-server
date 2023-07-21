@@ -7,6 +7,7 @@ import com.woorinpang.settlementservice.domain.payment.record.original.domain.Pa
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Store;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.User;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class FindPagePaymentOriginalRecordResponse {
@@ -18,9 +19,9 @@ public class FindPagePaymentOriginalRecordResponse {
     private String storeName;
     private Long userId;
     private String userName;
-    private Long mealAmount;
-    private Long companySettlementAmount;
-    private Long storeSettlementAmount;
+    private BigDecimal mealAmount;
+    private BigDecimal companySettlementAmount;
+    private BigDecimal storeSettlementAmount;
     private LocalDateTime paymentDate;
 
     @QueryProjection
@@ -34,9 +35,9 @@ public class FindPagePaymentOriginalRecordResponse {
         this.storeName = store.getStoreName();
         this.userId = user.getUserId();
         this.userName = user.getUserName();
-        this.mealAmount = paymentAmount.getMealAmount().getValue();
-        this.companySettlementAmount = paymentAmount.getCompanySettlementAmount().getValue();
-        this.storeSettlementAmount = paymentAmount.getStoreSettlementAmount().getValue();
+        this.mealAmount = paymentAmount.getMealAmount().getAmount();
+        this.companySettlementAmount = paymentAmount.getCompanySettlementAmount().getAmount();
+        this.storeSettlementAmount = paymentAmount.getStoreSettlementAmount().getAmount();
         this.paymentDate = payment.getPaymentDate();
     }
 }
