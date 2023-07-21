@@ -4,6 +4,7 @@ import com.woorinpang.settlementservice.domain.company.settlement.common.domain.
 import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyPaymentAmount;
 import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementDateYmd;
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.CompanyTempSettlement;
+import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.CompanyTempSettlementApply;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -30,16 +31,23 @@ public class CompanyTempSettlementHistory extends BaseEntity {
     @Embedded
     private CompanyPaymentAmount companyPaymentAmount;
 
+    @Embedded
+    private CompanyTempSettlementApply companyTempSettlementApply;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_temp_settlement_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private CompanyTempSettlement companyTempSettlement;
 
     @Builder(builderMethodName = "createCompanyTempSettlementHistory")
-    public CompanyTempSettlementHistory(CompanyId companyId, CompanySettlementDateYmd companySettlementDateYmd,
-                                        CompanyPaymentAmount companyPaymentAmount, CompanyTempSettlement companyTempSettlement) {
+    public CompanyTempSettlementHistory(CompanyTempSettlement companyTempSettlement,
+                                        CompanyId companyId,
+                                        CompanySettlementDateYmd companySettlementDateYmd,
+                                        CompanyPaymentAmount companyPaymentAmount,
+                                        CompanyTempSettlementApply companyTempSettlementApply) {
+        this.companyTempSettlement = companyTempSettlement;
         this.companyId = companyId;
         this.companySettlementDateYmd = companySettlementDateYmd;
         this.companyPaymentAmount = companyPaymentAmount;
-        this.companyTempSettlement = companyTempSettlement;
+        this.companyTempSettlementApply = companyTempSettlementApply;
     }
 }

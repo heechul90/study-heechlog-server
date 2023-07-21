@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum CompanyApprovalType {
+public enum CompanyApprovalStatus {
     READY("READY", "결재 준비"),
     REQUEST("REQUEST", "결재 요청"),
     COMPLETE("COMPLETE", "결재 완료"),

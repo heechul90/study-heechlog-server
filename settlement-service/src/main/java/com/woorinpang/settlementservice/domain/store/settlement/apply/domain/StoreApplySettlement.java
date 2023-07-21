@@ -12,6 +12,6 @@ import org.hibernate.annotations.Comment;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StoreApplySettlement {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_apply_settlement_id") @Comment("제휴사 반영 정산 고유번호")
+    @Column(name = "store_apply_settlement_id") @Comment("제휴사 적용정산 고유번호")
     private Long id;
 }
