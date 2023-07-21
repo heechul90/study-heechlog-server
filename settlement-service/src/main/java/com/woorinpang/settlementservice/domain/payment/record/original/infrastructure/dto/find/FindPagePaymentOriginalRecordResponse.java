@@ -34,9 +34,9 @@ public class FindPagePaymentOriginalRecordResponse {
         this.storeName = store.getStoreName();
         this.userId = user.getUserId();
         this.userName = user.getUserName();
-        this.mealAmount = paymentAmount.getMealAmount().getValue();
-        this.companySettlementAmount = paymentAmount.getCompanySettlementAmount().getValue();
-        this.storeSettlementAmount = paymentAmount.getStoreSettlementAmount().getValue();
+        this.mealAmount = paymentAmount.getMealAmount().getAmount();
+        this.companySettlementAmount = paymentAmount.getCompanySettlementAmount().getAmount();
+        this.storeSettlementAmount = paymentAmount.getStoreSettlementAmount().getAmount();
         this.paymentDate = payment.getPaymentDate();
     }
 }
