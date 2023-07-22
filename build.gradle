@@ -28,17 +28,6 @@ subprojects {
 
 project(':settlement-batch') {
     dependencies {
-        compileOnly project(':settlement-domain')
+        compileOnly project(':settlement-service')
     }
-}
-
-project(':settlement-service') {
-    dependencies {
-        compileOnly project(':settlement-domain')
-    }
-}
-
-project(':settlement-domain') {
-    bootJar { enabled = false }
-    jar { enabled = true}
 }
