@@ -42,12 +42,12 @@ public class PaymentAmount {
 
     @Embedded
     @AttributeOverrides(@AttributeOverride(name = "amount",column = @Column(
-            name = "companySettlementAmount", columnDefinition = "decimal(38,2) default 0 comment '고객사 정산금액'")))
+            name = "companySettlementAmount", columnDefinition = "decimal(38,2) default 0 comment '컴퍼니 정산금액'")))
     private Amount companySettlementAmount;
 
     @Embedded
     @AttributeOverrides(@AttributeOverride(name = "amount",column = @Column(
-            name = "storeSettlementAmount", columnDefinition = "decimal(38,2) default 0 comment '제휴사 정산금액'")))
+            name = "storeSettlementAmount", columnDefinition = "decimal(38,2) default 0 comment '스토어 정산금액'")))
     private Amount storeSettlementAmount;
 
     @Builder

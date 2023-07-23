@@ -28,7 +28,7 @@ public class PaymentOriginalRecordQueryRepository {
     }
 
     /**
-     * 결제 원본 기록 목록조회
+     * 결제 원본기록 목록조회
      */
     public Page<FindPagePaymentOriginalRecordResponse> findPagePaymentOriginalRecord(PaymentOriginalRecordSearchCondition condition, Pageable pageable) {
         return PageableExecutionUtils.getPage(
@@ -39,7 +39,7 @@ public class PaymentOriginalRecordQueryRepository {
     }
 
     /**
-     * 결제 원본 기록 목록조회 by companyId and storeId and paymentDateYmd
+     * 결제 원본기록 목록조회 by companyId and storeId and paymentDateYmd
      */
     public List<PaymentOriginalRecord> findAllByCompanyAndStore(Long companyId, Long storeId, YearMonthDay paymentDateYmd) {
         return queryFactory
@@ -54,7 +54,7 @@ public class PaymentOriginalRecordQueryRepository {
     }
 
     /**
-     * 결제 원본 기록 목록
+     * 결제 원본기록 목록
      */
     private List<FindPagePaymentOriginalRecordResponse> getPaymentOriginalRecordList(PaymentOriginalRecordSearchCondition condition, Pageable pageable) {
         return queryFactory
@@ -81,7 +81,7 @@ public class PaymentOriginalRecordQueryRepository {
     }
 
     /**
-     * 결제 원본 기록 목록 카운트
+     * 결제 원본기록 목록 카운트
      */
     private JPAQuery<Long> getPaymentOriginalRecordListCount(PaymentOriginalRecordSearchCondition condition) {
         return queryFactory

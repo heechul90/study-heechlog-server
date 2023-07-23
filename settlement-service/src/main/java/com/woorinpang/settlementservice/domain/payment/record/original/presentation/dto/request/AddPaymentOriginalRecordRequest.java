@@ -17,13 +17,13 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AddPaymentOriginalRecordRequest {
-    @NotNull(message = "회사 고유번호는 필수입니다.")
+    @NotNull(message = "컴퍼니 고유번호는 필수입니다.")
     private Long companyId;
-    @NotBlank(message = "회사명은 필수입니다.")
+    @NotBlank(message = "컴퍼니명은 필수입니다.")
     private String companyName;
-    @NotNull(message = "제휴사 고유번호는 필수잆니다.")
+    @NotNull(message = "스토어 고유번호는 필수잆니다.")
     private Long storeId;
-    @NotBlank(message = "제휴사명은 필수입니다.")
+    @NotBlank(message = "스토어명은 필수입니다.")
     private String storeName;
     @NotNull(message = "사용자 고유번호는 필수입니다.")
     private Long userId;
