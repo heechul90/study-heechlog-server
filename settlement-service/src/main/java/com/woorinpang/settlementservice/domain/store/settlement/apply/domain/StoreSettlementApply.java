@@ -6,12 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
+/**
+ * 스토어 정산반영
+ */
 @Entity
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class StoreApplySettlement {
+public class StoreSettlementApply {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_apply_settlement_id") @Comment("제휴사 적용정산 고유번호")
+    @Column(name = "store_settlement_apply_id") @Comment("스토어 정산반영 고유번호")
     private Long id;
 }
