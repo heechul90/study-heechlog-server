@@ -33,8 +33,8 @@ public final class StoreSettlementServiceTempHelper {
     /**
      * 스토어 정산임시 삭제
      */
-    public static void deleteStoreSettlementTemp(StoreSettlementTempRepository storeTempSettlementRepository,
-                                                 StoreSettlementTemp storeTempSettlement) {
-        storeTempSettlementRepository.delete(storeTempSettlement);
+    public static void deleteStoreSettlementTemp(StoreSettlementTempRepository storeSettlementTempRepository,
+                                                 StoreSettlementTemp storeSettlementTemp) {
+        storeSettlementTempRepository.delete(storeSettlementTemp);
     }
 }

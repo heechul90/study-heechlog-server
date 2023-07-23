@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class CreateStoreTempSettlementService {
+public class CreateStoreSettlementTempService {
     private final StoreSettlementTempRepository storeSettlementTempRepository;
     private final StoreSettlementTempQueryRepository storeSettlementTempQueryRepository;
 }

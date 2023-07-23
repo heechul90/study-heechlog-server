@@ -29,8 +29,8 @@ public class StoreSettlementTemp extends BaseEntity {
     private StoreSettlementDateYmd storeSettlementDateYmd;
 
     @Embedded
-    private StoreSettlementTempAmount storePaymentAmount;
+    private StoreSettlementTempAmount storeSettlementTempAmount;
 
-    //@OneToMany(mappedBy = "storeTempSettlement")
+    //@OneToMany(mappedBy = "storeSettlementTemp")
     //private List<PaymentDailyRecord> paymentDailyRecords = new ArrayList<>();
 }

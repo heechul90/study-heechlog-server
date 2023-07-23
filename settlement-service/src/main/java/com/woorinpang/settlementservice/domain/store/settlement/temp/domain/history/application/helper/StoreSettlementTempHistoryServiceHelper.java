@@ -27,7 +27,7 @@ public final class StoreSettlementTempHistoryServiceHelper {
         return StoreSettlementTempHistory.createStoreSettlementTempHistory()
                 .storeId(storeSettlementTemp.getStoreId())
                 .storeSettlementDateYmd(storeSettlementTemp.getStoreSettlementDateYmd())
-                .storeSettlementTempAmount(storeSettlementTemp.getStorePaymentAmount())
+                .storeSettlementTempAmount(storeSettlementTemp.getStoreSettlementTempAmount())
                 .storeSettlementTemp(storeSettlementTemp)
                 .build();
     }
