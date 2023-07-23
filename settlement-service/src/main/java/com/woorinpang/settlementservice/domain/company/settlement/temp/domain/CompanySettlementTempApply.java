@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CompanyTempSettlementApply {
+public class CompanySettlementTempApply {
     @Column(columnDefinition = "bit(1) not null default false comment '적용 여부'")
     private boolean isApplied;
 

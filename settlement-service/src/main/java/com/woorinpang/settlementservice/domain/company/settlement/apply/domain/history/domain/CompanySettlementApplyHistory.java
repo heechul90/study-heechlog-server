@@ -2,7 +2,7 @@ package com.woorinpang.settlementservice.domain.company.settlement.apply.domain.
 
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementApply;
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanyApproval;
-import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.SettlementApplyAmount;
+import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementApplyAmount;
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementType;
 import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementDateYmd;
 import jakarta.persistence.*;
@@ -32,7 +32,7 @@ public class CompanySettlementApplyHistory {
     private CompanySettlementType companySettlementType;
 
     @Embedded
-    private SettlementApplyAmount settlementApplyAmount;
+    private CompanySettlementApplyAmount settlementApplyAmount;
 
     @Embedded
     private CompanyApproval companyApproval;
@@ -45,7 +45,7 @@ public class CompanySettlementApplyHistory {
     public CompanySettlementApplyHistory(CompanySettlementApply companySettlementApply,
                                          CompanySettlementDateYmd companySettlementDateYmd,
                                          CompanySettlementType companySettlementType,
-                                         SettlementApplyAmount settlementApplyAmount,
+                                         CompanySettlementApplyAmount settlementApplyAmount,
                                          CompanyApproval companyApproval) {
         this.companySettlementApply = companySettlementApply;
         this.companySettlementDateYmd = companySettlementDateYmd;

@@ -1,9 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.daily.domain;
 
-import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.CompanyTempSettlement;
 import com.woorinpang.settlementservice.domain.payment.record.common.domain.PaymentAmount;
-import com.woorinpang.settlementservice.domain.payment.record.original.domain.Company;
-import com.woorinpang.settlementservice.domain.payment.record.original.domain.*;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDayConverter;
@@ -13,9 +10,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table

@@ -28,7 +28,7 @@ public final class CompanySettlementApplyHistoryServiceHelper {
                 .companySettlementApply(companySettlementApply)
                 .companySettlementDateYmd(companySettlementApply.getCompanySettlementDateYmd())
                 .companySettlementType(companySettlementApply.getCompanySettlementType())
-                .settlementApplyAmount(companySettlementApply.getSettlementApplyAmount())
+                .settlementApplyAmount(companySettlementApply.getCompanySettlementApplyAmount())
                 .companyApproval(companySettlementApply.getCompanyApproval())
                 .build();
     }

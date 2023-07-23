@@ -27,7 +27,7 @@ public class CompanySettlementApply {
     private CompanySettlementType companySettlementType;
 
     @Embedded
-    private SettlementApplyAmount settlementApplyAmount;
+    private CompanySettlementApplyAmount companySettlementApplyAmount;
 
     @Embedded
     private CompanyApproval companyApproval;

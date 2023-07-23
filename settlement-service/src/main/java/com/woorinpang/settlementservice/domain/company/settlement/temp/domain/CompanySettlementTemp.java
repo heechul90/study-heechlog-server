@@ -1,7 +1,7 @@
 package com.woorinpang.settlementservice.domain.company.settlement.temp.domain;
 
 import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyId;
-import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyPaymentAmount;
+import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementTempAmount;
 import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementDateYmd;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -14,9 +14,9 @@ import org.hibernate.annotations.Comment;
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CompanyTempSettlement extends BaseEntity {
+public class CompanySettlementTemp extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "company_temp_settlement_id") @Comment("회사 임시정산 고유번호")
+    @Column(name = "company_settlement_temp_id") @Comment("컴퍼니 정산임시 고유번호")
     private Long id;
 
     @Embedded
@@ -26,8 +26,8 @@ public class CompanyTempSettlement extends BaseEntity {
     private CompanySettlementDateYmd companySettlementDateYmd;
 
     @Embedded
-    private CompanyPaymentAmount companyPaymentAmount;
+    private CompanySettlementTempAmount companySettlementTempAmount;
 
     @Embedded
-    private CompanyTempSettlementApply companyTempSettlementApply;
+    private CompanySettlementTempApply companySettlementTempApply;
 }
