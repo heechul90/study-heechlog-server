@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CompanySettlementType {
-    WOORINPANG("WOORINPANG", "우린팡 플랫폼 정산"),
+    PLATFORM("PLATFORM", "플랫폼 정산"),
     DIRECT("DIRECT", "직접 정산"),
     ;
 
