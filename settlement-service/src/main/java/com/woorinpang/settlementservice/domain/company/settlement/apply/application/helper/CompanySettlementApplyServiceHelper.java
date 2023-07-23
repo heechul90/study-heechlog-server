@@ -26,7 +26,7 @@ public final class CompanySettlementApplyServiceHelper {
         CompanySettlementApply savedCompanySettlementApply = companySettlementApplyRepository.save(companySettlementApply);
 
         //save companySettlementApply
-        saveCompanyApplySettlementHistory(companySettlementApplyHistoryRepository, savedCompanySettlementApply);
+        saveCompanySettlementApplyHistory(companySettlementApplyHistoryRepository, savedCompanySettlementApply);
 
         return savedCompanySettlementApply;
     }

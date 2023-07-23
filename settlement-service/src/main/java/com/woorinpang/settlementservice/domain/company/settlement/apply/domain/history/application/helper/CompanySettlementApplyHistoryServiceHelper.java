@@ -18,7 +18,7 @@ public final class CompanySettlementApplyHistoryServiceHelper {
     /**
      * 컴퍼니 정산반영기록 저장
      */
-    public static CompanySettlementApplyHistory saveCompanyApplySettlementHistory(CompanySettlementApplyHistoryRepository companySettlementApplyHistoryRepository,
+    public static CompanySettlementApplyHistory saveCompanySettlementApplyHistory(CompanySettlementApplyHistoryRepository companySettlementApplyHistoryRepository,
                                                                                   CompanySettlementApply companySettlementApply) {
         return companySettlementApplyHistoryRepository.save(getCompanySettlementApplyHistory(companySettlementApply));
     }
