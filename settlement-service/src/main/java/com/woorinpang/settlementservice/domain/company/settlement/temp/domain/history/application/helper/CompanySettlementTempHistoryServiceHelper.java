@@ -5,7 +5,7 @@ import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.hi
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.history.domain.CompanySettlementTempHistory;
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.history.domain.CompanySettlementTempHistoryRepository;
 
-public final class CompanyTempSettlementHistoryServiceHelper {
+public final class CompanySettlementTempHistoryServiceHelper {
     /**
      * 컴퍼니 정산임시기록 단건조회
      */

@@ -5,10 +5,10 @@ import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CompanyTempSettlementQueryRepository {
+public class CompanySettlementTempQueryRepository {
     private final JPAQueryFactory queryFactory;
 
-    public CompanyTempSettlementQueryRepository(EntityManager em) {
+    public CompanySettlementTempQueryRepository(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
 }

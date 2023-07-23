@@ -5,7 +5,7 @@ import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.Co
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.CompanySettlementTempRepository;
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.history.domain.CompanySettlementTempHistoryRepository;
 
-import static com.woorinpang.settlementservice.domain.company.settlement.temp.domain.history.application.helper.CompanyTempSettlementHistoryServiceHelper.saveCompanySettlementTempHistory;
+import static com.woorinpang.settlementservice.domain.company.settlement.temp.domain.history.application.helper.CompanySettlementTempHistoryServiceHelper.saveCompanySettlementTempHistory;
 
 public final class CompanySettlementTempServiceHelper {
     /**
