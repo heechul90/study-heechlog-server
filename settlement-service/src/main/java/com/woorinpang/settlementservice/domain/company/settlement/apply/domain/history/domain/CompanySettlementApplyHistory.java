@@ -1,8 +1,8 @@
 package com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.domain;
 
-import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanyApplySettlement;
+import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementApply;
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanyApproval;
-import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementAmount;
+import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.SettlementApplyAmount;
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementType;
 import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementDateYmd;
 import jakarta.persistence.*;
@@ -12,13 +12,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
+/**
+ * 컴퍼니 정산반영기록
+ */
 @Entity
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CompanyApplySettlementHistory {
+public class CompanySettlementApplyHistory {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "company_apply_settlement_history_id") @Comment("회사 적용정산기록 고유번호")
+    @Column(name = "company_settlement_apply_history_id") @Comment("컴퍼니 정산반영기록 고유번호")
     private Long id;
 
     @Embedded
@@ -29,25 +32,25 @@ public class CompanyApplySettlementHistory {
     private CompanySettlementType companySettlementType;
 
     @Embedded
-    private CompanySettlementAmount companySettlementAmount;
+    private SettlementApplyAmount settlementApplyAmount;
 
     @Embedded
     private CompanyApproval companyApproval;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_apply_settlement_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private CompanyApplySettlement companyApplySettlement;
+    private CompanySettlementApply companySettlementApply;
 
-    @Builder(builderMethodName = "createCompanyApplySettlementHistory")
-    public CompanyApplySettlementHistory(CompanyApplySettlement companyApplySettlement,
+    @Builder(builderMethodName = "createCompanySettlementApplyHistory")
+    public CompanySettlementApplyHistory(CompanySettlementApply companySettlementApply,
                                          CompanySettlementDateYmd companySettlementDateYmd,
                                          CompanySettlementType companySettlementType,
-                                         CompanySettlementAmount companySettlementAmount,
+                                         SettlementApplyAmount settlementApplyAmount,
                                          CompanyApproval companyApproval) {
-        this.companyApplySettlement = companyApplySettlement;
+        this.companySettlementApply = companySettlementApply;
         this.companySettlementDateYmd = companySettlementDateYmd;
         this.companySettlementType = companySettlementType;
-        this.companySettlementAmount = companySettlementAmount;
+        this.settlementApplyAmount = settlementApplyAmount;
         this.companyApproval = companyApproval;
     }
 }

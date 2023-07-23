@@ -7,16 +7,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
+/**
+ * 컴퍼니 정산반영
+ */
 @Entity
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CompanyApplySettlement {
+public class CompanySettlementApply {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "company_apply_settlement_id") @Comment("회사 적용정산 고유번호")
+    @Column(name = "company_settlement_apply_id") @Comment("컴퍼니 정산반영 고유번호")
     private Long id;
 
     @Embedded
@@ -27,7 +27,7 @@ public class CompanyApplySettlement {
     private CompanySettlementType companySettlementType;
 
     @Embedded
-    private CompanySettlementAmount companySettlementAmount;
+    private SettlementApplyAmount settlementApplyAmount;
 
     @Embedded
     private CompanyApproval companyApproval;
