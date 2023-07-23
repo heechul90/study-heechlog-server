@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class StorePaymentAmount {
+public class StoreSettlementTempAmount {
     @Embedded
     @AttributeOverrides(@AttributeOverride(
             name = "amount",

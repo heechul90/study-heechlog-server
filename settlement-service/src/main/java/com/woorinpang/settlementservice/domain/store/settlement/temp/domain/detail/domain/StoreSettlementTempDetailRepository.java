@@ -2,5 +2,5 @@ package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.det
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StoreTempSettlementDetailRepository extends JpaRepository<StoreTempSettlementDetail, Long> {
+public interface StoreSettlementTempDetailRepository extends JpaRepository<StoreSettlementTempDetail, Long> {
 }
