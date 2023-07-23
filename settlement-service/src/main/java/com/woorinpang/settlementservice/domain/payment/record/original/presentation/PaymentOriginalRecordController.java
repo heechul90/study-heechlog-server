@@ -18,7 +18,7 @@ public class PaymentOriginalRecordController {
     private final CreatePaymentOriginalRecordService createPaymentOriginalRecordService;
 
     /**
-     * 결제 원본 기록 등록
+     * 결제 원본기록 등록
      */
     @PostMapping("/{transactionId}")
     public ResponseEntity<AddPaymentOriginalRecordResponse> addPaymentOriginalRecord(

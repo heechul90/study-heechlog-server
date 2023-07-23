@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CompanySettlementDateYmd {
-    @Column(columnDefinition = "char(8) not null comment '회사 정산시작일자 년월일'")
+    @Column(columnDefinition = "char(8) not null comment '컴퍼니 정산시작일자 년월일'")
     @Convert(converter = YearMonthDayConverter.class)
     private YearMonthDay companySettlementStartDateYmd;
 
-    @Column(columnDefinition = "char(8) not null comment '회사 정산종료일자 년월일'")
+    @Column(columnDefinition = "char(8) not null comment '컴퍼니 정산종료일자 년월일'")
     @Convert(converter = YearMonthDayConverter.class)
     private YearMonthDay companySettlementEndDateYmd;
 

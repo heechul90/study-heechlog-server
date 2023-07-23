@@ -1,6 +1,8 @@
 package com.woorinpang.settlementservice.domain.payment.record.daily.presentation.dto.request;
 
+import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyId;
 import com.woorinpang.settlementservice.domain.payment.record.daily.application.dto.command.CreatePaymentDailyRecordCommand;
+import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,6 +26,8 @@ public class CreatePaymentDailyRecordRequest {
 
     public CreatePaymentDailyRecordCommand toCommend() {
         return CreatePaymentDailyRecordCommand.builder()
+                .companyId(new CompanyId(this.companyId))
+                .storeId(new StoreId(this.storeId))
                 .paymentDateYmd(YearMonthDay.of(paymentDateYmd))
                 .build();
     }
