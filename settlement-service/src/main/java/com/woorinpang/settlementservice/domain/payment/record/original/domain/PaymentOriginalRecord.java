@@ -9,13 +9,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
+/**
+ * 결제 원본기록
+ */
 @Entity
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PaymentOriginalRecord extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_original_record_id") @Comment("결제 원본 기록 고유번호")
+    @Column(name = "payment_original_record_id") @Comment("결제 원본기록 고유번호")
     private Long id;
 
     @Column(columnDefinition = "varchar(36) not null comment '거래 고유 아이디'")

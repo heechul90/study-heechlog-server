@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CompanyId implements Serializable {
-    @Column(columnDefinition = "bigint not null comment '회사 고유번호'")
+    @Column(columnDefinition = "bigint not null comment '컴퍼니 고유번호'")
     private Long companyId;
 
     public CompanyId(Long companyId) {

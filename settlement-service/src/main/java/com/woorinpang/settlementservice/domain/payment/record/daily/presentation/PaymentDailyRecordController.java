@@ -18,7 +18,7 @@ public class PaymentDailyRecordController {
     private final CreatePaymentDailyRecordService createPaymentDailyRecordService;
 
     /**
-     * 특정 회사 제휴사 결제일일기록 재생성
+     * 컴퍼니 스토어 결제일일기록 재생성
      */
     @PostMapping
     public ResponseEntity reCreateCompanyStorePaymentDailyRecord(CreatePaymentDailyRecordRequest request) {

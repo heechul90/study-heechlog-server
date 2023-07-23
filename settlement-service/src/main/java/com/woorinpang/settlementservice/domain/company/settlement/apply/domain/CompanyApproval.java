@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CompanyApproval {
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "varchar(15) not null comment '회사 결재 상태'")
+    @Column(columnDefinition = "varchar(15) not null comment '컴퍼니 결재 상태'")
     private CompanyApprovalStatus companyApprovalStatus;
 
     @Column(columnDefinition = "datetime(6) null comment '결재요청 일자'")
