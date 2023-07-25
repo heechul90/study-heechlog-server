@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history.domain;
+package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history;
 
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreSettlementTempAmount;
