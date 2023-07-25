@@ -1,12 +1,9 @@
 package com.woorinpang.settlementservice.domain.payment.record.daily.application;
 
-import com.woorinpang.settlementservice.domain.payment.record.common.domain.PaymentAmount;
+import com.woorinpang.settlementservice.domain.payment.record.common.entity.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.daily.application.dto.command.CreatePaymentDailyRecordCommand;
-import com.woorinpang.settlementservice.domain.payment.record.daily.application.helper.PaymentDailyRecordServiceHelper;
-import com.woorinpang.settlementservice.domain.payment.record.daily.domain.PaymentDailyRecord;
 import com.woorinpang.settlementservice.domain.payment.record.daily.domain.PaymentDailyRecordRepository;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.PaymentOriginalRecord;
-import com.woorinpang.settlementservice.domain.payment.record.original.domain.PaymentOriginalRecordRepository;
 import com.woorinpang.settlementservice.domain.payment.record.original.infrastructure.PaymentOriginalRecordQueryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

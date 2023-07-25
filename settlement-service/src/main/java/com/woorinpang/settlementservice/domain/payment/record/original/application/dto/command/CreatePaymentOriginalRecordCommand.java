@@ -1,6 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.application.dto.command;
 
-import com.woorinpang.settlementservice.domain.payment.record.common.domain.PaymentAmount;
+import com.woorinpang.settlementservice.domain.payment.record.common.entity.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.*;
 import lombok.Builder;
 
