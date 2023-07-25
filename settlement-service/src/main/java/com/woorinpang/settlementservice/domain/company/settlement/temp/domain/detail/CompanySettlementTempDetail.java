@@ -3,7 +3,7 @@ package com.woorinpang.settlementservice.domain.company.settlement.temp.domain.d
 import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanyId;
 import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanySettlementTempAmount;
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.CompanySettlementTemp;
-import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
+import com.woorinpang.settlementservice.domain.store.settlement.common.entity.StoreId;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

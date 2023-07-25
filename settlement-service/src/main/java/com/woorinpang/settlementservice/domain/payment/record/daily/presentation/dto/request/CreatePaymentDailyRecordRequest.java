@@ -2,7 +2,7 @@ package com.woorinpang.settlementservice.domain.payment.record.daily.presentatio
 
 import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanyId;
 import com.woorinpang.settlementservice.domain.payment.record.daily.application.dto.command.CreatePaymentDailyRecordCommand;
-import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
+import com.woorinpang.settlementservice.domain.store.settlement.common.entity.StoreId;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

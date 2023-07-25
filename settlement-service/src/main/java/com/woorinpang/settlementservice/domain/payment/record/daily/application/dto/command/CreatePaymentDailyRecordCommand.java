@@ -3,7 +3,7 @@ package com.woorinpang.settlementservice.domain.payment.record.daily.application
 import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanyId;
 import com.woorinpang.settlementservice.domain.payment.record.common.domain.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.daily.domain.PaymentDailyRecord;
-import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
+import com.woorinpang.settlementservice.domain.store.settlement.common.entity.StoreId;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
 import lombok.Builder;
 

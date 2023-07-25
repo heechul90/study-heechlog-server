@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.store.settlement.common.domain;
+package com.woorinpang.settlementservice.domain.store.settlement.common.entity;
 
 import com.woorinpang.settlementservice.global.common.entity.Amount;
 import jakarta.persistence.*;
