@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.bank.information.bank.domain;
+package com.woorinpang.settlementservice.domain.bank.domain;
 
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 /**
- * 은행정보
+ * 은행
  */
 @Entity
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BankInformation extends BaseEntity {
+public class Bank extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bank_information_id") @Comment("은행정보 고유번호")
     private Long id;
