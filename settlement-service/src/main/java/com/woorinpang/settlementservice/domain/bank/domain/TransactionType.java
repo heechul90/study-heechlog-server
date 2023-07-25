@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.bank.statement.common.entity;
+package com.woorinpang.settlementservice.domain.bank.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
