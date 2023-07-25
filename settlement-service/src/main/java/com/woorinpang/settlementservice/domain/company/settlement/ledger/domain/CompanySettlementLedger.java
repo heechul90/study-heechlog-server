@@ -1,16 +1,14 @@
 package com.woorinpang.settlementservice.domain.company.settlement.ledger.domain;
 
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementType;
-import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyId;
-import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanySettlementDateYmd;
+import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanyId;
+import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanySettlementDateYmd;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
-
-import java.util.Date;
 
 /**
  * 컴퍼니 정산원장

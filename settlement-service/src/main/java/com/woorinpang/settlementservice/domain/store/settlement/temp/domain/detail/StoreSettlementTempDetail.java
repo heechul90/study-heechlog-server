@@ -1,8 +1,9 @@
-package com.woorinpang.settlementservice.domain.store.settlement.temp.domain;
+package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.detail;
 
+import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanyId;
 import com.woorinpang.settlementservice.domain.store.settlement.common.entity.StoreId;
 import com.woorinpang.settlementservice.domain.store.settlement.common.entity.StoreSettlementTempAmount;
-import com.woorinpang.settlementservice.domain.store.settlement.common.entity.StoreSettlementDateYmd;
+import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreSettlementTemp;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -10,27 +11,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
-/**
- * 스토어 정산임시
- */
 @Entity
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class StoreSettlementTemp extends BaseEntity {
+public class StoreSettlementTempDetail extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_settlement_temp_id") @Comment("스토어 정산임시 고유번호")
+    @Column(name = "store_settlement_temp_detail_id")
+    @Comment("스토어 정산임시상세 고유번호")
     private Long id;
 
     @Embedded
     private StoreId storeId;
 
     @Embedded
-    private StoreSettlementDateYmd storeSettlementDateYmd;
+    private CompanyId companyId;
 
     @Embedded
     private StoreSettlementTempAmount storeSettlementTempAmount;
 
-    //@OneToMany(mappedBy = "storeSettlementTemp")
-    //private List<PaymentDailyRecord> paymentDailyRecords = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_settlement_temp_id")
+    private StoreSettlementTemp storeSettlementTemp;
 }

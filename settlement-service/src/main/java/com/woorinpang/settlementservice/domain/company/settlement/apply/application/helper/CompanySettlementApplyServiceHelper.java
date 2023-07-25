@@ -3,9 +3,9 @@ package com.woorinpang.settlementservice.domain.company.settlement.apply.applica
 import com.woorinpang.settlementservice.domain.company.settlement.apply.application.exception.CompanySettlementApplyNotFoundException;
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementApply;
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementApplyRepository;
-import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.domain.CompanySettlementApplyHistoryRepository;
+import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.CompanySettlementApplyHistoryRepository;
 
-import static com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.application.helper.CompanySettlementApplyHistoryServiceHelper.*;
+import static com.woorinpang.settlementservice.domain.company.settlement.apply.application.helper.CompanySettlementApplyHistoryServiceHelper.*;
 
 public final class CompanySettlementApplyServiceHelper {
     /**
