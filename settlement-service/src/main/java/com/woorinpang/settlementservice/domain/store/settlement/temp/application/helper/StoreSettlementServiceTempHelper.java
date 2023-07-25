@@ -1,11 +1,11 @@
 package com.woorinpang.settlementservice.domain.store.settlement.temp.application.helper;
 
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreSettlementTemp;
-import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history.domain.StoreSettlementTempHistoryRepository;
+import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history.StoreSettlementTempHistoryRepository;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.application.exception.StoreSettlementTempNotFoundException;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreSettlementTempRepository;
 
-import static com.woorinpang.settlementservice.domain.store.settlement.temp.domain.history.application.helper.StoreSettlementTempHistoryServiceHelper.*;
+import static com.woorinpang.settlementservice.domain.store.settlement.temp.application.helper.StoreSettlementTempHistoryServiceHelper.*;
 
 public final class StoreSettlementServiceTempHelper {
     /**
