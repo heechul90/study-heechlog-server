@@ -1,6 +1,6 @@
 package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.detail;
 
-import com.woorinpang.settlementservice.domain.company.settlement.common.domain.CompanyId;
+import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanyId;
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreId;
 import com.woorinpang.settlementservice.domain.store.settlement.common.domain.StoreSettlementTempAmount;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreSettlementTemp;

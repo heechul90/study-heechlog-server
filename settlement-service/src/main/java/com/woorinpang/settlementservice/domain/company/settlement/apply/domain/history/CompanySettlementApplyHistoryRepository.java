@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.domain;
+package com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

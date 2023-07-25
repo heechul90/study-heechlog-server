@@ -3,9 +3,9 @@ package com.woorinpang.settlementservice.domain.company.settlement.temp.applicat
 import com.woorinpang.settlementservice.domain.company.settlement.temp.application.exception.CompanySettlementTempNotFoundException;
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.CompanySettlementTemp;
 import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.CompanySettlementTempRepository;
-import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.history.domain.CompanySettlementTempHistoryRepository;
+import com.woorinpang.settlementservice.domain.company.settlement.temp.domain.history.CompanySettlementTempHistoryRepository;
 
-import static com.woorinpang.settlementservice.domain.company.settlement.temp.domain.history.application.helper.CompanySettlementTempHistoryServiceHelper.saveCompanySettlementTempHistory;
+import static com.woorinpang.settlementservice.domain.company.settlement.temp.application.helper.CompanySettlementTempHistoryServiceHelper.saveCompanySettlementTempHistory;
 
 public final class CompanySettlementTempServiceHelper {
     /**

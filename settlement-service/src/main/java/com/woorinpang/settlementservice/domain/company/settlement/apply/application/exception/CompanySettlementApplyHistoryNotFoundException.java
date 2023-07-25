@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.application.exception;
+package com.woorinpang.settlementservice.domain.company.settlement.apply.application.exception;
 
 import com.woorinpang.settlementservice.global.exception.EntityNotFoundException;
 

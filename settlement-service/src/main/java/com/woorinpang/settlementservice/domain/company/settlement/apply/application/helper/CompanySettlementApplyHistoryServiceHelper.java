@@ -1,9 +1,9 @@
-package com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.application.helper;
+package com.woorinpang.settlementservice.domain.company.settlement.apply.application.helper;
 
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementApply;
-import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.application.exception.CompanySettlementApplyHistoryNotFoundException;
-import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.domain.CompanySettlementApplyHistory;
-import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.domain.CompanySettlementApplyHistoryRepository;
+import com.woorinpang.settlementservice.domain.company.settlement.apply.application.exception.CompanySettlementApplyHistoryNotFoundException;
+import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.CompanySettlementApplyHistory;
+import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.history.CompanySettlementApplyHistoryRepository;
 
 public final class CompanySettlementApplyHistoryServiceHelper {
     /**

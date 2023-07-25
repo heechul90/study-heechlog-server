@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.company.settlement.common.domain;
+package com.woorinpang.settlementservice.domain.company.settlement.common.entity;
 
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDay;
 import com.woorinpang.settlementservice.global.common.entity.YearMonthDayConverter;
