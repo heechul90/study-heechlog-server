@@ -1,6 +1,7 @@
 package com.woorinpang.settlementservice.domain.information.company.bank.domain;
 
 import com.woorinpang.settlementservice.domain.bank.domain.Bank;
+import com.woorinpang.settlementservice.domain.information.common.entity.Account;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,4 +23,7 @@ public class CompanyBankInformation {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Bank bank;
+
+    @Embedded
+    private Account account;
 }
