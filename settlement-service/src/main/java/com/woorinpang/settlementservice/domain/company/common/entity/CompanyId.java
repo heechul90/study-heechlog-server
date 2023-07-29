@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.company.settlement.common.entity;
+package com.woorinpang.settlementservice.domain.company.common.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
