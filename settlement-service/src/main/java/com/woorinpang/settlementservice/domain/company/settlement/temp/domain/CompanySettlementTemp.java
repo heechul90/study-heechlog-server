@@ -10,6 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
+/**
+ * 컴퍼니 정산임시
+ */
 @Entity
 @Table
 @Getter
