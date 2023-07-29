@@ -1,6 +1,6 @@
 package com.woorinpang.settlementservice.domain.information.company.bank.domain;
 
-import com.woorinpang.settlementservice.domain.bank.domain.Bank;
+import com.woorinpang.settlementservice.domain.bank.bank.domain.Bank;
 import com.woorinpang.settlementservice.domain.information.common.entity.Account;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
