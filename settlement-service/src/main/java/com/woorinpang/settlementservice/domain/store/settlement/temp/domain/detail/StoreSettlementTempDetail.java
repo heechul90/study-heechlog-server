@@ -1,8 +1,8 @@
 package com.woorinpang.settlementservice.domain.store.settlement.temp.domain.detail;
 
-import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanyId;
-import com.woorinpang.settlementservice.domain.store.settlement.common.entity.StoreId;
-import com.woorinpang.settlementservice.domain.store.settlement.common.entity.StoreSettlementTempAmount;
+import com.woorinpang.settlementservice.domain.company.common.entity.CompanyId;
+import com.woorinpang.settlementservice.domain.store.common.entity.StoreId;
+import com.woorinpang.settlementservice.domain.store.common.entity.StoreSettlementTempAmount;
 import com.woorinpang.settlementservice.domain.store.settlement.temp.domain.StoreSettlementTemp;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;

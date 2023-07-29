@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 /**
- * 은행
+ * 뱅크
  */
 @Entity
 @Table
@@ -16,13 +16,13 @@ import org.hibernate.annotations.Comment;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Bank extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bank_information_id") @Comment("은행정보 고유번호")
+    @Column(name = "bank_id") @Comment("뱅크 고유번호")
     private Long id;
 
-    @Column(columnDefinition = "varchar(15) not null comment '은행코드'")
+    @Column(columnDefinition = "varchar(15) not null comment '뱅크코드'")
     private String bankCode;
 
-    @Column(columnDefinition = "varchar(30) not null comment '은행명'")
+    @Column(columnDefinition = "varchar(30) not null comment '뱅크명'")
     private String bankName;
 
     @Column(columnDefinition = "bit(1) default true comment '사용여부'")

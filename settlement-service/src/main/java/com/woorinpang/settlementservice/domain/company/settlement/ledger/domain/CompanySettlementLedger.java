@@ -1,8 +1,8 @@
 package com.woorinpang.settlementservice.domain.company.settlement.ledger.domain;
 
 import com.woorinpang.settlementservice.domain.company.settlement.apply.domain.CompanySettlementType;
-import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanyId;
-import com.woorinpang.settlementservice.domain.company.settlement.common.entity.CompanySettlementDateYmd;
+import com.woorinpang.settlementservice.domain.company.common.entity.CompanyId;
+import com.woorinpang.settlementservice.domain.company.common.entity.CompanySettlementDateYmd;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
