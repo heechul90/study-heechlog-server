@@ -24,9 +24,9 @@ public class CompanyApproval {
     @Column(columnDefinition = "datetime(6) null comment '결재된 일자'")
     private LocalDateTime approvedDate;
 
-    @Column(columnDefinition = "varchar(60) null comment '결재자 고유번호")
+    @Column(columnDefinition = "varchar(60) null comment '결재자 고유번호'")
     private Long approvalId;
 
-    @Column(columnDefinition = "varchar(120) null comment '미결재 사유")
+    @Column(columnDefinition = "varchar(120) null comment '미결재 사유'")
     private String disapprovedReason;
 }
