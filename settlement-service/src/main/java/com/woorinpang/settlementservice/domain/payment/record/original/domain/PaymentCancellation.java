@@ -9,6 +9,9 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * 결제 취소
+ */
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

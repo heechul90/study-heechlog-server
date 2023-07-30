@@ -1,7 +1,7 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.infrastructure.dto.find;
 
 import com.querydsl.core.annotations.QueryProjection;
-import com.woorinpang.settlementservice.domain.payment.record.common.entity.PaymentAmount;
+import com.woorinpang.settlementservice.domain.payment.common.entity.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Company;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Payment;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Store;
@@ -19,7 +19,7 @@ public class FindPagePaymentOriginalRecordResponse {
     private String storeName;
     private Long userId;
     private String userName;
-    private BigDecimal mealAmount;
+    private BigDecimal paymentAmount;
     private BigDecimal companySettlementAmount;
     private BigDecimal storeSettlementAmount;
     private LocalDateTime paymentDate;
@@ -35,7 +35,7 @@ public class FindPagePaymentOriginalRecordResponse {
         this.storeName = store.getStoreName();
         this.userId = user.getUserId();
         this.userName = user.getUserName();
-        this.mealAmount = paymentAmount.getMealAmount().getAmount();
+        this.paymentAmount = paymentAmount.getPaymentAmount().getAmount();
         this.companySettlementAmount = paymentAmount.getCompanySettlementAmount().getAmount();
         this.storeSettlementAmount = paymentAmount.getStoreSettlementAmount().getAmount();
         this.paymentDate = payment.getPaymentDate();
