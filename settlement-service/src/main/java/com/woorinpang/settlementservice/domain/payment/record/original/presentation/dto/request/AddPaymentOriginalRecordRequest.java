@@ -1,6 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.presentation.dto.request;
 
-import com.woorinpang.settlementservice.domain.payment.record.common.entity.PaymentAmount;
+import com.woorinpang.settlementservice.domain.payment.common.entity.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.original.application.dto.command.CreatePaymentOriginalRecordCommand;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.*;
 import com.woorinpang.settlementservice.global.common.entity.Amount;

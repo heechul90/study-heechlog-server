@@ -1,7 +1,7 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.infrastructure.dto.find;
 
 import com.querydsl.core.annotations.QueryProjection;
-import com.woorinpang.settlementservice.domain.payment.record.common.entity.PaymentAmount;
+import com.woorinpang.settlementservice.domain.payment.common.entity.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Company;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Payment;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.Store;

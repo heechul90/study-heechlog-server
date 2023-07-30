@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.domain.payment.record.common.entity;
+package com.woorinpang.settlementservice.domain.payment.common.entity;
 
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.PaymentOriginalRecord;
 import com.woorinpang.settlementservice.global.common.entity.Amount;
