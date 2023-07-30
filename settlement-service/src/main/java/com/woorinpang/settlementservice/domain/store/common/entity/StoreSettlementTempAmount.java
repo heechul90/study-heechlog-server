@@ -6,6 +6,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * 스토어 정산임시금액
+ */
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -13,8 +16,8 @@ public class StoreSettlementTempAmount {
     @Embedded
     @AttributeOverrides(@AttributeOverride(
             name = "amount",
-            column = @Column(name = "mealAmount", columnDefinition = "decimal(38,2) default 0 comment '식대 결제금액'")))
-    private Amount mealAmount;
+            column = @Column(name = "paymentAmount", columnDefinition = "decimal(38,2) default 0 comment '결제금액'")))
+    private Amount paymentAmount;
 
     @Embedded
     @AttributeOverrides(@AttributeOverride(
