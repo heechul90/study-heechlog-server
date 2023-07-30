@@ -1,6 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.presentation.dto.request;
 
-import com.woorinpang.settlementservice.domain.payment.record.common.entity.PaymentAmount;
+import com.woorinpang.settlementservice.domain.payment.common.entity.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.original.application.dto.command.CreatePaymentOriginalRecordCommand;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.*;
 import com.woorinpang.settlementservice.global.common.entity.Amount;
@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,26 +20,34 @@ import java.time.format.DateTimeFormatter;
 public class AddPaymentOriginalRecordRequest {
     @NotNull(message = "컴퍼니 고유번호는 필수입니다.")
     private Long companyId;
+
     @NotBlank(message = "컴퍼니명은 필수입니다.")
     private String companyName;
+
     @NotNull(message = "스토어 고유번호는 필수잆니다.")
     private Long storeId;
+
     @NotBlank(message = "스토어명은 필수입니다.")
     private String storeName;
+
     @NotNull(message = "사용자 고유번호는 필수입니다.")
     private Long userId;
+
     @NotBlank(message = "사용자명은 필수입니다.")
     private String userName;
-    //private Long userPayAmount;
-    //private Long mypointPayAmount;
-    //private Long instantPayAmount;
-    private Long mealAmount;
-    //private Long couponAmount;
-    private Long companySettlementAmount;
-    private Long storeSettlementAmount;
+
+    private BigDecimal paymentAmount;
+
+    private BigDecimal companySettlementAmount;
+
+    private BigDecimal storeSettlementAmount;
+
     private LocalDateTime paymentDate;
+
     private LocalDateTime paymentCancellationDate;
+
     private String paymentCancellationReason;
+
     private String paymentType;
 
     public void validate() {
@@ -60,7 +69,7 @@ public class AddPaymentOriginalRecordRequest {
 
     private PaymentAmount getPaymentAmount() {
         return PaymentAmount.of(
-                Amount.create(this.mealAmount),
+                Amount.create(this.paymentAmount),
                 Amount.create(this.companySettlementAmount),
                 Amount.create(this.storeSettlementAmount)
         );

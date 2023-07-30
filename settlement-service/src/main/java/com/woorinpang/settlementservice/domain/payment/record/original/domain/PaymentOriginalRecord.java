@@ -1,6 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.domain;
 
-import com.woorinpang.settlementservice.domain.payment.record.common.entity.PaymentAmount;
+import com.woorinpang.settlementservice.domain.payment.common.entity.PaymentAmount;
 import com.woorinpang.settlementservice.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -21,7 +21,7 @@ public class PaymentOriginalRecord extends BaseEntity {
     @Column(name = "payment_original_record_id") @Comment("결제 원본기록 고유번호")
     private Long id;
 
-    @Column(columnDefinition = "varchar(36) not null comment '거래 고유 아이디'")
+    @Column(columnDefinition = "varchar(36) not null comment '거래 아이디'")
     private String transactionId;
 
     @Embedded

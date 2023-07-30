@@ -1,6 +1,6 @@
 package com.woorinpang.settlementservice.domain.payment.record.daily.application;
 
-import com.woorinpang.settlementservice.domain.payment.record.common.entity.PaymentAmount;
+import com.woorinpang.settlementservice.domain.payment.common.entity.PaymentAmount;
 import com.woorinpang.settlementservice.domain.payment.record.daily.application.dto.command.CreatePaymentDailyRecordCommand;
 import com.woorinpang.settlementservice.domain.payment.record.daily.domain.PaymentDailyRecordRepository;
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.PaymentOriginalRecord;
