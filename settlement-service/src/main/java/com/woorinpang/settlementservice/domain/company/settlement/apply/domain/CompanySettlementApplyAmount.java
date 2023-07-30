@@ -13,9 +13,9 @@ public class CompanySettlementApplyAmount {
     @Embedded
     @AttributeOverrides(@AttributeOverride(
             name = "amount",
-            column = @Column(name = "mealAmount", columnDefinition = "decimal(38,2) default 0 comment '식대 결제금액'"))
+            column = @Column(name = "paymentAmount", columnDefinition = "decimal(38,2) default 0 comment '결제금액'"))
     )
-    private Amount mealAmount;
+    private Amount paymentAmount;
 
     @Embedded
     @AttributeOverrides(@AttributeOverride(

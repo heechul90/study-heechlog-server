@@ -8,16 +8,19 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * 컴퍼니 정산임시반영
+ */
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CompanySettlementTempApply {
-    @Column(columnDefinition = "bit(1) not null default false comment '적용 여부'")
+    @Column(columnDefinition = "bit(1) not null default false comment '반영 여부'")
     private boolean isApplied;
 
-    @Column(columnDefinition = "datetime(6) null comment '적용된 일자'")
+    @Column(columnDefinition = "datetime(6) null comment '반영된 일자'")
     private LocalDateTime appliedDate;
 
-    @Column(columnDefinition = "bigint null comment '적용자 고유번호'")
+    @Column(columnDefinition = "bigint null comment '반영자 고유번호'")
     private Long applierId;
 }
