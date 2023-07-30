@@ -6,21 +6,20 @@ import com.woorinpang.settlementservice.domain.payment.record.original.domain.Pa
 import com.woorinpang.settlementservice.domain.payment.record.original.domain.PaymentOriginalRecordRepository;
 
 public final class PaymentOriginalRecordServiceHelper {
+    /**
+     * 결제 원본기록 단건조회
+     */
     public static PaymentOriginalRecord findPaymentOriginalRecordById(PaymentOriginalRecordRepository paymentOriginalRecordRepository,
                                                                Long paymentOriginalRecordId) {
         return paymentOriginalRecordRepository.findById(paymentOriginalRecordId)
                 .orElseThrow(() -> new PaymentOriginalRecordNotFoundException(paymentOriginalRecordId));
     }
 
+    /**
+     * 결제 원본기록 저장
+     */
     public static PaymentOriginalRecord savePaymentOriginalRecord(PaymentOriginalRecordRepository paymentOriginalRecordRepository,
                                                            PaymentOriginalRecord paymentOriginalRecord) {
         return paymentOriginalRecordRepository.save(paymentOriginalRecord);
-    }
-
-    public static void existsPaymentOriginalRecordByTransactionId(PaymentOriginalRecordRepository paymentOriginalRecordRepository,
-                                                                  String transactionId) {
-        if (paymentOriginalRecordRepository.existsByTransactionId(transactionId)) {
-            throw new TransactionIdAlreadyExistsException(transactionId);
-        }
     }
 }

@@ -1,6 +1,5 @@
 package com.woorinpang.settlementservice.domain.payment.record.original.infrastructure;
 
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
