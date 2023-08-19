@@ -1,9 +1,14 @@
 package study.heechlog.server.config;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,12 +17,16 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 import study.heechlog.server.core.user.domain.User;
 import study.heechlog.server.core.user.repository.UserRepository;
 
+import java.io.IOException;
+
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
+@Slf4j
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -55,6 +64,14 @@ public class SecurityConfig {
                     .passwordParameter("password")
                     .defaultSuccessUrl("/")
                 .and()
+                    .exceptionHandling(e -> {
+                        new AccessDeniedHandler() {
+                            @Override
+                            public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+                                log.info("403", accessDeniedException);
+                            }
+                        };
+                    })
                     .rememberMe(rm -> rm.rememberMeParameter("remember")
                             .alwaysRemember(false)
                             .tokenValiditySeconds(2592000)

@@ -1,2 +1,4 @@
-package study.heechlog.server.config.handler;public class Http403Handler {
+package study.heechlog.server.config.handler;
+
+public class Http403Handler {
 }
