@@ -24,4 +24,3 @@
     - Package name : com.heech.heechlog
     - Packaging : Jar
     - Java : 11
-  
