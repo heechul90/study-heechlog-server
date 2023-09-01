@@ -17,4 +17,4 @@ include 'application:settlement-batch'
 include 'common:enums'
 
 //client
-include 'clients:user-client'
+include 'clients:user'
