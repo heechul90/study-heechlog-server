@@ -1,4 +1,20 @@
-rootProject.name = 'settlement'
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version "${springBootVersion}"
+        id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+        id 'org.asciidoctor.jvm.convert' version "${asciidoctorConvertVersion}"
+        id 'io.spring.javaformat' version "${springJavaFormatVersion}"
+    }
+}
 
-include 'settlement-batch'
-include 'settlement-service'
+rootProject.name = 'settlement-service'
+
+//api
+include 'application:settlement-api'
+include 'application:settlement-batch'
+
+//common
+include 'common:enums'
+
+//client
+include 'clients:user'
