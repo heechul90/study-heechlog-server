@@ -2,7 +2,11 @@ bootJar.enabled = true
 jar.enabled = false
 
 dependencies {
+    //common
     implementation project(":common:enums")
+
+    //clients
+    implementation project("clients:user")
 
     //spring boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
