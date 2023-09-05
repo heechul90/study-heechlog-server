@@ -1,8 +1,10 @@
 package com.woorinpang.settlementservice.domain.store.domain;
 
-import jakarta.persistence.Entity;
 import lombok.Builder;
 
-@Entity
-public class Store {
+@Builder
+public record Store(
+        Long storeId,
+        String storeName
+) {
 }
