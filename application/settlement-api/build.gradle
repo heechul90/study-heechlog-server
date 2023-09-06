@@ -6,7 +6,7 @@ dependencies {
     implementation project(":common:enums")
 
     //clients
-    implementation project("clients:user")
+    implementation project(":clients:user")
 
     //spring boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
