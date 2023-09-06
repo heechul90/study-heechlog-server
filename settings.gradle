@@ -13,8 +13,16 @@ rootProject.name = 'settlement-service'
 include 'application:settlement-api'
 include 'application:settlement-batch'
 
-//common
-include 'common:enums'
+//domain
+include 'domain:store-domain'
+include 'domain:company-domain'
+include 'domain:settlement-domain'
+
+//storage
+include 'storage:main-db'
 
 //client
 include 'clients:user'
+
+//common
+include 'common:enums'
