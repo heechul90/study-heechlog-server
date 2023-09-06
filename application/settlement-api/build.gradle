@@ -10,9 +10,10 @@ dependencies {
 
     //domain
     implementation project(':domain:store-domain')
+    implementation project(':domain:company-domain')
 
     //storage
-    implementation project(':storage:main-db')
+    //implementation project(':storage:main-db')
 
     //spring boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
