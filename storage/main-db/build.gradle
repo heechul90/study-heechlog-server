@@ -1,0 +1,18 @@
+dependencies {
+    implementation project(':common:enums')
+    compileOnly project(':domain:store-domain')
+    compileOnly project(':domain:company-domain')
+    compileOnly project(':domain:settlement-domain')
+
+    //spring data jpa
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //database
+    runtimeOnly 'com.h2database:h2'
+
+    //querydsl
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+}
