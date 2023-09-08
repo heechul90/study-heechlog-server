@@ -17,6 +17,7 @@ include 'application:settlement-batch'
 include 'domain:store-domain'
 include 'domain:company-domain'
 include 'domain:settlement-domain'
+include 'domain:payment-domain'
 
 //storage
 include 'storage:main-db'
