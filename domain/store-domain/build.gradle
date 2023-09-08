@@ -1,3 +1,7 @@
 dependencies {
-    //implementation project(':storage:main-db')
+    compileOnly 'org.springframework:spring-context'
+
+    // @Transactional 사용할 수 있고
+    // jpa 1차 캐쉬도 사용할 수 있다.
+    //compileOnly 'jakarta.transaction:jakarta.transaction-api'
 }
