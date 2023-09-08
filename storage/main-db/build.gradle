@@ -1,8 +1,8 @@
 dependencies {
     implementation project(':common:enums')
     compileOnly project(':domain:store-domain')
-    compileOnly project(':domain:company-domain')
-    compileOnly project(':domain:settlement-domain')
+    //compileOnly project(':domain:company-domain')
+    //compileOnly project(':domain:settlement-domain')
 
     //spring data jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
