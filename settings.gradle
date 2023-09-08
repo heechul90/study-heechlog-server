@@ -11,6 +11,8 @@ rootProject.name = 'settlement-service'
 
 //api
 include 'application:settlement-api'
+
+//batch
 include 'application:settlement-batch'
 
 //domain
@@ -22,8 +24,9 @@ include 'domain:payment-domain'
 //storage
 include 'storage:main-db'
 
-//client
+//clients
 include 'clients:user'
 
 //common
 include 'common:enums'
+include 'common:objects'

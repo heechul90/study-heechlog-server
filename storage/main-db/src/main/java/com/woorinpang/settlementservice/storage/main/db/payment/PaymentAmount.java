@@ -1,6 +1,6 @@
 package com.woorinpang.settlementservice.storage.main.db.payment;
 
-import com.woorinpang.settlementservice.storage.main.db.global.entity.Amount;
+import com.woorinpang.settlementservice.common.objects.Amount;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -46,5 +46,4 @@ public class PaymentAmount {
                 .storeSettlementAmount(storeSettlementAmount)
                 .build();
     }
-
 }

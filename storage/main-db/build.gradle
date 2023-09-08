@@ -1,6 +1,9 @@
 dependencies {
     implementation project(':common:enums')
-    compileOnly project(':domain:store-domain')
+    implementation project(':common:objects')
+
+    compileOnly project(':domain:payment-domain')
+    //compileOnly project(':domain:store-domain')
     //compileOnly project(':domain:company-domain')
     //compileOnly project(':domain:settlement-domain')
 
@@ -9,6 +12,7 @@ dependencies {
 
     //database
     runtimeOnly 'com.h2database:h2'
+    //runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
     //querydsl
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
