@@ -4,6 +4,9 @@ import lombok.Builder;
 
 @Builder
 public record AddPaymentRecordCommand(
-        String transactionId
+        String transactionId,
+        Company company,
+        Store store,
+        User user
 ) {
 }
