@@ -42,7 +42,7 @@ public class PaymentRecordEntity {
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
-    @Builder(builderMethodName = "createPaymentOriginalRecord")
+    @Builder(builderMethodName = "create")
     public PaymentRecordEntity(String transactionId, Company company, Store store, User user, PaymentAmount paymentAmount,
                                  Payment payment, PaymentCancellation paymentCancellation, PaymentType paymentType) {
         this.transactionId = transactionId;
