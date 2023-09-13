@@ -1,4 +1,10 @@
 package com.woorinpang.settlementservice.domain.payment.domain;
 
-public record Company() {
+import lombok.Builder;
+
+@Builder
+public record Company(
+        Long companyId,
+        String companyName
+) {
 }

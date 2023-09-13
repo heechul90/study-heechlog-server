@@ -4,6 +4,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class YearMonthDay {
@@ -23,6 +26,10 @@ public class YearMonthDay {
 
     public static YearMonthDay of(String yearMonthDay) {
         return new YearMonthDay(yearMonthDay.substring(0, 4), yearMonthDay.substring(4, 6), yearMonthDay.substring(6, 8));
+    }
+
+    public static YearMonthDay of(LocalDateTime date) {
+        return YearMonthDay.of(date.format(DateTimeFormatter.ofPattern("yyyyMMdd")));
     }
 
     public String getYearMonthDay() {

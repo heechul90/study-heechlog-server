@@ -1,5 +1,8 @@
 package com.woorinpang.settlementservice.application.settlement.api.payment.v1.request;
 
+import com.woorinpang.settlementservice.common.objects.Amount;
+import com.woorinpang.settlementservice.common.objects.YearMonthDay;
+import com.woorinpang.settlementservice.domain.payment.domain.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -38,50 +41,35 @@ public class AddPaymentRecordRequest {
 
     private LocalDateTime paymentDate;
 
-    private LocalDateTime paymentCancellationDate;
-
-    private String paymentCancellationReason;
-
-    private String paymentType;
 
     public void validate() {
 
     }
 
-    /*public CreatePaymentOriginalRecordCommand toCommand(String transactionId) {
-        return CreatePaymentOriginalRecordCommand.builder()
-                .transactionId(transactionId)
-                .company(new Company(this.companyId, this.companyName))
-                .store(new Store(this.storeId, this.storeName))
-                .user(new User(this.userId, this.userName))
-                .paymentAmount(this.getPaymentAmount())
-                .payment(this.getPayment())
-                .paymentCancellation(this.getPaymentCancellation())
-                .paymentType(PaymentType.findByCode(this.paymentType))
+    public Company toCompany() {
+        return new Company(this.companyId, this.companyName);
+    }
+
+    public Store toStore() {
+        return new Store(this.storeId, this.storeName);
+    }
+
+    public User toUser() {
+        return new User(this.userId, this.userName);
+    }
+
+    public PaymentAmount toPaymentAmount() {
+        return PaymentAmount.builder()
+                .paymentAmount(Amount.create(this.paymentAmount))
+                .companySettlementAmount(Amount.create(this.companySettlementAmount))
+                .storeSettlementAmount(Amount.create(this.storeSettlementAmount))
                 .build();
-    }*/
+    }
 
-    /*private PaymentAmount getPaymentAmount() {
-        return PaymentAmount.of(
-                Amount.create(this.paymentAmount),
-                Amount.create(this.companySettlementAmount),
-                Amount.create(this.storeSettlementAmount)
-        );
-    }*/
-
-    /*private Payment getPayment() {
-        return PaymentType.findByCode(this.paymentType).equals(PaymentType.GENERAL)
-                ? new Payment(this.paymentDate, YearMonthDay.of(this.paymentDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))))
-                : null;
-    }*/
-
-    /*private PaymentCancellation getPaymentCancellation() {
-        return PaymentType.findByCode(this.paymentType).equals(PaymentType.CANCEL)
-                ? PaymentCancellation.builder()
-                .paymentCancellationDate(this.paymentCancellationDate)
-                .paymentCancellationYmd(YearMonthDay.of(this.paymentCancellationDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))))
-                .paymentCancellationReason(this.paymentCancellationReason)
-                .build()
-                : null;
-    }*/
+    public PaymentDay toPaymentDay() {
+        return PaymentDay.builder()
+                .paymentDate(this.paymentDate)
+                .paymentDateYmd(YearMonthDay.of(this.paymentDate))
+                .build();
+    }
 }

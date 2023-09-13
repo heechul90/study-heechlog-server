@@ -1,4 +1,10 @@
 package com.woorinpang.settlementservice.domain.payment.domain;
 
-public record User() {
+import lombok.Builder;
+
+@Builder
+public record User(
+        Long userId,
+        String userName
+) {
 }
