@@ -1,6 +1,6 @@
 package com.woorinpang.settlementservice.storage.main.db.payment;
 
-import com.woorinpang.settlementservice.storage.main.db.global.entity.YearMonthDay;
+import com.woorinpang.settlementservice.common.objects.YearMonthDay;
 import com.woorinpang.settlementservice.storage.main.db.global.entity.YearMonthDayConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;

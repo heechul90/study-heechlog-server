@@ -1,9 +1,10 @@
 package com.woorinpang.settlementservice.storage.main.db.global.entity;
 
+import com.woorinpang.settlementservice.common.objects.YearMonthDay;
 import jakarta.persistence.AttributeConverter;
+import org.springframework.util.StringUtils;
 
 import static java.util.Objects.isNull;
-import static org.springframework.util.StringUtils.hasText;
 
 //@Converter(autoApply = true)
 public class YearMonthDayConverter implements AttributeConverter<YearMonthDay, String> {
@@ -15,7 +16,7 @@ public class YearMonthDayConverter implements AttributeConverter<YearMonthDay, S
 
     @Override
     public YearMonthDay convertToEntityAttribute(String dbData) {
-        if(!hasText(dbData)) return null;
+        if(!StringUtils.hasText(dbData)) return null;
         return YearMonthDay.of(dbData);
     }
 }
