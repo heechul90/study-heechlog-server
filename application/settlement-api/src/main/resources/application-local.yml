@@ -1,0 +1,8 @@
+server:
+  port: 9030
+
+# config server actuator
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false

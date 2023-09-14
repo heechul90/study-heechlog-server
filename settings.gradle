@@ -1,0 +1,32 @@
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version "${springBootVersion}"
+        id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+        id 'org.asciidoctor.jvm.convert' version "${asciidoctorConvertVersion}"
+        id 'io.spring.javaformat' version "${springJavaFormatVersion}"
+    }
+}
+
+rootProject.name = 'settlement-service'
+
+//api
+include 'application:settlement-api'
+
+//batch
+include 'application:settlement-batch'
+
+//domain
+include 'domain:store-domain'
+include 'domain:company-domain'
+include 'domain:settlement-domain'
+include 'domain:payment-domain'
+
+//storage
+include 'storage:main-db'
+
+//clients
+include 'clients:user'
+
+//common
+include 'common:enums'
+include 'common:objects'

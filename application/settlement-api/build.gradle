@@ -1,0 +1,28 @@
+bootJar.enabled = true
+jar.enabled = false
+
+dependencies {
+    //common
+    implementation project(':common:enums')
+    implementation project(':common:objects')
+
+    //clients
+    implementation project(':clients:user')
+
+    //domain
+    implementation project(':domain:payment-domain')
+    //implementation project(':domain:settlement-domain')
+    //implementation project(':domain:store-domain')
+    //implementation project(':domain:company-domain')
+
+    //database
+    runtimeOnly project(':storage:main-db')
+
+    //spring boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    //spring cloud
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+}
