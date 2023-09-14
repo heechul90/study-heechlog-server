@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
 
 /**
  * 결제 기록
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PaymentRecordEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_record_id", columnDefinition = "bigint not null comment '결제 기록 고유번호'")
+    @Column(name = "payment_record_id") @Comment("결제 기록 고유번호")
     private Long id;
 
     @Column(columnDefinition = "varchar(36) not null comment '거래 아이디'")

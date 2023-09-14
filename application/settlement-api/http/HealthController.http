@@ -1,2 +1,2 @@
 ###
-GET http://localhost:9030/heath
+GET http://localhost:9030/health
