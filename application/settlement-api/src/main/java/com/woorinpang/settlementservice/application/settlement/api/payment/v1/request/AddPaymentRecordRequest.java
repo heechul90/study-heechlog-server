@@ -1,5 +1,8 @@
 package com.woorinpang.settlementservice.application.settlement.api.payment.v1.request;
 
+import com.woorinpang.settlementservice.application.settlement.api.global.exception.FieldError;
+import com.woorinpang.settlementservice.application.settlement.api.global.exception.JsonInvalidRequestException;
+import com.woorinpang.settlementservice.application.settlement.api.global.exception.SettlementApiException;
 import com.woorinpang.settlementservice.common.objects.Amount;
 import com.woorinpang.settlementservice.common.objects.YearMonthDay;
 import com.woorinpang.settlementservice.domain.payment.domain.*;
@@ -11,6 +14,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -41,9 +46,16 @@ public class AddPaymentRecordRequest {
 
     private LocalDateTime paymentDate;
 
-
     public void validate() {
+        List<FieldError> errors = new ArrayList();
 
+        if (this.userName.contains("바보")) {
+            errors.add(new FieldError("userName", this.userName, "유저명은 나쁜말을 사용할 수 없습니다."));
+        }
+
+        if (errors.size() > 0) {
+            throw new SettlementApiException(errors);
+        }
     }
 
     public Company toCompany() {

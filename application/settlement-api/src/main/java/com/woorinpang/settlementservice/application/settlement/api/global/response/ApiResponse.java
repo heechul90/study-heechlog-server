@@ -1,21 +1,19 @@
 package com.woorinpang.settlementservice.application.settlement.api.global.response;
 
-import com.woorinpang.settlementservice.application.settlement.api.global.error.ErrorMessage;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import com.woorinpang.settlementservice.application.settlement.api.global.exception.ErrorMessage;
 
 import java.time.LocalDateTime;
 
 public class ApiResponse<T> {
     private final LocalDateTime timestamp;
-    private final ResultType result;
-    private final ErrorMessage error;
+    private final ResultType resultType;
+    private final ErrorMessage errorMessage;
     private final T data;
 
-    public ApiResponse(ResultType result, ErrorMessage error, T data) {
+    public ApiResponse(ResultType resultType, ErrorMessage errorMessage, T data) {
         this.timestamp = LocalDateTime.now();
-        this.result = result;
-        this.error = error;
+        this.resultType = resultType;
+        this.errorMessage = errorMessage;
         this.data = data;
     }
 
@@ -29,5 +27,9 @@ public class ApiResponse<T> {
 
     public static ApiResponse<?> error() {
         return new ApiResponse<>(ResultType.ERROR, null, null);
+    }
+
+    public static ApiResponse<?> error(Object data) {
+        return new ApiResponse<>(ResultType.ERROR, null, data);
     }
 }
