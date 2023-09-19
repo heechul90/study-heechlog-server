@@ -1,4 +1,4 @@
-package com.woorinpang.settlementservice.application.settlement.api.global.controller;
+package com.woorinpang.settlementservice.application.settlement.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HealthController {
-    @GetMapping("/heath")
+    @GetMapping("/health")
     public ResponseEntity<Object> health() {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
