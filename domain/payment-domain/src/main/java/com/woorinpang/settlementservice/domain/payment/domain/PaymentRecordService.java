@@ -19,6 +19,4 @@ public class PaymentRecordService {
                 .build();
         return addPaymentRecord.add(command);
     }
-
-
 }

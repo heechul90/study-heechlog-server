@@ -1,5 +1,6 @@
 package com.woorinpang.settlementservice.application.settlement.api.payment.v1;
 
+import com.woorinpang.settlementservice.application.settlement.api.global.response.ApiResponse;
 import com.woorinpang.settlementservice.application.settlement.api.payment.v1.request.AddPaymentRecordRequest;
 import com.woorinpang.settlementservice.application.settlement.api.payment.v1.response.AddPaymentRecordResponse;
 import com.woorinpang.settlementservice.domain.payment.domain.PaymentRecordService;
@@ -18,7 +19,7 @@ public class PaymentController {
     private final PaymentRecordService paymentRecordService;
 
     @PostMapping("/{transactionId}")
-    public ResponseEntity addPaymentRecord(
+    public ResponseEntity<ApiResponse<AddPaymentRecordResponse>> addPaymentRecord(
             @PathVariable String transactionId,
             @RequestBody @Valid AddPaymentRecordRequest request
     ) {
@@ -29,6 +30,6 @@ public class PaymentController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new AddPaymentRecordResponse(addedId));
+                .body(ApiResponse.success(new AddPaymentRecordResponse(addedId)));
     }
 }

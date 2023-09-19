@@ -60,7 +60,7 @@ public class QPaymentRecordEntity extends EntityPathBase<PaymentRecordEntity> {
         super(type, metadata, inits);
         this.company = inits.isInitialized("company") ? new QCompany(forProperty("company")) : null;
         this.payment = inits.isInitialized("payment") ? new QPayment(forProperty("payment")) : null;
-        this.paymentAmount = inits.isInitialized("paymentAmount") ? new QPaymentAmount(forProperty("paymentAmount"), inits.get("paymentAmount")) : null;
+        this.paymentAmount = inits.isInitialized("paymentAmount") ? new QPaymentAmount(forProperty("paymentAmount")) : null;
         this.paymentCancellation = inits.isInitialized("paymentCancellation") ? new QPaymentCancellation(forProperty("paymentCancellation")) : null;
         this.store = inits.isInitialized("store") ? new QStore(forProperty("store")) : null;
         this.user = inits.isInitialized("user") ? new QUser(forProperty("user")) : null;
