@@ -30,3 +30,6 @@ include 'clients:user'
 //common
 include 'common:enums'
 include 'common:objects'
+
+//tests
+include 'tests:api-docs'

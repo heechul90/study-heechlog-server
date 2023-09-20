@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/payment/records")
-public class PaymentController {
+@RequestMapping("/api/v1/payment/original/records")
+public class PaymentOriginalRecordController {
     private final PaymentRecordService paymentRecordService;
 
     @PostMapping("/{transactionId}")
