@@ -7,12 +7,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class PaymentRecordEntityRepository implements PaymentRecordRepository {
-    private final PaymentRecordJpaRepository repository;
+public class PaymentOriginalRecordEntityRepository implements PaymentRecordRepository {
+    private final PaymentOriginalRecordJpaRepository repository;
 
     @Override
     public Long add(AddPaymentRecordCommand command) {
-        PaymentRecordEntity paymentRecord = PaymentRecordEntity.create()
+        PaymentOriginalRecordEntity paymentRecord = PaymentOriginalRecordEntity.create()
                 .transactionId(command.transactionId())
                 .build();
         return repository.save(paymentRecord).getId();

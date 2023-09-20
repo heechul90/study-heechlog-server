@@ -20,7 +20,7 @@ import org.hibernate.annotations.Comment;
 @Table
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PaymentDailyRecord extends BaseEntity {
+public class PaymentDailyRecordEntity extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_daily_record_id") @Comment("결제 일일기록 고유번호")
     private Long id;
@@ -39,7 +39,7 @@ public class PaymentDailyRecord extends BaseEntity {
     private YearMonthDay paymentDateYmd;
 
     @Builder(builderMethodName = "createPaymentDailyRecord")
-    public PaymentDailyRecord(CompanyId companyId, StoreId storeId, PaymentAmount paymentAmount, YearMonthDay paymentDateYmd) {
+    public PaymentDailyRecordEntity(CompanyId companyId, StoreId storeId, PaymentAmount paymentAmount, YearMonthDay paymentDateYmd) {
         this.companyId = companyId;
         this.storeId = storeId;
         this.paymentAmount = paymentAmount;

@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 /**
- * 결제 기록
+ * 결제 원본기록
  */
 @Entity
-@Table(name = "payment_record")
+@Table(name = "payment_original_record")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PaymentRecordEntity {
+public class PaymentOriginalRecordEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_record_id") @Comment("결제 기록 고유번호")
+    @Column(name = "payment_original_record_id") @Comment("결제 원본기록 고유번호")
     private Long id;
 
     @Column(columnDefinition = "varchar(36) not null comment '거래 아이디'")
@@ -44,8 +44,8 @@ public class PaymentRecordEntity {
     private PaymentType paymentType;
 
     @Builder(builderMethodName = "create")
-    public PaymentRecordEntity(String transactionId, Company company, Store store, User user, PaymentAmount paymentAmount,
-                                 Payment payment, PaymentCancellation paymentCancellation, PaymentType paymentType) {
+    public PaymentOriginalRecordEntity(String transactionId, Company company, Store store, User user, PaymentAmount paymentAmount,
+                                       Payment payment, PaymentCancellation paymentCancellation, PaymentType paymentType) {
         this.transactionId = transactionId;
         this.company = company;
         this.store = store;

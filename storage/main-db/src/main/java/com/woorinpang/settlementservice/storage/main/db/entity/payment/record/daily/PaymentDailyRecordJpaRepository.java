@@ -2,5 +2,5 @@ package com.woorinpang.settlementservice.storage.main.db.entity.payment.record.d
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PaymentDailyRecordRepository extends JpaRepository<PaymentDailyRecord, Long> {
+public interface PaymentDailyRecordJpaRepository extends JpaRepository<PaymentDailyRecordEntity, Long> {
 }
