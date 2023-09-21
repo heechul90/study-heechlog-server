@@ -7,7 +7,6 @@ import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.http.converter.cbor.MappingJackson2CborHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -18,7 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @Tag("restdocs")
 @ExtendWith(RestDocumentationExtension.class)
 public abstract class RestDocsTest {
-    protected MockMvcRequestSpecification mockMvcRequestSpecification;
+    protected MockMvcRequestSpecification mockMvc;
     private RestDocumentationContextProvider restDocumentationContextProvider;
 
     @BeforeEach
@@ -27,7 +26,7 @@ public abstract class RestDocsTest {
     }
 
     protected MockMvcRequestSpecification given() {
-        return this.mockMvcRequestSpecification;
+        return this.mockMvc;
     }
 
     protected MockMvcRequestSpecification mockController(Object controller) {
