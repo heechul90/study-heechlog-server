@@ -1,0 +1,15 @@
+###
+POST http://localhost:9030/api/v1/payment/original/records/ZZDDDEEE-121-ZZZDDDDDD
+Content-Type: application/json
+
+{
+  "companyId" : 1,
+  "companyName" : "둘리 컴퍼니",
+  "storeId" : 1,
+  "storeName" : "오메가3 스토어",
+  "userId" : 1,
+  "userName" : "이희철",
+  "paymentAmount" : 10000,
+  "companySettlementAmount" : 10000,
+  "storeSettlementAmount" : 10000
+}

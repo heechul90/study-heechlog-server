@@ -8,9 +8,7 @@ import com.woorinpang.settlementservice.common.objects.YearMonthDay;
 import com.woorinpang.settlementservice.domain.payment.domain.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,6 +17,8 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class AddPaymentRecordRequest {
     @NotNull(message = "컴퍼니 고유번호는 필수입니다.")
     private Long companyId;
@@ -43,8 +43,6 @@ public class AddPaymentRecordRequest {
     private BigDecimal companySettlementAmount;
 
     private BigDecimal storeSettlementAmount;
-
-    private LocalDateTime paymentDate;
 
     public void validate() {
         List<FieldError> errors = new ArrayList();
@@ -79,9 +77,10 @@ public class AddPaymentRecordRequest {
     }
 
     public PaymentDay toPaymentDay() {
+        LocalDateTime now = LocalDateTime.now();
         return PaymentDay.builder()
-                .paymentDate(this.paymentDate)
-                .paymentDateYmd(YearMonthDay.of(this.paymentDate))
+                .paymentDate(now)
+                .paymentDateYmd(YearMonthDay.of(now))
                 .build();
     }
 }
