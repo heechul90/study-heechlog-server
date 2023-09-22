@@ -1,6 +1,8 @@
 package com.woorinpang.settlementservice.storage.main.db.entity.payment.record.original;
 
 import com.woorinpang.settlementservice.domain.payment.domain.AddPaymentRecordCommand;
+import com.woorinpang.settlementservice.storage.main.db.entity.company.common.CompanyId;
+import com.woorinpang.settlementservice.storage.main.db.entity.store.common.StoreId;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,14 +24,14 @@ public class PaymentOriginalRecordEntity {
     @Column(columnDefinition = "varchar(36) not null comment '거래 아이디'")
     private String transactionId;
 
-    @Column(columnDefinition = "bigint not null comment '컴퍼니 고유번호'")
-    private Long companyId;
+    @Embedded
+    private CompanyId companyId;
 
     @Column(columnDefinition = "varchar(120) not null comment '컴퍼니명'")
     private String companyName;
 
-    @Column(columnDefinition = "bigint not null comment '스토어 고유번호'")
-    private Long storeId;
+    @Embedded
+    private StoreId storeId;
 
     @Column(columnDefinition = "varchar(120) not null comment '스토어명'")
     private String storeName;
@@ -54,9 +56,9 @@ public class PaymentOriginalRecordEntity {
 
     public PaymentOriginalRecordEntity(AddPaymentRecordCommand command) {
         this.transactionId = command.transactionId();
-        this.companyId = command.company().companyId();
+        this.companyId = new CompanyId(command.company().companyId());
         this.companyName = command.company().companyName();
-        this.storeId = command.store().storeId();
+        this.storeId = new StoreId(command.store().storeId());
         this.storeName = command.store().storeName();
         this.userId = command.user().userId();
         this.userName = command.user().userName();
