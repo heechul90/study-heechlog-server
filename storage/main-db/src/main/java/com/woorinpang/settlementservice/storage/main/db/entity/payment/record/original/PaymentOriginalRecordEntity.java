@@ -22,14 +22,23 @@ public class PaymentOriginalRecordEntity {
     @Column(columnDefinition = "varchar(36) not null comment '거래 아이디'")
     private String transactionId;
 
-    @Embedded
-    private Company company;
+    @Column(columnDefinition = "bigint not null comment '컴퍼니 고유번호'")
+    private Long companyId;
 
-    @Embedded
-    private Store store;
+    @Column(columnDefinition = "varchar(120) not null comment '컴퍼니명'")
+    private String companyName;
 
-    @Embedded
-    private User user;
+    @Column(columnDefinition = "bigint not null comment '스토어 고유번호'")
+    private Long storeId;
+
+    @Column(columnDefinition = "varchar(120) not null comment '스토어명'")
+    private String storeName;
+
+    @Column(columnDefinition = "bigint not null comment '사용자 고유번호'")
+    private Long userId;
+
+    @Column(columnDefinition = "varchar(60) not null comment '사용자 이름'")
+    private String userName;
 
     @Embedded
     private PaymentAmount paymentAmount;
@@ -47,9 +56,12 @@ public class PaymentOriginalRecordEntity {
     public PaymentOriginalRecordEntity(String transactionId, Company company, Store store, User user, PaymentAmount paymentAmount,
                                        Payment payment, PaymentCancellation paymentCancellation, PaymentType paymentType) {
         this.transactionId = transactionId;
-        this.company = company;
-        this.store = store;
-        this.user = user;
+        this.companyId = company.getCompanyId();
+        this.companyName = company.getCompanyName();
+        this.storeId = store.getStoreId();
+        this.storeName = store.getStoreName();
+        this.userId = user.getUserId();
+        this.userName = user.getUserName();
         this.paymentAmount = paymentAmount;
         this.payment = payment;
         this.paymentCancellation = paymentCancellation;

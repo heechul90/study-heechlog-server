@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class User {
     @Column(columnDefinition = "bigint not null comment '사용자 고유번호'")
     private Long userId;
+
     @Column(columnDefinition = "varchar(60) not null comment '사용자 이름'")
     private String userName;
 }
