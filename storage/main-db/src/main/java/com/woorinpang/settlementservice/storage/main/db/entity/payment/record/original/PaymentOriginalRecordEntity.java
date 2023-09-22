@@ -1,5 +1,6 @@
 package com.woorinpang.settlementservice.storage.main.db.entity.payment.record.original;
 
+import com.woorinpang.settlementservice.domain.payment.domain.AddPaymentRecordCommand;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -52,19 +53,20 @@ public class PaymentOriginalRecordEntity {
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
-    @Builder(builderMethodName = "create")
-    public PaymentOriginalRecordEntity(String transactionId, Company company, Store store, User user, PaymentAmount paymentAmount,
-                                       Payment payment, PaymentCancellation paymentCancellation, PaymentType paymentType) {
-        this.transactionId = transactionId;
-        this.companyId = company.getCompanyId();
-        this.companyName = company.getCompanyName();
-        this.storeId = store.getStoreId();
-        this.storeName = store.getStoreName();
-        this.userId = user.getUserId();
-        this.userName = user.getUserName();
-        this.paymentAmount = paymentAmount;
-        this.payment = payment;
-        this.paymentCancellation = paymentCancellation;
-        this.paymentType = paymentType;
+    public PaymentOriginalRecordEntity(AddPaymentRecordCommand command) {
+        this.transactionId = command.transactionId();
+        this.companyId = command.company().companyId();
+        this.companyName = command.company().companyName();
+        this.storeId = command.store().storeId();
+        this.storeName = command.store().storeName();
+        this.userId = command.user().userId();
+        this.userName = command.user().userName();
+        this.paymentAmount = PaymentAmount.of(
+                command.paymentAmount().paymentAmount(),
+                command.paymentAmount().companySettlementAmount(),
+                command.paymentAmount().storeSettlementAmount());
+        this.payment = new Payment(command.paymentDay().paymentDate(), command.paymentDay().paymentDateYmd());
+        this.paymentCancellation = new PaymentCancellation(null, null, null);
+        this.paymentType = PaymentType.GENERAL;
     }
 }
