@@ -3,7 +3,6 @@ package com.woorinpang.settlementservice.storage.main.db.entity.payment.record.o
 import com.woorinpang.settlementservice.domain.payment.domain.AddPaymentRecordCommand;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
