@@ -37,11 +37,6 @@ public class AuthController {
         return new SessionResponse(jwt);
     }
 
-    @GetMapping("/auth/login")
-    public String login() {
-        return "로그인 페이지입니다.";
-    }
-
     @PostMapping("/auth/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public void signup(@RequestBody SignupRequest request) {

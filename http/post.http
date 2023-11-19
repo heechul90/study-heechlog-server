@@ -1,0 +1,8 @@
+### post 작성
+POST http://localhost:9000/api/posts
+Content-Type: application/json
+
+{
+  "title" : "제목",
+  "content" : "내용"
+}

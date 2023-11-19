@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.heechlog.server.common.json.JsonResult;
@@ -61,6 +62,7 @@ public class PostController  {
     /**
      * post 저장
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public JsonResult savePost(@RequestBody @Validated CreatePostRequest request) {
 
@@ -74,6 +76,7 @@ public class PostController  {
     /**
      * post 수정
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{postId}")
     public JsonResult updatePost(@PathVariable("postId") Long postId,
                                  @RequestBody @Validated UpdatePostRequest request) {
@@ -86,6 +89,7 @@ public class PostController  {
     /**
      * post 삭제
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{postId}")
     public JsonResult deletePost(@PathVariable("postId") Long postId) {
         postService.deletePost(postId);

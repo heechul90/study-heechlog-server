@@ -26,6 +26,7 @@ import study.heechlog.server.config.filter.EmailPasswordAuthFilter;
 import study.heechlog.server.config.handler.Http401Handler;
 import study.heechlog.server.config.handler.Http403Handler;
 import study.heechlog.server.config.handler.LoginFailHandler;
+import study.heechlog.server.config.handler.LoginSuccessHandler;
 import study.heechlog.server.core.user.domain.User;
 import study.heechlog.server.core.user.repository.UserRepository;
 
@@ -42,15 +43,10 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return new WebSecurityCustomizer() {
-            @Override
-            public void customize(WebSecurity web) {
-                web.ignoring()
-                        .requestMatchers("/favicon.ico")
-                        .requestMatchers("/error")
-                        .requestMatchers(toH2Console());
-            }
-        };
+        return web -> web.ignoring()
+                .requestMatchers("/favicon.ico")
+                .requestMatchers("/error")
+                .requestMatchers(toH2Console());
     }
 
     @Bean
@@ -62,7 +58,7 @@ public class SecurityConfig {
 //                    request.requestMatchers("/user").hasRole("USER");
 //                    request.requestMatchers("/admin").hasRole("ADMIN");
 //                    request.requestMatchers("/admin").access(new WebExpressionAuthorizationManager("hasRole('ADMIN') AND hasAuthority('WRITE')"));
-                    request.anyRequest().authenticated();
+                    request.anyRequest().permitAll();
                 })
 //                .formLogin(login -> {
 //                    login.loginPage("/auth/login");
@@ -91,7 +87,8 @@ public class SecurityConfig {
     public EmailPasswordAuthFilter usernamePasswordAuthenticationFilter() {
         EmailPasswordAuthFilter filter = new EmailPasswordAuthFilter("/auth/login", objectMapper);
         filter.setAuthenticationManager(authenticationManager());
-        filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/"));
+//        filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/"));
+        filter.setAuthenticationSuccessHandler(new LoginSuccessHandler(objectMapper));
         filter.setAuthenticationFailureHandler(new LoginFailHandler(objectMapper));
         filter.setSecurityContextRepository(new HttpSessionSecurityContextRepository());
 
