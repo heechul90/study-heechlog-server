@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,6 +35,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity(debug = true)
+@EnableMethodSecurity
 public class SecurityConfig {
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
@@ -57,8 +59,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> {
                     request.requestMatchers("/auth/login").permitAll();
                     request.requestMatchers("/auth/signup").permitAll();
-                    request.requestMatchers("/user").hasRole("USER");
-                    request.requestMatchers("/admin").hasRole("ADMIN");
+//                    request.requestMatchers("/user").hasRole("USER");
+//                    request.requestMatchers("/admin").hasRole("ADMIN");
 //                    request.requestMatchers("/admin").access(new WebExpressionAuthorizationManager("hasRole('ADMIN') AND hasAuthority('WRITE')"));
                     request.anyRequest().authenticated();
                 })
