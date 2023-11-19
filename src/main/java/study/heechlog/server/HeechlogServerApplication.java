@@ -11,10 +11,6 @@ import study.heechlog.server.config.AppConfig;
 @SpringBootApplication
 public class HeechlogServerApplication {
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
     public static void main(String[] args) {
         SpringApplication.run(HeechlogServerApplication.class, args);
     }

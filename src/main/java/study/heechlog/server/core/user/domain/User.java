@@ -34,7 +34,7 @@ public class User {
     @Builder
     public User(String email, String password, String name) {
         this.email = email;
-        this.password = new BCryptPasswordEncoder().encode(password);
+        this.password = password;
         this.name = name;
         this.createdDate = LocalDateTime.now();
     }

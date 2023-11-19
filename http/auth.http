@@ -9,12 +9,20 @@ Content-Type: application/json
 }
 
 
-### 로그인
+### 로그인(form)
 POST http://localhost:9000/auth/login
 Content-Type: application/x-www-form-urlencoded
 
 username=heechul@gmail.com&password=1234&remember=1
 
+### 로그인(json)
+POST http://localhost:9000/auth/login
+Content-Type: application/json
+
+{
+  "email" : "heechul@gmail.com",
+  "password" : "1234"
+}
 
 ### 메인 페이지
 GET http://localhost:9000

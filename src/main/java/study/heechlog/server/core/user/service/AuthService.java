@@ -16,8 +16,8 @@ import study.heechlog.server.core.user.repository.UserRepository;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class AuthService {
-
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public Long signin(SigninRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
@@ -38,7 +38,7 @@ public class AuthService {
 
         User user = User.builder()
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
                 .build();
 

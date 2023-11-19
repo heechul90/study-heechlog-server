@@ -1,15 +1,13 @@
 package study.heechlog.server.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,16 +15,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
+import study.heechlog.server.config.filter.EmailPasswordAuthFilter;
 import study.heechlog.server.config.handler.Http401Handler;
 import study.heechlog.server.config.handler.Http403Handler;
 import study.heechlog.server.config.handler.LoginFailHandler;
 import study.heechlog.server.core.user.domain.User;
 import study.heechlog.server.core.user.repository.UserRepository;
-
-import java.io.IOException;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
@@ -39,7 +39,7 @@ public class SecurityConfig {
     private final ObjectMapper objectMapper;
 
     @Bean
-    protected WebSecurityCustomizer webSecurityCustomizer() {
+    public WebSecurityCustomizer webSecurityCustomizer() {
         return new WebSecurityCustomizer() {
             @Override
             public void customize(WebSecurity web) {
@@ -52,7 +52,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(request -> {
                     request.requestMatchers("/auth/login").permitAll();
@@ -62,14 +62,15 @@ public class SecurityConfig {
 //                    request.requestMatchers("/admin").access(new WebExpressionAuthorizationManager("hasRole('ADMIN') AND hasAuthority('WRITE')"));
                     request.anyRequest().authenticated();
                 })
-                .formLogin(login -> {
-                    login.loginPage("/auth/login");
-                    login.loginProcessingUrl("/auth/login");
-                    login.usernameParameter("username");
-                    login.passwordParameter("password");
-                    login.defaultSuccessUrl("/");
-                    login.failureHandler(new LoginFailHandler(objectMapper));
-                })
+//                .formLogin(login -> {
+//                    login.loginPage("/auth/login");
+//                    login.loginProcessingUrl("/auth/login");
+//                    login.usernameParameter("username");
+//                    login.passwordParameter("password");
+//                    login.defaultSuccessUrl("/");
+//                    login.failureHandler(new LoginFailHandler(objectMapper));
+//                })
+                .addFilterBefore(usernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(e -> {
                     e.accessDeniedHandler(new Http403Handler(objectMapper));
                     e.authenticationEntryPoint(new Http401Handler(objectMapper));
@@ -85,11 +86,41 @@ public class SecurityConfig {
     }
 
     @Bean
-    protected UserDetailsService userDetailsService() {
+    public EmailPasswordAuthFilter usernamePasswordAuthenticationFilter() {
+        EmailPasswordAuthFilter filter = new EmailPasswordAuthFilter("/auth/login", objectMapper);
+        filter.setAuthenticationManager(authenticationManager());
+        filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/"));
+        filter.setAuthenticationFailureHandler(new LoginFailHandler(objectMapper));
+        filter.setSecurityContextRepository(new HttpSessionSecurityContextRepository());
+
+        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+        rememberMeServices.setAlwaysRemember(true);
+        rememberMeServices.setValiditySeconds(3600 * 24 * 30);
+        filter.setRememberMeServices(rememberMeServices);
+
+        return filter;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService(userRepository));
+        provider.setPasswordEncoder(passwordEncoder());
+
+        return new ProviderManager(provider);
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
         return username -> {
             User findUser = userRepository.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException(username + "을 찾을 수 없습니다."));
             return new UserPrincipal(findUser);
         };
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
