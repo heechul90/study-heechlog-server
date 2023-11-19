@@ -1,5 +1,6 @@
 package study.heechlog.server.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +20,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
+import study.heechlog.server.config.handler.Http401Handler;
+import study.heechlog.server.config.handler.Http403Handler;
+import study.heechlog.server.config.handler.LoginFailHandler;
 import study.heechlog.server.core.user.domain.User;
 import study.heechlog.server.core.user.repository.UserRepository;
 
@@ -32,6 +36,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 @EnableWebSecurity(debug = true)
 public class SecurityConfig {
     private final UserRepository userRepository;
+    private final ObjectMapper objectMapper;
 
     @Bean
     protected WebSecurityCustomizer webSecurityCustomizer() {
@@ -47,37 +52,36 @@ public class SecurityConfig {
     }
 
     @Bean
-    protected SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .authorizeHttpRequests()
-                    .requestMatchers("/auth/login").permitAll()
-                    .requestMatchers("/auth/signup").permitAll()
-//                    .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-                    .requestMatchers("/admin")
-                        .access(new WebExpressionAuthorizationManager("hasRole('ADMIN') AND hasAuthority('WRITE')"))
-                    .anyRequest().authenticated()
-                .and()
-                    .formLogin()
-                    .loginPage("/auth/login")
-                    .loginProcessingUrl("/auth/login")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/")
-                .and()
-                    .exceptionHandling(e -> {
-                        new AccessDeniedHandler() {
-                            @Override
-                            public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-                                log.info("403", accessDeniedException);
-                            }
-                        };
-                    })
-                    .rememberMe(rm -> rm.rememberMeParameter("remember")
+    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(request -> {
+                    request.requestMatchers("/auth/login").permitAll();
+                    request.requestMatchers("/auth/signup").permitAll();
+                    request.requestMatchers("/user").hasRole("USER");
+                    request.requestMatchers("/admin").hasRole("ADMIN");
+//                    request.requestMatchers("/admin").access(new WebExpressionAuthorizationManager("hasRole('ADMIN') AND hasAuthority('WRITE')"));
+                    request.anyRequest().authenticated();
+                })
+                .formLogin(login -> {
+                    login.loginPage("/auth/login");
+                    login.loginProcessingUrl("/auth/login");
+                    login.usernameParameter("username");
+                    login.passwordParameter("password");
+                    login.defaultSuccessUrl("/");
+                    login.failureHandler(new LoginFailHandler(objectMapper));
+                })
+                .exceptionHandling(e -> {
+                    e.accessDeniedHandler(new Http403Handler(objectMapper));
+                    e.authenticationEntryPoint(new Http401Handler(objectMapper));
+                })
+                .rememberMe(rm -> {
+                    rm.rememberMeParameter("remember")
                             .alwaysRemember(false)
-                            .tokenValiditySeconds(2592000)
-                    )
-                    .csrf(AbstractHttpConfigurer::disable)
-                .build();
+                            .tokenValiditySeconds(2592000);
+                })
+                .csrf(AbstractHttpConfigurer::disable);
+
+        return http.build();
     }
 
     @Bean
@@ -87,13 +91,5 @@ public class SecurityConfig {
                     .orElseThrow(() -> new UsernameNotFoundException(username + "을 찾을 수 없습니다."));
             return new UserPrincipal(findUser);
         };
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        UserDetails user = User
-//                .withUsername("heechul")
-//                .password(new BCryptPasswordEncoder().encode("1234"))
-//                .roles("ADMIN")
-//                .build();
-//        manager.createUser(user);
-//        return manager;
     }
 }

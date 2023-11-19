@@ -17,7 +17,8 @@ spring:
       path: /h2-console
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/heechlog;NON_KEYWORDS=USER
+#    url: jdbc:h2:tcp://localhost/~/heechlog;NON_KEYWORDS=USER
+    url: jdbc:h2:mem:live-code-show;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     username: sa
     password:
     driver-class-name: org.h2.Driver
