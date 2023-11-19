@@ -32,6 +32,7 @@ class AuthServiceTest {
 
     @PersistenceContext private EntityManager em;
     @Autowired private AuthService authService;
+    @Autowired private BCryptPasswordEncoder passwordEncoder;
 
     private static User getUser(String email, String password, String name) {
         return User.builder()
@@ -84,7 +85,7 @@ class AuthServiceTest {
     @DisplayName("로그인 성공")
     void test03() {
         //given
-        User user = getUser(HEECHMAN_EMAIL, HEECHMAN_PASSWORD, HEECHMAN_NAME);
+        User user = getUser(HEECHMAN_EMAIL, passwordEncoder.encode(HEECHMAN_PASSWORD), HEECHMAN_NAME);
         em.persist(user);
 
         SigninRequest request = SigninRequest.builder()

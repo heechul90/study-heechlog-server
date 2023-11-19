@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -35,14 +36,6 @@ class PostControllerIntegrationTest {
     @PersistenceContext private EntityManager em;
     @Autowired private ObjectMapper objectMapper;
     @Autowired private MockMvc mockMvc;
-
-    private Post getPost(String title, String content) {
-        Post post = Post.createPostBuilder()
-                .title(title)
-                .content(content)
-                .build();
-        return post;
-    }
 
     @Test
     @DisplayName("게시글 목록 조회")
@@ -99,8 +92,9 @@ class PostControllerIntegrationTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
     @DisplayName("게시글 저장")
+    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @Test
     void savePostTest() throws Exception {
         //given
         CreatePostRequest request = new CreatePostRequest();
@@ -118,8 +112,9 @@ class PostControllerIntegrationTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
     @DisplayName("게시글 저장_예외 발생_필드")
+    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @Test
     void savePostTest_validation_field() throws Exception {
         //given
         CreatePostRequest request = new CreatePostRequest();
@@ -141,8 +136,9 @@ class PostControllerIntegrationTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
     @DisplayName("게시글 저장_예외 발생_제목")
+    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @Test
     void savePostTest_validation_object_title() throws Exception {
         //given
         CreatePostRequest request = new CreatePostRequest();
@@ -163,8 +159,9 @@ class PostControllerIntegrationTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
     @DisplayName("게시글 저장_예외 발생_내용")
+    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @Test
     void savePostTest_validation_object_content() throws Exception {
         //given
         CreatePostRequest request = new CreatePostRequest();
@@ -185,8 +182,9 @@ class PostControllerIntegrationTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
     @DisplayName("게시글 수정")
+    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @Test
     void updatePostTest() throws Exception {
         //given
         Post post = getPost("title", "content");
@@ -208,8 +206,9 @@ class PostControllerIntegrationTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
     @DisplayName("게시글 수정_예외 발생")
+    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @Test
     void updatePostTest_validation() throws Exception {
         //given
         Post post = getPost("title", "content");
@@ -232,8 +231,9 @@ class PostControllerIntegrationTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
     @DisplayName("게시글 삭제")
+    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @Test
     void deletePostTest() throws Exception {
         //given
         Post post = getPost("title", "content");
@@ -248,8 +248,9 @@ class PostControllerIntegrationTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
     @DisplayName("게시글 삭제_예외 발생")
+    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @Test
     void deletePostTest_validation() throws Exception {
         //given
         Post post = getPost("title", "content");
@@ -262,5 +263,12 @@ class PostControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(HttpStatus.NOT_FOUND.name()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("존재하지 않는 게시글입니다."))
                 .andDo(MockMvcResultHandlers.print());
+    }
+
+    private Post getPost(String title, String content) {
+        return Post.createPostBuilder()
+                .title(title)
+                .content(content)
+                .build();
     }
 }

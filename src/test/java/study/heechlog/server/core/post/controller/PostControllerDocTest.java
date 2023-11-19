@@ -73,8 +73,9 @@ public class PostControllerDocTest {
                 ));
     }
 
-    @Test
     @DisplayName("게시글 저장")
+    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @Test
     void savePostTest() throws Exception {
         //given
         CreatePostRequest request = new CreatePostRequest();
