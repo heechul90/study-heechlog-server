@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +19,7 @@ import study.heechlog.server.core.post.dto.UpdatePostParam;
 import study.heechlog.server.core.post.exception.PostNotFound;
 import study.heechlog.server.core.post.repository.PostRepository;
 import study.heechlog.server.core.user.domain.User;
+import study.heechlog.server.core.user.repository.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,9 +37,15 @@ class PostServiceTest {
 
     @Autowired PostRepository postRepository;
 
+    @Autowired UserRepository userRepository;
+
     @Autowired PostService postService;
 
-    @Autowired MessageSource messageSource;
+    @BeforeEach
+    void clean() {
+        postRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
     private Post getPost(String title, String content) {
         Post post = Post.createPostBuilder()
@@ -77,10 +83,14 @@ class PostServiceTest {
     @DisplayName("게시글 단건 조회")
     void findPostTest() {
         //given
-        Post post = getPost("test_title", "test_content");
         CreatePost createPost = getCreatePost("test_title", "test_content");
-        long userId = 1L;
-        Long savedId = postService.savePost(userId, createPost);
+        User user = User.builder()
+                .name("희치맨")
+                .email("heechman@naver.com")
+                .password("1234")
+                .build();
+        userRepository.save(user);
+        Long savedId = postService.savePost(user.getId(), createPost);
 
         //when
         Post findPost = postService.findPost(savedId);
@@ -89,7 +99,7 @@ class PostServiceTest {
         //then
         assertThat(findPost.getTitle()).isEqualTo("test_title");
         assertThat(findPost.getContent()).isEqualTo("test_content");
-        assertThatThrownBy(() -> postService.findPost(post.getId() + 1L))
+        assertThatThrownBy(() -> postService.findPost(savedId + 1L))
                 .isInstanceOf(PostNotFound.class)
                 .hasMessageStartingWith("존재하지 않는")
                 .hasMessageEndingWith("게시글입니다.");
@@ -101,10 +111,15 @@ class PostServiceTest {
         //given
         CreatePost createPost = getCreatePost("test_title", "test_content");
 
-        long userId = 1L;
+        User user = User.builder()
+                .name("희치맨")
+                .email("heechman@naver.com")
+                .password("1234")
+                .build();
+        userRepository.save(user);
 
         //when
-        Long savedPost = postService.savePost(userId, createPost);
+        Long savedPost = postService.savePost(user.getId(), createPost);
 
         //then
         Post findPost = postService.findPost(savedPost);
