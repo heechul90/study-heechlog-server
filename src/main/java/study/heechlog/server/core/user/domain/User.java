@@ -8,7 +8,11 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.persistence.*;
+import study.heechlog.server.core.post.domain.Post;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -30,6 +34,9 @@ public class User {
     private String name;
     @CreatedDate
     private LocalDateTime createdDate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Post> posts = new ArrayList<>();
 
     @Builder
     public User(String email, String password, String name) {

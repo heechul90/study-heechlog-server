@@ -5,9 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.heechlog.server.common.json.JsonResult;
+import study.heechlog.server.config.UserPrincipal;
 import study.heechlog.server.core.post.controller.request.CreatePostRequest;
 import study.heechlog.server.core.post.controller.request.UpdatePostRequest;
 import study.heechlog.server.core.post.controller.response.CreatePostResponse;
@@ -25,7 +27,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/posts")
 public class PostController  {
-
     private final PostService postService;
 
     /**
@@ -64,12 +65,15 @@ public class PostController  {
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public JsonResult savePost(@RequestBody @Validated CreatePostRequest request) {
+    public JsonResult savePost(
+            @AuthenticationPrincipal UserPrincipal userPrincipal,
+            @RequestBody @Validated CreatePostRequest request
+    ) {
 
         //validate
         request.validate();
 
-        Long savedId = postService.savePost(request.toEntity());
+        Long savedId = postService.savePost(userPrincipal.getUserId(), request.toCreatePost());
         return JsonResult.OK(new CreatePostResponse(savedId));
     }
 
@@ -89,7 +93,8 @@ public class PostController  {
     /**
      * post 삭제
      */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') && hasPermission(#postId, 'POST', 'DELETE')")
     @DeleteMapping(value = "/{postId}")
     public JsonResult deletePost(@PathVariable("postId") Long postId) {
         postService.deletePost(postId);

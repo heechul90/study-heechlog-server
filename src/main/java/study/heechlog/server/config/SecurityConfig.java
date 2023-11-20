@@ -36,7 +36,6 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity(debug = true)
-@EnableMethodSecurity
 public class SecurityConfig {
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper;

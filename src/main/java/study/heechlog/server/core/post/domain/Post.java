@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import study.heechlog.server.core.post.dto.UpdatePostParam;
 
 import jakarta.persistence.*;
+import study.heechlog.server.core.user.domain.User;
 
 import static org.springframework.util.StringUtils.hasText;
 
@@ -29,16 +30,25 @@ public class Post {
     @Lob
     private String content;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     //===생성 메서드===//
     @Builder(builderClassName = "createPostBuilder", builderMethodName = "createPostBuilder")
-    public Post(String title, String content) {
+    public Post(String title, String content, User user) {
         this.title = title;
         this.content = content;
+        this.user = user;
     }
 
     @Builder(builderClassName = "updatePostBuiler", builderMethodName = "updatePostBuiler")
     public void updatePost(UpdatePostParam param) {
         if (hasText(param.getTitle())) this.title = param.getTitle();
         if (hasText(param.getContent())) this.content = param.getContent();
+    }
+
+    public Long getUserId() {
+        return this.user.getId();
     }
 }

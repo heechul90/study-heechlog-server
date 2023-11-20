@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "name": "이희철",
-  "email": "heechul@gmail.com",
+  "email": "heechul1@gmail.com",
   "password": "1234"
 }
 
@@ -20,7 +20,7 @@ POST http://localhost:9000/auth/login
 Content-Type: application/json
 
 {
-  "email" : "heechul@gmail.com",
+  "email" : "heechul1@gmail.com",
   "password" : "1234"
 }
 

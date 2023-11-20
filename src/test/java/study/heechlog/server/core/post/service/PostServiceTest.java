@@ -2,6 +2,7 @@ package study.heechlog.server.core.post.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import study.heechlog.server.core.post.PostTestConfig;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.dto.CreatePost;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
 import study.heechlog.server.core.post.dto.UpdatePostParam;
 import study.heechlog.server.core.post.exception.PostNotFound;
 import study.heechlog.server.core.post.repository.PostRepository;
+import study.heechlog.server.core.user.domain.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,7 +78,9 @@ class PostServiceTest {
     void findPostTest() {
         //given
         Post post = getPost("test_title", "test_content");
-        Long savedId = postService.savePost(post);
+        CreatePost createPost = getCreatePost("test_title", "test_content");
+        long userId = 1L;
+        Long savedId = postService.savePost(userId, createPost);
 
         //when
         Post findPost = postService.findPost(savedId);
@@ -94,10 +99,12 @@ class PostServiceTest {
     @DisplayName("게시글 저장")
     void savePostTest() {
         //given
-        Post post = getPost("test_title", "test_content");
+        CreatePost createPost = getCreatePost("test_title", "test_content");
+
+        long userId = 1L;
 
         //when
-        Long savedPost = postService.savePost(post);
+        Long savedPost = postService.savePost(userId, createPost);
 
         //then
         Post findPost = postService.findPost(savedPost);
@@ -145,5 +152,12 @@ class PostServiceTest {
                 .isInstanceOf(PostNotFound.class)
                 .hasMessageStartingWith("존재하지 않는")
                 .hasMessageEndingWith("게시글입니다.");
+    }
+
+    private static CreatePost getCreatePost(String title, String content) {
+        return CreatePost.builder()
+                .title(title)
+                .content(content)
+                .build();
     }
 }

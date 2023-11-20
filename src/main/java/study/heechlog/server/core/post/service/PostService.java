@@ -7,20 +7,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.dto.CreatePost;
 import study.heechlog.server.core.post.dto.UpdatePostParam;
 import study.heechlog.server.core.post.dto.PostSearchCondition;
 import study.heechlog.server.core.post.exception.PostNotFound;
 import study.heechlog.server.core.post.repository.PostQueryRepository;
 import study.heechlog.server.core.post.repository.PostRepository;
+import study.heechlog.server.core.user.domain.User;
+import study.heechlog.server.core.user.exception.UserNotFound;
+import study.heechlog.server.core.user.repository.UserRepository;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class PostService {
-
     private final PostRepository postRepository;
     private final PostQueryRepository postQueryRepository;
+    private final UserRepository userRepository;
 
     /**
      * post 목록 조회
@@ -41,8 +45,10 @@ public class PostService {
      * post 저장
      */
     @Transactional
-    public Long savePost(Post post) {
-        return postRepository.save(post).getId();
+    public Long savePost(long userId, CreatePost createPost) {
+        User findUser = userRepository.findById(userId)
+                .orElseThrow(UserNotFound::new);
+        return postRepository.save(createPost.toPost(findUser)).getId();
     }
 
     /**

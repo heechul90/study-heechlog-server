@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import study.heechlog.server.core.post.repository.PostQueryRepository;
 import study.heechlog.server.core.post.repository.PostRepository;
 import study.heechlog.server.core.post.service.PostService;
+import study.heechlog.server.core.user.repository.UserRepository;
 
 @TestConfiguration
 public class PostTestConfig {
@@ -16,6 +17,8 @@ public class PostTestConfig {
 
     @Autowired PostRepository postRepository;
 
+    @Autowired UserRepository userRepository;
+
     @Bean
     public PostQueryRepository postQueryRepository() {
         return new PostQueryRepository(em);
@@ -23,6 +26,6 @@ public class PostTestConfig {
 
     @Bean
     public PostService postService() {
-        return new PostService(postRepository, postQueryRepository());
+        return new PostService(postRepository, postQueryRepository(), userRepository);
     }
 }
