@@ -47,8 +47,4 @@ public class Post {
         if (hasText(param.getTitle())) this.title = param.getTitle();
         if (hasText(param.getContent())) this.content = param.getContent();
     }
-
-    public Long getUserId() {
-        return this.user.getId();
-    }
 }

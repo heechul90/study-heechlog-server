@@ -26,13 +26,6 @@ public class CreatePostRequest {
         }
     }
 
-    public Post toEntity() {
-        return Post.createPostBuilder()
-                .title(this.getTitle())
-                .content(this.getContent())
-                .build();
-    }
-
     public CreatePost toCreatePost() {
         return CreatePost.builder()
                 .title(this.title)

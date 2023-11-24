@@ -3,6 +3,7 @@ package study.heechlog.server.core.post.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +12,18 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
+import study.heechlog.server.annotation.CustomMockSecurityContext;
 import study.heechlog.server.core.post.controller.request.CreatePostRequest;
 import study.heechlog.server.core.post.controller.request.UpdatePostRequest;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.repository.PostRepository;
+import study.heechlog.server.core.user.domain.User;
+import study.heechlog.server.core.user.repository.UserRepository;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -36,13 +40,24 @@ class PostControllerIntegrationTest {
     @PersistenceContext private EntityManager em;
     @Autowired private ObjectMapper objectMapper;
     @Autowired private MockMvc mockMvc;
+    @Autowired private PostRepository postRepository;
+    @Autowired private UserRepository userRepository;
+
+    @AfterEach
+    void clean() {
+        postRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
     @Test
+    @CustomMockSecurityContext(email = "heechman@naver.com")
     @DisplayName("게시글 목록 조회")
     void findPostsTest() throws Exception {
         //given
-        Post post1 = getPost(TITLE, CONTENT);
-        Post post2 = getPost("test_title2", "test_content2");
+        User findUser = userRepository.findByEmail("heechman@naver.com").get();
+
+        Post post1 = getPost(TITLE, CONTENT, findUser);
+        Post post2 = getPost("test_title2", "test_content2", findUser);
         em.persist(post1);
         em.persist(post2);
 
@@ -59,10 +74,13 @@ class PostControllerIntegrationTest {
     }
 
     @Test
+    @CustomMockSecurityContext(email = "heechman@naver.com")
     @DisplayName("게시글 단건 조회")
     void findPostTest() throws Exception {
         //given
-        Post post = getPost("test_title", "test_content");
+        User findUser = userRepository.findByEmail("heechman@naver.com").get();
+
+        Post post = getPost("test_title", "test_content", findUser);
         em.persist(post);
 
         //expected
@@ -77,10 +95,13 @@ class PostControllerIntegrationTest {
     }
 
     @Test
+    @CustomMockSecurityContext(email = "heechman@naver.com")
     @DisplayName("게시글 단건 조회_예외 발생")
     void findPostTest_validation() throws Exception {
         //given
-        Post post = getPost("test_title", "test_content");
+        User findUser = userRepository.findByEmail("heechman@naver.com").get();
+
+        Post post = getPost("test_title", "test_content", findUser);
         em.persist(post);
 
         //expected
@@ -93,7 +114,7 @@ class PostControllerIntegrationTest {
     }
 
     @DisplayName("게시글 저장")
-    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @CustomMockSecurityContext
     @Test
     void savePostTest() throws Exception {
         //given
@@ -113,7 +134,7 @@ class PostControllerIntegrationTest {
     }
 
     @DisplayName("게시글 저장_예외 발생_필드")
-    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @CustomMockSecurityContext
     @Test
     void savePostTest_validation_field() throws Exception {
         //given
@@ -137,7 +158,7 @@ class PostControllerIntegrationTest {
     }
 
     @DisplayName("게시글 저장_예외 발생_제목")
-    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @CustomMockSecurityContext
     @Test
     void savePostTest_validation_object_title() throws Exception {
         //given
@@ -160,7 +181,7 @@ class PostControllerIntegrationTest {
     }
 
     @DisplayName("게시글 저장_예외 발생_내용")
-    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @CustomMockSecurityContext
     @Test
     void savePostTest_validation_object_content() throws Exception {
         //given
@@ -183,11 +204,13 @@ class PostControllerIntegrationTest {
     }
 
     @DisplayName("게시글 수정")
-    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @CustomMockSecurityContext(email = "heechman@naver.com")
     @Test
     void updatePostTest() throws Exception {
         //given
-        Post post = getPost("title", "content");
+        User findUser = userRepository.findByEmail("heechman@naver.com").get();
+
+        Post post = getPost("title", "content", findUser);
         em.persist(post);
 
         UpdatePostRequest request = new UpdatePostRequest();
@@ -207,11 +230,13 @@ class PostControllerIntegrationTest {
     }
 
     @DisplayName("게시글 수정_예외 발생")
-    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @CustomMockSecurityContext(email = "heechman@naver.com")
     @Test
     void updatePostTest_validation() throws Exception {
         //given
-        Post post = getPost("title", "content");
+        User findUser = userRepository.findByEmail("heechman@naver.com").get();
+
+        Post post = getPost("title", "content", findUser);
         em.persist(post);
 
         UpdatePostRequest request = new UpdatePostRequest();
@@ -232,11 +257,13 @@ class PostControllerIntegrationTest {
     }
 
     @DisplayName("게시글 삭제")
-    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @CustomMockSecurityContext(email = "heechman@naver.com")
     @Test
     void deletePostTest() throws Exception {
         //given
-        Post post = getPost("title", "content");
+        User findUser = userRepository.findByEmail("heechman@naver.com").get();
+
+        Post post = getPost("title", "content", findUser);
         em.persist(post);
 
         //expected
@@ -249,11 +276,13 @@ class PostControllerIntegrationTest {
     }
 
     @DisplayName("게시글 삭제_예외 발생")
-    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @CustomMockSecurityContext(email = "heechman@naver.com")
     @Test
     void deletePostTest_validation() throws Exception {
         //given
-        Post post = getPost("title", "content");
+        User findUser = userRepository.findByEmail("heechman@naver.com").get();
+
+        Post post = getPost("title", "content", findUser);
         em.persist(post);
 
         //expected
@@ -265,10 +294,11 @@ class PostControllerIntegrationTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    private Post getPost(String title, String content) {
+    private Post getPost(String title, String content, User user) {
         return Post.createPostBuilder()
                 .title(title)
                 .content(content)
+                .user(user)
                 .build();
     }
 }

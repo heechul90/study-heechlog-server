@@ -25,7 +25,7 @@ public class HeechlogPermissionEvaluator implements PermissionEvaluator {
         Post findPost = postRepository.findById((Long) targetId)
                 .orElseThrow(PostNotFound::new);
 
-        if (!findPost.getUserId().equals(userPrincipal.getUserId())) {
+        if (!findPost.getUser().getId().equals(userPrincipal.getUserId())) {
             return false;
         }
         return true;

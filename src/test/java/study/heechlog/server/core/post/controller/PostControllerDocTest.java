@@ -3,10 +3,10 @@ package study.heechlog.server.core.post.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,8 +19,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
+import study.heechlog.server.annotation.CustomMockSecurityContext;
 import study.heechlog.server.core.post.controller.request.CreatePostRequest;
 import study.heechlog.server.core.post.domain.Post;
+import study.heechlog.server.core.post.repository.PostRepository;
+import study.heechlog.server.core.user.repository.UserRepository;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -38,6 +41,14 @@ public class PostControllerDocTest {
     @PersistenceContext private EntityManager em;
     @Autowired private ObjectMapper objectMapper;
     @Autowired private MockMvc mockMvc;
+    @Autowired private PostRepository postRepository;
+    @Autowired private UserRepository userRepository;
+
+    @AfterEach
+    void clean() {
+        postRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
     private Post getPost(String title, String content) {
         return Post.createPostBuilder()
@@ -74,7 +85,7 @@ public class PostControllerDocTest {
     }
 
     @DisplayName("게시글 저장")
-    @WithMockUser(username = "heechul@gmail.com", roles = {"ADMIN", "USER"})
+    @CustomMockSecurityContext
     @Test
     void savePostTest() throws Exception {
         //given
