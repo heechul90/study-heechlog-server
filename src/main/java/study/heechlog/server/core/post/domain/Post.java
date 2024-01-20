@@ -4,12 +4,16 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import study.heechlog.server.core.comment.domain.Comment;
 import study.heechlog.server.core.post.dto.UpdatePostParam;
 
 import jakarta.persistence.*;
 import study.heechlog.server.core.user.domain.User;
 
-import static org.springframework.util.StringUtils.hasText;
+import java.util.ArrayList;
+import java.util.List;
+
+import static io.jsonwebtoken.lang.Strings.hasText;
 
 @Entity
 @SequenceGenerator(
@@ -33,6 +37,9 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     //===생성 메서드===//
     @Builder(builderClassName = "createPostBuilder", builderMethodName = "createPostBuilder")
